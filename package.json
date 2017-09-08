@@ -1,0 +1,32 @@
+{
+  "name": "sparvapp",
+  "version": "0.0.1",
+  "description": "Milestone 1 version of sparvapp for fitness trainer",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+	"dev": "nuxt"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/puresick/sparvapp.git"
+  },
+  "author": "Daniel Henning",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/puresick/sparvapp/issues"
+  },
+  "homepage": "https://github.com/puresick/sparvapp#readme",
+  "devDependencies": {
+    "mocha": "^3.5.0"
+  },
+  "dependencies": {
+    "express": "^4.15.4",
+    "moment": "^2.18.1",
+    "nuxt": "^1.0.0-rc11",
+    "passport": "^0.4.0",
+    "pg": "^7.3.0",
+    "pg-hstore": "^2.3.2",
+    "sequelize": "^4.8.2"
+  }
+}
