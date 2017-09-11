@@ -4,7 +4,7 @@
 	"description": "Milestone 1 version of sparvapp for fitness trainer",
 	"main": "server.js",
 	"scripts": {
-	"test": "ava",
+		"test": "ava",
 		"dev": "nuxt"
 	},
 	"repository": {
@@ -23,11 +23,7 @@
 	},
 	"dependencies": {
 		"moment": "^2.18.1",
-		"nuxt": "^1.0.0-rc11",
-		"passport": "^0.4.0",
-		"pg": "^7.3.0",
-		"pg-hstore": "^2.3.2",
-		"sequelize": "^4.8.2"
+		"nuxt": "^1.0.0-rc11"
 	},
 	"ava": {
 		"require": [
