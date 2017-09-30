@@ -28,6 +28,7 @@ export default function ({ req, res, redirect, store }) {
 			}).then((nestResponse) => {
 				console.log(nestResponse.data.auth)
 				store.commit(`setAuthentication`, nestResponse.data.auth)
+				store.commit(`setSessionId`, nestResponse.data.session)
 				resolve()
 			})
 		})
