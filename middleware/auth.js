@@ -9,6 +9,7 @@ export default function ({ req, res, redirect, store }) {
 		})
 
 		req.on(`end`, () => {
+			console.log(req.cookie)
 			console.log(formData)
 			const formDataArray = formData.split(`&`)
 			let user = ``
@@ -19,24 +20,26 @@ export default function ({ req, res, redirect, store }) {
 				;(item.indexOf(`password=`) !== -1) ? password = item.replace(`password=`, ``) : null
 			})
 
-			console.log(`User: ${user}`)
-			console.log(`Password: ${password}`)
+			//console.log(`User: ${user}`)
+			//console.log(`Password: ${password}`)
 
-			axios.post(`http://localhost:4040/login`, {
-				email: user,
-				password: password
+			axios({
+				url: `http://localhost:4040/login`,
+				method: `post`,
+				data: {
+					email: user,
+					password: password
+				},
+				withCredentials: true
 			}).then((nestResponse) => {
-				console.log(nestResponse.data.auth)
+				console.log(nestResponse.data)
 				store.commit(`setAuthentication`, nestResponse.data.auth)
-				store.commit(`setSessionId`, nestResponse.data.session)
+				store.commit(`setSessionId`, nestResponse.data.token) //rename setSessionId to be clearer that it is jwt token auth
+				store.commit(`setUsername`, nestResponse.data.user)
 				resolve()
 			})
 		})
 	})
 
 	return getFormCredentials
-	//return axios.post(`localhost:4040/`)
-	//console.log(req.body.email)
-	//console.log(res)
-	//return redirect(`/profile`)
 }
