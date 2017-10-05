@@ -14,6 +14,8 @@ export default function ({ store, redirect }) {
 		}).then((response) => {
 			if (!response.data.isAuthenticated) {
 				reject()
+			} else {
+				resolve()
 			}
 		})
 	}).catch(() => {
