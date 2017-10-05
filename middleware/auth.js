@@ -1,9 +1,11 @@
 import axios from 'axios'
 
-export default function ({ req, res, redirect, store }) {
+export default function ({ req, store, redirect }) {
 	let formData = ``
 
 	const getFormCredentials = new Promise((resolve, reject) => {
+		if (req == undefined) { return redirect(`/`) }
+
 		req.on(`data`, (data) => {
 			formData += data
 		})
@@ -19,9 +21,6 @@ export default function ({ req, res, redirect, store }) {
 				;(item.indexOf(`email=`) !== -1) ? user = item.replace(`email=`, ``) : null
 				;(item.indexOf(`password=`) !== -1) ? password = item.replace(`password=`, ``) : null
 			})
-
-			//console.log(`User: ${user}`)
-			//console.log(`Password: ${password}`)
 
 			axios({
 				url: `http://localhost:4040/login`,

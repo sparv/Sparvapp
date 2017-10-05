@@ -3,7 +3,8 @@
 		<h1>Profile</h1>
 		<p v-if="getAuthentication">You are logged in as {{ getUser }}</p>
 		<p v-if="!getAuthentication">Invalid user credentials</p>
-		<button v-on:click="checkAuth"></button>
+		<button v-on:click="checkAuth">Check auth</button>
+		<router-link to="secret">Secret Area</router-link>
 	</div>
 </template>
 
@@ -20,10 +21,9 @@
 		methods: {
 			checkAuth: function () {
 				const token = this.$store.getters.getSessionId
-				console.log(token)
 
 				axios({
-					url: `http://localhost:4040/auth`,
+					url: `http://localhost:4040/checkauth`,
 					method: `post`,
 					headers: {
 						'Authorization': `Bearer ${token}`
