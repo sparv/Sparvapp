@@ -7,11 +7,15 @@
 	</div>
 	<div>
 		<label>Password:</label>
-		<input v-model="password"/>
+		<input v-model="password" type="password"/>
 	</div>
 	<div>
 		<button v-on:click="login">
 			Login
+		</button>
+
+		<button v-on:click="register">
+			Register
 		</button>
 	</div>
 	</div>
@@ -46,6 +50,19 @@
 						document.cookie = `token=${response.data.token}`
 						this.$router.push(`/secret`)
 					}
+				})
+			},
+			register: function (event) {
+				axios({
+					url: `http://localhost:4040/register`,
+					method: `post`,
+					data: {
+						email: this.email,
+						password: this.password
+					},
+					withCredentials: false //needed?
+				}).then((response) => {
+					console.log(response)
 				})
 			}
 		}

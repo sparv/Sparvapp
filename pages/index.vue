@@ -23,7 +23,7 @@
 				console.log(`Cookietoken: ${token}`)
 
 				axios({
-					url: `http://localhost:4040/checkauth`,
+					url: `http://localhost:4040/validate`,
 					method: `post`,
 					headers: {
 						'Authorization': `Bearer ${token}`
