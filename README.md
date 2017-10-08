@@ -6,8 +6,6 @@ This is SparvApp.
 
 Following tools are needed to run the application
 `node >= 8.4.0`
-`postgreSQL >= 9.6.5`
-
 
 ## Development
 
