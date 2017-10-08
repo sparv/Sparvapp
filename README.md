@@ -1,6 +1,6 @@
 # Sparv
 
-This is Sparv (Milestone 1).
+This is SparvApp.
 
 ## Requirements
 
@@ -19,11 +19,11 @@ To run the development server execute:
 
 `npm run dev`
 
-For running tests, execute:
+For running tests, execute: (not implemented yet)
 
 `npm run test`
 
 ## Project structure
 
-`assets/` are static files which will be compiled by webpack, like `.sass`, `.png` etc.
-`static/` are static files that will be serveed "as-is"
+To learn more about the directory structure, visit: https://nuxtjs.org/guide/directory-structure
+To read about the style guide for vuejs code, visit: https://vuejs.org/v2/style-guide/
