@@ -1,4 +1,4 @@
-# Sparv
+# SparvApp
 
 This is SparvApp.
 
