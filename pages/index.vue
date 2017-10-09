@@ -28,7 +28,7 @@
 					headers: {
 						'Authorization': `Bearer ${token}`
 					}
-				}).then(response => {
+				}).then((response) => {
 					console.log(response)
 					if (response.data.isAuthenticated) {
 						console.log(`auth: ${response.data.isAuthenticated}`)
