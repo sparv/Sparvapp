@@ -8,11 +8,11 @@
 			<label>Password:</label>
 			<input v-model="userSettings.password" placeholder="Type in new password"/>
 		</div>
-		<button v-on:click="updateUserSettings">Update user data</button>
-		<hr />
 		<div>
-			<input v-model="userSettings.name"/>
+			<label>Name: </label>
+			<input v-model="userSettings.name" v-bind:placeholder="getName"/>
 		</div>
+		<button v-on:click="updateUserSettings">Update user data</button>
 		<router-link to="/secret">Secret</router-link>
 	</div>
 </template>
@@ -37,7 +37,8 @@
 
 		computed: {
 			...mapGetters([
-				`getEmail`
+				`getEmail`,
+				`getName`
 			])
 		},
 
@@ -59,7 +60,8 @@
 
 				const data = {
 					current: {
-						email: this.$store.getters.getEmail
+						email: this.$store.getters.getEmail,
+						name: this.$store.getters.getName
 					},
 
 					update: {
@@ -81,7 +83,8 @@
 						console.log(`isUpdated`)
 						console.log(this.$store.getters.getEmail)
 						console.log(response.data)
-						this.$store.commit(`setUsername`, response.data.username)
+						this.$store.commit(`setEmail`, response.data.email)
+						this.$store.commit(`setName`, response.data.name)
 						this.$store.commit(`setSessionId`, response.data.token)
 
 						const expirationDate = `${moment().add(1, `months`).utc().format(`ddd, D MMM YYYY hh:mm:ss`)} GMT`
