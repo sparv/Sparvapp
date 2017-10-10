@@ -3,7 +3,7 @@
 		<p>super secret</p>
 		<button v-on:click="logout">Logout</button>
 
-		<p>Current user: {{ getUser }}</p>
+		<p>Current user: {{ getName }} - {{ getEmail }}</p>
 
 		<router-link to="/settings">Settings</router-link>
 	</div>
@@ -17,7 +17,8 @@
 		middleware: `validate`,
 		computed: {
 			...mapGetters([
-				`getUser`
+				`getEmail`,
+				`getName`
 			])
 		},
 		methods: {
@@ -25,7 +26,8 @@
 				document.cookie = `token=; expires=Thu, 01 Jan 1970 00:00:00 GMT`
 				this.$store.commit(`setAuthentication`, false)
 				this.$store.commit(`setSessionId`, null) //rename setSessionId to be clearer that it is jwt token auth
-				this.$store.commit(`setUsername`, null)
+				this.$store.commit(`setEmail`, null)
+				this.$store.commit(`setName`, null)
 				this.$router.push(`/`)
 			}
 		}

@@ -3,21 +3,32 @@
 	<p>Login</p>
 	<div>
 		<label>Mail:</label>
-		<input v-model="email"/>
+		<input v-model="loginEmail" />
 	</div>
 	<div>
 		<label>Password:</label>
-		<input v-model="password" type="password"/>
+		<input v-model="loginPassword" type="password" />
+	</div>
+	<button v-on:click="login">
+		Login
+	</button>
+	<hr />
+	<h1>Register</h1>
+	<div>
+		<label>Mail:</label>
+		<input v-model="registerEmail" />
 	</div>
 	<div>
-		<button v-on:click="login">
-			Login
-		</button>
-
-		<button v-on:click="register">
-			Register
-		</button>
+		<label>Name:</label>
+		<input v-model="registerName" />
 	</div>
+	<div>
+		<label>Password:</label>
+		<input v-model="registerPassword" type="password" />
+	</div>
+	<button v-on:click="register">
+		Register
+	</button>
 	</div>
 </template>
 
@@ -28,8 +39,11 @@
 	export default {
 		data: function () {
 			return {
-				email: ``,
-				password: ``
+				loginEmail: ``,
+				loginPassword: ``,
+				registerEmail: ``,
+				registerPassword: ``,
+				registerName: ``
 			}
 		},
 		methods: {
@@ -38,8 +52,8 @@
 					url: `http://localhost:4040/login`,
 					method: `post`,
 					data: {
-						email: this.email,
-						password: this.password
+						email: this.loginEmail,
+						password: this.loginPassword
 					},
 					withCredentials: false //needed?
 				}).then((response) => {
@@ -50,19 +64,24 @@
 
 						this.$store.commit(`setAuthentication`, response.data.auth)
 						this.$store.commit(`setSessionId`, response.data.token) //rename setSessionId to be clearer that it is jwt token auth
-						this.$store.commit(`setUsername`, response.data.user)
+						this.$store.commit(`setEmail`, response.data.user)
+						this.$store.commit(`setName`, response.data.name)
 						document.cookie = `token=${response.data.token} ;expires=${expirationDate}`
 						this.$router.push(`/secret`)
 					}
 				})
 			},
 			register: function (event) {
+				console.log(`email: ${this.registerEmail}`)
+				console.log(`pw: ${this.registerPassword}`)
+				console.log(`name: ${this.registerName}`)
 				axios({
 					url: `http://localhost:4040/register`,
 					method: `post`,
 					data: {
-						email: this.email,
-						password: this.password
+						email: this.registerEmail,
+						password: this.registerPassword,
+						name: this.registerName
 					},
 					withCredentials: false //needed?
 				}).then((response) => {

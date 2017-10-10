@@ -5,7 +5,8 @@ const createStore = () => {
 		state: {
 			isAuthenticated: false,
 			sessionID: ``,
-			username: ``
+			email: ``,
+			name: ``
 		},
 		mutations: {
 			setAuthentication (state, bool) {
@@ -14,19 +15,25 @@ const createStore = () => {
 			setSessionId (state, string) {
 				state.sessionID = string
 			},
-			setUsername (state, string) {
-				state.username = string
+			setEmail (state, string) {
+				state.email = string
+			},
+			setName (state, string) {
+				state.name = string
 			}
 		},
 		getters: {
 			getAuthentication (state) {
 				return state.isAuthenticated
 			},
-			getUser (state) {
-				return state.username
+			getEmail (state) {
+				return state.email
 			},
 			getSessionId (state) {
 				return state.sessionID
+			},
+			getName (state) {
+				return state.name
 			}
 		}
 	})

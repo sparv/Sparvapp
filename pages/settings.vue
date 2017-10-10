@@ -2,7 +2,7 @@
 	<div>
 		<div>
 			<label>Mail:</label>
-			<input v-model="userSettings.email" v-bind:placeholder="getUser" />
+			<input v-model="userSettings.email" v-bind:placeholder="getEmail" />
 		</div>
 		<div>
 			<label>Password:</label>
@@ -12,9 +12,6 @@
 		<hr />
 		<div>
 			<input v-model="userSettings.name"/>
-		</div>
-		<div>
-			<input v-model="userSettings.surname"/>
 		</div>
 		<router-link to="/secret">Secret</router-link>
 	</div>
@@ -40,16 +37,15 @@
 
 		computed: {
 			...mapGetters([
-				`getUser`
+				`getEmail`
 			])
 		},
 
 		data: function () {
 			return {
 				userSettings: {
-					name: ``,
-					surname: ``,
-					email: this.getUser,
+					name: this.getName,
+					email: this.getEmail,
 					password: ``
 				}
 			}
@@ -57,18 +53,19 @@
 
 		methods: {
 			updateUserSettings: function (event) {
-				console.log(this.$store.getters.getUser)
+				console.log(this.$store.getters.getEmail)
 				console.log(this.userSettings.email)
 				console.log(this.userSettings.password)
 
 				const data = {
 					current: {
-						email: this.$store.getters.getUser
+						email: this.$store.getters.getEmail
 					},
 
 					update: {
 						email: this.userSettings.email,
-						password: this.userSettings.password
+						password: this.userSettings.password,
+						name: this.userSettings.name
 					}
 				}
 
@@ -82,7 +79,7 @@
 					console.log(response)
 					if (response.data.isUpdated) {
 						console.log(`isUpdated`)
-						console.log(this.$store.getters.getUser)
+						console.log(this.$store.getters.getEmail)
 						console.log(response.data)
 						this.$store.commit(`setUsername`, response.data.username)
 						this.$store.commit(`setSessionId`, response.data.token)
