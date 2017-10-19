@@ -6,7 +6,11 @@
   align-items: center;
   justify-content: space-between;
   height: 96px;
-  padding: 0 48px;
+  padding: 0 16px;
+
+  @media (min-width: $breakpoint-medium) {
+    padding: 0 48px;
+  }
 }
 
 .landingpage-content {}
@@ -15,7 +19,6 @@
 ||  Landigpage - Login
 -------------------------------------------------------------------*/
 .c-card__header--login {
-  margin-bottom: 48px;
   border-bottom: 2px solid #e1e3e6;
   .display-2 {
     text-align: center;

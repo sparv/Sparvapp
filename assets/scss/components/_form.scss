@@ -2,9 +2,14 @@
 ||  Form - Basics
 -------------------------------------------------------------------*/
 .c-label {
-	font-size: 16px;
-	line-height: 1.5;
-	color: #434547;
+  font-size: 14px;
+	line-height: 18px;
+  color: #434547;
+  
+  @media (min-width: $breakpoint-medium) {
+    font-size: 16px;
+    line-height: 24px;
+  }
 }
 
 .c-input {
@@ -13,12 +18,13 @@
   font-size: 1rem;
   line-height: 48px;
   vertical-align: middle;
-  border: 1px solid #c7ced7;
+  border: none;
+  box-shadow: inset 0 0 0 1px #c7ced7;
   border-radius: 5px;
   outline: none;
 
-  &.focus {
-    border: 2px solid #434547;
+  &:focus {
+    box-shadow: inset 0 0 0 2px #15171a;
     outline: none;
   }
 }

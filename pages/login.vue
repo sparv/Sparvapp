@@ -1,9 +1,9 @@
 <template>
-	<section class="f-pa12">
+	<section class="f-pv8 f-ph5 f-pa12-m">
 		<div class="f-wrapper f-wrapper--login">
-			<div class="c-card f-pa8">
-				<div class="c-card__header--login">
-					<h2 class="display-2">Login</h2>
+			<div class="c-card f-pv6 f-ph5 f-pa8-m">
+				<div class="c-card__header--login f-mb6 f-mb8-m">
+					<h2 class="display-2 f-mb5 f-mb6-m">Login</h2>
 				</div>
 				<form v-on:submit.prevent="loginSubmit">
 					<div class="f-mb7">
