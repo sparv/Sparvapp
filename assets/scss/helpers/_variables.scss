@@ -1,0 +1,73 @@
+/*------------------------------------------------------------------
+||  Spacing
+-------------------------------------------------------------------*/
+$spacing-none: 0 !default;
+$spacing-tiny: 2px !default;
+
+$spacing-extra-extra-small: 4px !default;
+$spacing-extra-small: 8px !default;
+$spacing-small: 12px !default;
+
+$spacing-medium: 16px !default;
+
+$spacing-large: 24px !default;
+$spacing-extra-large: 32px !default;
+$spacing-extra-extra-large: 48px !default;
+
+$spacing-giant: 56px !default;
+$spacing-extra-giant: 72px !default;
+$spacing-extra-extra-giant: 96px !default;
+
+$spacing-planet: 128px !default;
+$spacing-extra-planet: 192px !default;
+$spacing-extra-extra-planet: 256px !default;
+
+/*------------------------------------------------------------------
+||  Color
+-------------------------------------------------------------------*/
+$gray-color-dark: #808590 !default;
+$gray-color: #9CA0A9 !default;
+$gray-color-medium: #B8BBC1 !default;
+$gray-color-light: #D4D6DA !default;
+$gray-color-lightest: #F1F1F2 !default;
+
+$primary-color-dark: #C52323 !default;
+$primary-color: #DC2828 !default;
+$primary-color-medium: #E66868 !default;
+$primary-color-light: #F1A9A9 !default;
+$primary-color-lightest: #F8D4D4 !default;
+
+$secondary-color-dark: #111A2C !default;
+$secondary-color: #141E32 !default;
+$secondary-color-medium: #2B3446 !default;
+$secondary-color-light: #5A616F !default;
+$secondary-color-lightest: #727884 !default;
+
+$warning-color-dark: #C58423 !default;
+$warning-color: #DC9328 !default;
+$warning-color-medium: #E6B368 !default;
+$warning-color-light: #F1D3A9 !default;
+$warning-color-lightest: #F8E9D4 !default;
+
+$white: #FFFFFF !default;
+
+/*------------------------------------------------------------------
+||  Typography
+-------------------------------------------------------------------*/
+$basic-font: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif !default;
+
+/*------------------------------------------------------------------
+||  Border Radius
+-------------------------------------------------------------------*/
+
+/*------------------------------------------------------------------
+||  Box Shadow
+-------------------------------------------------------------------*/
+
+/*------------------------------------------------------------------
+||  Breakpoints
+-------------------------------------------------------------------*/
+$breakpoint-giant: 1440px !default;
+$breakpoint-large: 1080px !default;
+$breakpoint-medium: 860px !default;
+$breakpoint-small: 640px !default;

@@ -1,0 +1,40 @@
+/*------------------------------------------------------------------
+||  Reset
+-------------------------------------------------------------------*/
+*, ::after, ::before {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+address,
+h1, h2, h3, h4, h5, h6,
+blockquote, p, pre,
+dl, ol, ul,
+figure,
+hr,
+table,
+fieldset {
+  margin-bottom: $spacing-large;
+}
+
+dd, ol, ul {
+  margin-left: $spacing-large;
+}
+
+li > {
+  ol, ul {
+    margin-bottom: 0;
+  }
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+fieldset {
+  min-width: 0;
+  border: 0;
+}

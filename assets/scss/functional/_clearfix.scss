@@ -1,0 +1,17 @@
+/*------------------------------------------------------------------
+||  Clearfix
+||  Ref: http://nicolasgallagher.com/micro-clearfix-hack/
+-------------------------------------------------------------------*/
+.f-cf:before,
+.f-cf:after {
+  content: " ";
+  display: table;
+}
+
+.f-cf:after {
+  clear: both;
+}
+
+.f-cf {
+  *zoom: 1;
+}

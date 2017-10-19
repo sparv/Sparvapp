@@ -1,0 +1,24 @@
+/*------------------------------------------------------------------
+||  Form - Basics
+-------------------------------------------------------------------*/
+.c-label {
+	font-size: 16px;
+	line-height: 1.5;
+	color: #434547;
+}
+
+.c-input {
+  padding: 0 16px;
+  height: 48px;
+  font-size: 1rem;
+  line-height: 48px;
+  vertical-align: middle;
+  border: 1px solid #c7ced7;
+  border-radius: 5px;
+  outline: none;
+
+  &.focus {
+    border: 2px solid #434547;
+    outline: none;
+  }
+}

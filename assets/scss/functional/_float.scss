@@ -1,0 +1,24 @@
+/*------------------------------------------------------------------
+||  Float
+-------------------------------------------------------------------*/
+.f-fl { float: left;  _display: inline; }
+.f-fr { float: right; _display: inline; }
+.f-fn { float: none; }
+
+@media (min-width: $breakpoint-small) {
+  .f-fl-ns { float: left; _display: inline; }
+  .f-fr-ns { float: right; _display: inline; }
+  .f-fn-ns { float: none; }
+}
+
+@media (min-width: $breakpoint-medium) {
+  .f-fl-m { float: left; _display: inline; }
+  .f-fr-m { float: right; _display: inline; }
+  .f-fn-m { float: none; }
+}
+
+@media (min-width: $breakpoint-large) {
+  .f-fl-l { float: left; _display: inline; }
+  .f-fr-l { float: right; _display: inline; }
+  .f-fn-l { float: none; }
+}

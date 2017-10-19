@@ -1,0 +1,51 @@
+/*------------------------------------------------------------------
+||  Button
+-------------------------------------------------------------------*/
+.c-btn {
+  position: relative;
+  display: inline-block;
+  padding: 0 24px;
+  height: 48px;
+  font-size: 1rem;
+  font-weight: bold;
+  line-height: 48px;
+  white-space: nowrap;
+  vertical-align: middle;
+  text-decoration: none;
+  cursor: pointer;
+  user-select: none;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.12);
+  appearance: none;
+
+  &:hover {
+    text-decoration: none;
+  }
+
+  &:focus {
+    outline: 0;
+  }
+
+  &:disabled {
+    cursor: default;
+  }
+}
+
+.c-btn--primary {
+  color: $white;
+  background-color: #2db27d;
+  
+  &:hover {
+    background-color: darken(#2db27d, 8%);
+  }
+}
+
+.c-btn--white {
+  color: #15171a;
+  background-color: $white;
+  
+  &:hover {
+    background-color: darken($white, 8%);
+  }
+}
