@@ -7,7 +7,7 @@ module.exports = {
       { hid: 'description', name: 'description', content: 'Meta description' }
     ]
   },
-  css: [
-    '@/assets/scss/main.scss'
-  ]
+  css: [ '@/assets/scss/main.scss' ],
+  plugins: [ { src: '~/plugins/vee-validate', ssr: true } ],
+  build: { vendor: ['vee-validate'] }
 }

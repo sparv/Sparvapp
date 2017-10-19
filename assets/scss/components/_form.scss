@@ -28,3 +28,23 @@
     outline: none;
   }
 }
+
+.c-input--error {
+  border-radius: 5px 5px 0 0;
+  box-shadow: inset 0 0 0 2px #F03D5D;
+  &:focus {
+    box-shadow: inset 0 0 0 2px #F03D5D;
+  }
+}
+
+.c-input__error-msg {
+  display: block;
+  padding: 4px 16px;
+  color: $white;
+  font-size: 12px;
+  font-weight: bold;
+  line-height: 18px;
+  letter-spacing: 0.24px;
+  background: #F03D5D;
+  border-radius: 0 0 5px 5px;
+}

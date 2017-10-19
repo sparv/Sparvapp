@@ -8,11 +8,13 @@
       	<form v-on:submit.prevent="registerSubmit">
         	<div class="f-mb7">
           	<label class="c-label f-db f-mb3" for="">E-Mail-Adresse</label>
-          	<input class="c-input f-w-100" v-model="email" type="email">
+          	<input class="c-input f-w-100" :class="{'c-input--error': errors.has('email') }" v-model="email" v-validate="'required|email'" name="email" type="text">
+						<span v-show="errors.has('email')" class="c-input__error-msg">{{ errors.first('email') }}</span>
         	</div>
         	<div class="f-mb7">
           	<label class="c-label f-db f-mb3" for="">Passwort</label>
-          	<input class="c-input f-w-100" v-model="password" type="password">
+          	<input class="c-input f-w-100" :class="{'c-input--error': errors.has('password') }" v-model="password" v-validate="'required'" name="password" type="password">
+						<span v-show="errors.has('password')" class="c-input__error-msg">{{ errors.first('password') }}</span>
         	</div>
         	<button class="c-btn c-btn--primary f-w-100">Account erstellen</button>
       	</form>
@@ -26,13 +28,14 @@
 	import moment from 'moment'
 
 	export default {
+		layout: 'landingpage',
 		head: {
 			title: 'Sign Up',
 			meta: [
 				{ hid: 'description', name: 'description', content: 'Home page description' }
 			]
 		},
-		layout: 'landingpage',
+		
 		data: function () {
 			return {
 				name: ``,
@@ -40,28 +43,27 @@
 				password: ``
 			}
 		},
+		
 		methods: {
 			registerSubmit: function (event) {
-        const inputEmailString = this.email.match(/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/)
-				
-        if (inputEmailString == null) {
-					window.alert(`please enter valid email`)
-				} else if (this.password.length == 0) {
-					window.alert(`please enter password`)
-				} else {
-					axios({
-						url: `http://localhost:4040/register`,
-						method: `post`,
-						data: {
-							email: this.email,
-							password: this.password,
-							name: this.registerName
-						},
-						withCredentials: false //needed?
-					}).then((response) => {
-						console.log(response)
-					})
-				}
+				this.$validator.validateAll().then(validationState => {
+					if(validationState) {
+						axios({
+							url: `http://localhost:4040/register`,
+							method: `post`,
+							data: {
+								name: "",
+								email: this.email,
+								password: this.password
+							},
+							withCredentials: false // needed?
+						}).then((response) => {
+							console.log(response)
+						})
+					}
+				}).catch(error => {
+					console.log(error)
+				})
 			}
 		}
 	}
