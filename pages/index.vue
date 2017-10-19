@@ -1,14 +1,18 @@
 <template>
-	<div>
-		<h2>INDEX</h2>
-		<p>loading...</p>
-	</div>
+	<div></div>
 </template>
 
 <script>
 	import axios from 'axios'
 
 	export default {
+		head: {
+			title: 'Home',
+			meta: [
+				{ hid: 'description', name: 'description', content: 'Home page description' }
+			]
+		},
+		layout: 'landingpage',
 		mounted: function () {
 			let cookie = document.cookie
 			//changing scope variable to be cleaner code
@@ -16,7 +20,7 @@
 
 			if ((cookie == ``) && (cookie.indexOf(`token=`) == -1)) {
 				console.log(`no cookie set`)
-				this.$router.push(`/login`)
+				// this.$router.push(`/login`)
 			} else {
 				console.log(`cookie set`)
 				const token = cookie.replace(`token=`, ``)
@@ -38,7 +42,7 @@
 						console.log(`commmited to store`)
 						scope.$router.push(`/secret`)
 					} else {
-						scope.$router.push(`/login`)
+						// scope.$router.push(`/login`)
 					}
 				})
 

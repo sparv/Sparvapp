@@ -1,16 +1,24 @@
 <template>
-	<div>
-	<h1>Login</h1>
-	<div>
-		<label>Mail:</label>
-		<input v-model="loginEmail" />
-	</div>
-	<div>
-		<label>Password:</label>
-		<input v-model="loginPassword" type="password" />
-	</div>
-	<button v-on:click="login">Login</button>
-	</div>
+	<section class="f-pa12">
+		<div class="f-wrapper f-wrapper--login">
+			<div class="c-card f-pa8">
+				<div class="c-card__header--login">
+					<h2 class="display-2">Login</h2>
+				</div>
+				<form v-on:submit.prevent="loginSubmit">
+					<div class="f-mb7">
+						<label class="c-label f-db f-mb3" for="">E-Mail-Adresse</label>
+						<input class="c-input f-w-100" v-model="email" type="email">
+					</div>
+					<div class="f-mb7">
+						<label class="c-label f-db f-mb3" for="">Passwort</label>
+						<input class="c-input f-w-100" v-model="password" type="password">
+					</div>
+					<button class="c-btn c-btn--primary f-w-100">Einloggen</button>
+				</form>
+			</div>
+		</div>
+	</section>
 </template>
 
 <script>
@@ -18,15 +26,22 @@
 	import moment from 'moment'
 
 	export default {
+		head: {
+			title: 'Login',
+			meta: [
+				{ hid: 'description', name: 'description', content: 'Home page description' }
+			]
+		},
+		layout: 'landingpage',
 		data: function () {
 			return {
-				loginEmail: ``,
-				loginPassword: ``
+				email: ``,
+				password: ``
 			}
 		},
 		methods: {
-			login: function (event) {
-				const inputEmailString = this.loginEmail.match(/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/)
+			loginSubmit: function (event) {
+				const inputEmailString = this.email.match(/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/)
 
 				if (inputEmailString == null) {
 					window.alert(`please enter valid email`)
@@ -35,8 +50,8 @@
 						url: `http://localhost:4040/login`,
 						method: `post`,
 						data: {
-							email: this.loginEmail,
-							password: this.loginPassword
+							email: this.email,
+							password: this.password
 						},
 						withCredentials: false //needed?
 					}).then((response) => {
