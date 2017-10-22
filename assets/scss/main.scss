@@ -12,11 +12,14 @@
 @import "./components/form";
 @import "./components/card";
 @import "./components/buttons";
+@import "./components/sidebar-menu";
 
 @import "./functional/display";
 @import "./functional/spacing";
 @import "./functional/widths";
 @import "./functional/clearfix";
+@import "./functional/float";
 
 @import "./pages/base";
+@import "./pages/application";
 @import "./pages/landingpage";

@@ -1,0 +1,33 @@
+/*------------------------------------------------------------------
+||  Sidebar Menu
+-------------------------------------------------------------------*/
+.c-sidebar-menu__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.c-sidebar-menu__item {
+
+  a {
+    display: block;
+    padding: 0 16px;
+    height: 56px;
+    font-weight: bold;
+    line-height: 56px;
+    color: lighten(#15171A, 20%);
+    text-decoration: none;
+
+    &:hover, &:focus {
+      color: #15171A;
+      background-color: $white;
+    }
+    
+    &.nuxt-link-exact-active {
+      color: #15171A;
+      background-color: $white;
+      border-radius: 5px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12)
+    }
+  }
+}

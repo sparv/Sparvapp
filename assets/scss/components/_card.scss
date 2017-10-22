@@ -2,7 +2,24 @@
 ||  Card
 -------------------------------------------------------------------*/
 .c-card {
+	overflow: hidden;
 	border-radius: 5px;
 	background-color: $white;
 	box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.12);
+}
+
+.c-card__header {
+	display: flex;
+	align-items: center;
+	height: 56px;
+	background-color: #15171A;
+}
+
+.c-card__header-title {
+	font-size: 16px;
+	font-weight: bold;
+	line-height: 1.5;
+	color: $white;
+	letter-spacing: 0.72px;
+	text-transform: uppercase;
 }

@@ -40,7 +40,7 @@
 						scope.$store.commit(`setSessionId`, token) //rename setSessionId to be clearer that it is jwt token auth
 						scope.$store.commit(`setEmail`, response.data.username)
 						console.log(`commmited to store`)
-						scope.$router.push(`/secret`)
+						scope.$router.push(`/dashboard`)
 					} else {
 						// scope.$router.push(`/login`)
 					}

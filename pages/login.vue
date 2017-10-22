@@ -65,7 +65,7 @@
 								this.$store.commit(`setName`, response.data.name)
 								
 								document.cookie = `token=${response.data.token} ;expires=${expirationDate}`
-								this.$router.push(`/secret`)
+								this.$router.push(`/dashboard`)
 							}
 						})
 					}

@@ -4,8 +4,6 @@
 		<button v-on:click="logout">Logout</button>
 
 		<p>Current user: {{ getName }} - {{ getEmail }}</p>
-
-		<router-link to="/settings">Settings</router-link>
 	</div>
 </template>
 
@@ -14,6 +12,7 @@
 	import { mapGetters } from 'vuex'
 
 	export default {
+		layout: 'application',
 		middleware: `validate`,
 		computed: {
 			...mapGetters([
