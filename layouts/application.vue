@@ -26,9 +26,7 @@
       </div>
     </header>
     <main class="application-content">
-      <section class="f-wrapper">
-        <nuxt/>
-      </section>
+      <nuxt/>
     </main>
     <div class="m-tabbar">
       <div class="o-grid o-grid--full">

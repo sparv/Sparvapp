@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <section class="f-wrapper">
     <div class="m-app-control f-mb8 f-mb10-m">
       <h2 class="f-ma0">Einstellungen</h2>
     </div>
@@ -22,7 +22,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </section>
 </template>
 
 <script>
