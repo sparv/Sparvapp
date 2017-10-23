@@ -1,12 +1,12 @@
 <template>
   <div>
-    <div class="m-app-control f-mb10">
+    <div class="m-app-control f-mb8 f-mb10-m">
       <h2 class="f-ma0">Einstellungen</h2>
     </div>
     <div class="m-app-settings">
       <div class="o-grid">
-        <div class="o-grid__item f-w-third">
-          <aside class="c-sidebar-menu">
+        <div class="o-grid__item f-w-third-m">
+          <aside class="c-sidebar-menu f-mb7">
             <ul class="c-sidebar-menu__list">
               <li class="c-sidebar-menu__item f-mb5">
                 <nuxt-link to="/settings">Persönliche Einstellungen</nuxt-link>
@@ -17,7 +17,7 @@
             </ul>
           </aside>
         </div>
-        <div class="o-grid__item f-w-two-thirds">
+        <div class="o-grid__item f-w-two-thirds-m">
           <nuxt-child/>
         </div>
       </div>

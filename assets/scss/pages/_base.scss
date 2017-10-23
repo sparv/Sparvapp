@@ -7,8 +7,12 @@ body {
 
 .f-wrapper {
   margin: 0 auto;
-  padding: 0 24px;
+  padding: 0 12px;
   max-width: 1160px;
+
+  @media (min-width: $breakpoint-medium) {
+    padding: 0 24px;
+  }
 }
 
 .f-wrapper--login {

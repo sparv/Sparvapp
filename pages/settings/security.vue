@@ -8,24 +8,53 @@
       <form>
         <div class="f-mb7">
           <label class="c-label f-db f-mb3" for="">Altes Passwort</label>
-          <input class="c-input f-w-100" :class="{'c-input--error': errors.has('fist_name') }" v-model="email" v-validate="" name="fist_name" type="text">
-          <span v-show="errors.has('fist_name')" class="c-input__error-msg">{{ errors.first('fist_name') }}</span>
+          <input class="c-input f-w-100" :class="{'c-input--error': errors.has('userSettings.oldPassword') }" v-model="userSettings.oldPassword" v-validate="'required'" name="userSettings.oldPassword" type="password">
+          <span v-show="errors.has('userSettings.oldPassword')" class="c-input__error-msg">{{ errors.first('userSettings.oldPassword') }}</span>
         </div>
         <div class="f-mb7">
           <label class="c-label f-db f-mb3" for="">Neues Passwort</label>
-          <input class="c-input f-w-100" :class="{'c-input--error': errors.has('last_name') }" v-model="last_name" v-validate="" name="last_name" type="text">
-          <span v-show="errors.has('last_name')" class="c-input__error-msg">{{ errors.first('last_name') }}</span>
+          <input class="c-input f-w-100" :class="{'c-input--error': errors.has('userSettings.newPassword') }" v-model="userSettings.newPassword" v-validate="'required'" name="userSettings.newPassword" type="password">
+          <span v-show="errors.has('userSettings.newPassword')" class="c-input__error-msg">{{ errors.first('userSettings.newPassword') }}</span>
         </div>
         <div class="f-mb7">
           <label class="c-label f-db f-mb3" for="">Passwort bestätigen</label>
-          <input class="c-input f-w-100" :class="{'c-input--error': errors.has('last_name') }" v-model="last_name" v-validate="" name="last_name" type="text">
-          <span v-show="errors.has('last_name')" class="c-input__error-msg">{{ errors.first('last_name') }}</span>
+          <input class="c-input f-w-100" :class="{'c-input--error': errors.has('userSettings.newPasswordRepeat') }" v-model="userSettings.newPasswordRepeat" v-validate="'required'" name="userSettings.newPasswordRepeat" type="password">
+          <span v-show="errors.has('userSettings.newPasswordRepeat')" class="c-input__error-msg">{{ errors.first('userSettings.newPasswordRepeat') }}</span>
         </div>
         <div class="f-cf">
-          <button class="c-btn c-btn--primary f-fr">Neues Passwort speichern</button>
+          <button class="c-btn c-btn--primary f-w-100 f-w-auto-m f-fr-m">Neues Passwort speichern</button>
         </div>
       </form>
     </div>
   </div>
 </div>
 </template>
+
+<script>
+	import axios from 'axios'
+	import moment from 'moment'
+
+	export default {
+		asyncData ({ store }) {
+			return axios({
+				url: `http://localhost:4040/validate`,
+				method: `post`,
+				headers: {
+					'Authorization': `Bearer ${store.getters.getSessionId}`
+				}
+			}).then((response) => {
+				console.log(response)
+			})
+		},
+
+		data: function () {
+      return {
+        userSettings: {
+          oldPassword: ``,
+          newPassword: ``,
+          newPasswordRepeat: ``
+				}
+			}
+		}
+	}
+</script>

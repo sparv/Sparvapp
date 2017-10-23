@@ -14,12 +14,20 @@
 	export default {
 		layout: 'application',
 		middleware: `validate`,
+		
 		computed: {
 			...mapGetters([
 				`getEmail`,
 				`getName`
 			])
 		},
+
+		data: function () {
+			return {
+				title: `Test`,
+			}
+		},
+
 		methods: {
 			logout: function (event) {
 				document.cookie = `token=; expires=Thu, 01 Jan 1970 00:00:00 GMT`

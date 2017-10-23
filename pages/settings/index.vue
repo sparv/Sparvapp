@@ -4,25 +4,20 @@
       <div class="c-card__header f-ph6">
         <h3 class="f-ma0 c-card__header-title">Account-Einstellungen</h3>
       </div>
-      <div class="c-card__content f-pv7 f-ph6">
+      <div class="c-card__content f-pv6 f-ph4 f-pv7-m f-ph6-m">
         <form>
-          <div class="f-mb7">
-            <label class="c-label f-db f-mb3" for="">Vorname</label>
-            <input class="c-input f-w-100" :class="{'c-input--error': errors.has('fist_name') }" v-model="email" v-validate="" name="fist_name" type="text">
-            <span v-show="errors.has('fist_name')" class="c-input__error-msg">{{ errors.first('fist_name') }}</span>
+          <div class="f-mb6 f-mb7-m">
+            <label class="c-label f-db f-mb3" for="">Name</label>
+            <input class="c-input f-w-100" :class="{'c-input--error': errors.has('userSettings.name') }" v-model="userSettings.name" name="userSettings.name" type="text">
+            <span v-show="errors.has('userSettings.name')" class="c-input__error-msg">{{ errors.first('userSettings.name') }}</span>
           </div>
-          <div class="f-mb7">
-            <label class="c-label f-db f-mb3" for="">Nachname</label>
-            <input class="c-input f-w-100" :class="{'c-input--error': errors.has('last_name') }" v-model="last_name" v-validate="" name="last_name" type="text">
-            <span v-show="errors.has('last_name')" class="c-input__error-msg">{{ errors.first('last_name') }}</span>
-          </div>
-          <div class="f-mb7">
+          <div class="f-mb6 f-mb7-m">
             <label class="c-label f-db f-mb3" for="">E-Mail-Adresse</label>
-            <input class="c-input f-w-100" :class="{'c-input--error': errors.has('email') }" v-model="email" v-validate="'required|email'" name="email" type="text">
-            <span v-show="errors.has('email')" class="c-input__error-msg">{{ errors.first('email') }}</span>
+            <input class="c-input f-w-100" :class="{'c-input--error': errors.has('userSettings.email') }" v-model="userSettings.email" v-validate="'email'" name="userSettings.email" type="email">
+            <span v-show="errors.has('userSettings.email')" class="c-input__error-msg">{{ errors.first('userSettings.email') }}</span>
           </div>
           <div class="f-cf">
-            <button class="c-btn c-btn--primary f-fr">Änderungen speichern</button>
+            <button class="c-btn c-btn--primary f-w-100 f-w-auto-m f-fr-m">Änderungen speichern</button>
           </div>
         </form>
       </div>
@@ -40,3 +35,39 @@
     </div>
   </div>
 </template>
+
+<script>
+	import axios from 'axios'
+	import moment from 'moment'
+	import { mapGetters } from 'vuex'
+
+	export default {
+		asyncData ({ store }) {
+			return axios({
+				url: `http://localhost:4040/validate`,
+				method: `post`,
+				headers: {
+					'Authorization': `Bearer ${store.getters.getSessionId}`
+				}
+			}).then((response) => {
+				console.log(response)
+			})
+		},
+
+		computed: {
+			...mapGetters([
+				`getEmail`,
+				`getName`
+			])
+		},
+
+		data: function () {
+      return {
+        userSettings: {
+          name: ``,
+          email: ``
+				}
+			}
+    }
+	}
+</script>

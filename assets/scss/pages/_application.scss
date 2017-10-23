@@ -2,16 +2,41 @@
 ||  Application
 -------------------------------------------------------------------*/
 .m-app-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 96px;
-  padding: 0 16px;
+  padding: 0 12px;
   background: #FFF;
   box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.12);
 
   @media (min-width: $breakpoint-medium) {
     padding: 0 48px;
+  }
+}
+
+.m-app-header-content--mobile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 56px;
+  
+  h1 {
+    width: calc(100% - 48px - 32px);
+    font-size: 20px;
+    font-weight: bold;
+    color: #15171a;
+    text-align: center;
+  }
+
+  @media (min-width: $breakpoint-medium) {
+    display: none;
+  }
+}
+
+.m-app-header-content--desktop {
+  display: none;
+  @media (min-width: $breakpoint-medium) {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 96px;
   }
 }
 
@@ -38,12 +63,49 @@
 }
 
 .m-app-control {
-  display: flex;
-  align-items: center;
-  height: 96px;
-  border-bottom: 2px solid #E1E3E6;
-  h2 {
-    font-size: 30px;
-    line-height: 1.25;
+  display: none;
+  @media (min-width: $breakpoint-medium) {
+    display: flex;
+    align-items: center;
+    height: 96px;
+    border-bottom: 2px solid #E1E3E6;
+    
+    h2 {
+      font-size: 30px;
+      line-height: 1.25;
+    }
   }
+}
+
+.m-tabbar {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  height: 56px;
+  width: 100%;
+  background-color: #ffffff;
+  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.12), inset 0 1px 0 0 #dcdde0;
+
+  @media (min-width: $breakpoint-medium) {
+    display: none;
+  }
+}
+
+.m-tabbar__item a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #15171a;
+  opacity: 0.56;
+  text-decoration: none;
+
+  &.nuxt-link-exact-active {
+    opacity: 1;
+  }
+}
+
+.m-tabbar__item-text {
+  font-size: 12px;
+  line-height: 16px;
 }
