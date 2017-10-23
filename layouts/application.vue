@@ -19,7 +19,20 @@
               <nuxt-link to="/clients">Kunden</nuxt-link>
             </li>
             <li class="f-ml8 m-app-header-nav__item">
-              <nuxt-link to="/settings">Einstellungen</nuxt-link>
+              <button v-on:click="showUserSubmenu = !showUserSubmenu">
+                <img src="https://d3iw72m71ie81c.cloudfront.net/female-17.jpg" width="32" height="32" alt="">
+                <span>{{ getName }}</span>
+              </button>
+              <div v-if="showUserSubmenu" class="c-submenu">
+                <ul class="c-submenu__list">
+                  <li class="c-submenu__item">
+                    <nuxt-link to="/settings/" class="">Einstellungen</nuxt-link>
+                  </li>
+                  <li class="c-submenu__item">
+                    <button v-on:click="logout">Logout</button>
+                  </li>
+                </ul>
+              </div>
             </li>
           </ul>
         </nav>
@@ -58,3 +71,38 @@
     </div>
   </div>
 </template>
+
+<script>
+	import axios from 'axios'
+	import { mapGetters } from 'vuex'
+
+	export default {
+		layout: 'application',
+		middleware: `validate`,
+		
+		computed: {
+			...mapGetters([
+				`getEmail`,
+				`getName`
+			])
+		},
+
+		data: function () {
+			return {
+        title: `Test`,
+        showUserSubmenu: false
+			}
+		},
+
+		methods: {
+			logout: function (event) {
+				document.cookie = `token=; expires=Thu, 01 Jan 1970 00:00:00 GMT`
+				this.$store.commit(`setAuthentication`, false)
+				this.$store.commit(`setSessionId`, null) //rename setSessionId to be clearer that it is jwt token auth
+				this.$store.commit(`setEmail`, null)
+				this.$store.commit(`setName`, null)
+				this.$router.push(`/`)
+			}
+		}
+	}
+</script>
