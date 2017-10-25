@@ -2,9 +2,7 @@
 	<section class="f-pv8 f-ph5 f-pa12-m">
 		<div class="f-wrapper f-wrapper--login">
 			<div class="c-card f-pv6 f-ph5 f-pa8-m">
-				<div class="c-card__header--login f-mb6 f-mb8-m">
-					<h2 class="display-2 f-mb5 f-mb6-m">Login</h2>
-				</div>
+				<LoginHeader title="Login"></LoginHeader>
 				<form v-on:submit.prevent="loginSubmit">
 					<div class="f-mb7">
 						<label class="c-label f-db f-mb3" for="">E-Mail-Adresse</label>
@@ -26,21 +24,29 @@
 <script>
 	import axios from 'axios'
 	import moment from 'moment'
+	
+	import LoginHeader from '~/components/LoginHeader.vue'
 
 	export default {
+		layout: 'landingpage',
 		head: {
 			title: 'Login',
 			meta: [
 				{ hid: 'description', name: 'description', content: 'Home page description' }
 			]
 		},
-		layout: 'landingpage',
+		
+		components: {
+			LoginHeader
+		},
+		
 		data: function () {
 			return {
-				email: ``,
-				password: ``
+				email: '',
+				password: ''
 			}
 		},
+		
 		methods: {
 			loginSubmit: function (event) {
 				this.$validator.validateAll().then(validationState => {

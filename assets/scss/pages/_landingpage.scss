@@ -1,21 +1,4 @@
 /*------------------------------------------------------------------
-||  Landigpage
--------------------------------------------------------------------*/
-.m-site-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 96px;
-  padding: 0 16px;
-
-  @media (min-width: $breakpoint-medium) {
-    padding: 0 48px;
-  }
-}
-
-.landingpage-content {}
-
-/*------------------------------------------------------------------
 ||  Landigpage - Login
 -------------------------------------------------------------------*/
 .c-card__header--login {
