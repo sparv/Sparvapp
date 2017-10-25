@@ -33,7 +33,7 @@
     display: flex;
     align-items: center;
     flex-direction: column;
-    padding: 16px;
+    padding: 24px 16px;
     height: auto;
 
     @media (min-width: 860px) {
