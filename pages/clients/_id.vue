@@ -22,10 +22,22 @@
         <div v-if="showProfileSubmenu" class="c-submenu">
           <ul class="c-submenu__list">
             <li class="c-submenu__item">
-              <nuxt-link to="/clients/1/edit/" class="">Kunde bearbeiten</nuxt-link>
+              <nuxt-link to="/clients/1/edit/">
+                <svg class="f-mr5" fill="#15171A" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/>
+                  <path d="M0 0h24v24H0z" fill="none"/>
+                </svg>
+                <span>Kunde bearbeiten</span>
+              </nuxt-link>
             </li>
-            <li class="c-submenu__item">
-              <nuxt-link to="/clients/1/delete/" class="">Kunde löschen</nuxt-link>
+            <li class="c-submenu__item c-submenu__item--important">
+              <nuxt-link to="/clients/1/delete/">
+                <svg class="f-mr5" fill="#F03D5D" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/>
+                  <path d="M0 0h24v24H0z" fill="none"/>
+                </svg>
+                <span>Kunde löschen</span>
+              </nuxt-link>
             </li>
           </ul>
         </div>
@@ -90,64 +102,4 @@
 	}
 </script>
 
-<style lang="scss" scoped>
-  .m-app-control {
-    position: relative;
-  }
-  
-  .c-single-breadcrumb {
-    margin: 0;
-    padding: 0;
-    font-size: 24px;
-    list-style: none;
-    span {
-      color: #727375;
-    }
-  }
-
-  .c-single-breadcrumb__item {
-    display: inline-block;
-  }
-
-  .c-single-breadcrumb__item--first a {
-    color: #727375;
-    text-decoration: none;
-  }
-
-  .c-submenu {
-    position: absolute;
-    top: 56px;
-    right: 0;
-    width: 256px;
-    z-index: 10;
-    background: #FFFFFF;
-    border-radius: 5px;
-    box-shadow: 0 2px 8px 0 rgba(0,0,0,0.12);
-  }
-
-  .c-submenu__list {
-    margin: 0;
-    padding: 8px 0;
-    list-style: none;
-  }
-
-  .c-submenu__item a {
-    display: flex;
-    align-items: center;
-    padding: 0 16px;
-    height: 56px;
-    color: #15171A;
-    letter-spacing: 0.24px;
-    line-height: 24px;
-    text-decoration: none;
-
-    &:hover, &:focus {
-      background: #f5f7fa;
-    }
-  }
-
-
-
-
-
-</style>
+<style lang="scss" scoped></style>
