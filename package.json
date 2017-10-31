@@ -26,6 +26,7 @@
 		"vee-validate": "^2.0.0-rc.19"
 	},
 	"dependencies": {
+		"a11y-dialog": "^4.0.0",
 		"axios": "^0.16.2",
 		"moment": "^2.18.1",
 		"nuxt": "^1.0.0-rc11"

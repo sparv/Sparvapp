@@ -30,7 +30,8 @@
   }
 
   &:disabled {
-    cursor: default;
+    opacity: 0.48;
+    cursor: not-allowed;
   }
 }
 

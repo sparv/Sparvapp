@@ -28,46 +28,59 @@
       </div>
       <div class="c-card__content f-pv7 f-ph6">
         <p>Möchten Sie wirklich Ihren Account endgültig löschen?</p>
-        <form>
-          <button class="c-btn c-btn--error">Account endgültig löschen</button>
-        </form>
+        <button class="c-btn c-btn--error" data-a11y-dialog-show="deleteUser">Account endgültig löschen</button>
       </div>
     </div>
+    <Modal elementId="deleteUser" 
+            icon="/images/delete.svg"
+            iconDescription="Test"
+            title="Kunde löschen"
+            description="Bist Du Dir sicher, dass du diesen Kunden löschen möchtest? Das Löschen kann nicht rückgängig gemacht werden. Bitte gebe zur Bestätigung den Nachnamen des Kunden ein." label="Gib den Nachname des Kunden zur Bestätigung ein"
+            buttonText="Kunde löschen"></Modal>
   </div>
 </template>
 
 <script>
-	import axios from 'axios'
-	import moment from 'moment'
-	import { mapGetters } from 'vuex'
+import axios from "axios";
+import moment from "moment";
+import A11yDialog from "a11y-dialog";
+import { mapGetters } from "vuex";
 
-	export default {
-		asyncData ({ store }) {
-			return axios({
-				url: `http://localhost:4040/validate`,
-				method: `post`,
-				headers: {
-					'Authorization': `Bearer ${store.getters.getSessionId}`
-				}
-			}).then((response) => {
-				console.log(response)
-			})
-		},
+import Modal from '~/components/Modal.vue'
 
-		computed: {
-			...mapGetters([
-				`getEmail`,
-				`getName`
-			])
-		},
+export default {
+  asyncData({ store }) {
+    return axios({
+      url: `http://localhost:4040/validate`,
+      method: `post`,
+      headers: {
+        Authorization: `Bearer ${store.getters.getSessionId}`
+      }
+    }).then(response => {
+      console.log(response);
+    });
+  },
 
-		data: function () {
-      return {
-        userSettings: {
-          name: ``,
-          email: ``
-				}
-			}
-    }
-	}
+  components: {
+    Modal
+  },
+
+  computed: {
+    ...mapGetters([`getEmail`, `getName`])
+  },
+
+  mounted: function() {
+    const el = document.getElementById('deleteUser');
+    const dialog = new A11yDialog(el);
+  },
+
+  data: function() {
+    return {
+      userSettings: {
+        name: "",
+        email: ""
+      }
+    };
+  }
+};
 </script>

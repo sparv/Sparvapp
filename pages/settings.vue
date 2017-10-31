@@ -31,6 +31,6 @@
 
 	export default {
 		layout: 'application',
-		middleware: `validate`
-	}
+    middleware: 'validate'
+  }
 </script>
