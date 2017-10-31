@@ -61,6 +61,16 @@
   }
 }
 
+.c-btn--text {
+  background-color: none;
+  box-shadow: none;
+  
+  &:hover {
+    background-color: none;
+    box-shadow: none;
+  }
+}
+
 .c-btn--icon {
   position: relative;
   padding: 0;

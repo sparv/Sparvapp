@@ -2,7 +2,7 @@
   <section class="f-wrapper">
 		<div class="m-app-control f-mb8 f-mb10-m">
       <h2 class="f-ma0">Kunden</h2>
-      <button v-on:click="openNewClientDialog" class="c-btn c-btn--primary">Neuen Kunden hinzufügen</button>
+      <button class="c-btn c-btn--primary" @click="openSidebar = !openSidebar">Neuen Kunden hinzufügen</button>
     </div>
 
     <div class="c-table-flow__list">
@@ -21,19 +21,27 @@
         </div>
       </nuxt-link>
     </div>
+    <Sidebar :openState="openSidebar" @update="updateModalState"></Sidebar>
   </section>
 </template>
 
 <script>
 	import axios from 'axios'
-	import { mapGetters } from 'vuex'
+  import { mapGetters } from 'vuex'
+  
+  import Sidebar from '~/components/Sidebar/Clients/AddClient.vue'
 
 	export default {
 		layout: 'application',
     middleware: `validate`,
+
+    components: {
+			Sidebar
+		},
     
     data () {
       return {
+        openSidebar: false,
         clients: [{
           id: "1",
           name: 'Ursula Adler',
@@ -54,8 +62,8 @@
     },
 
     methods: {
-      openNewClientDialog: function(event) {
-        console.log(event);
+      updateModalState: function(data) {
+        this.openSidebar = data
       }
     }
 	}
