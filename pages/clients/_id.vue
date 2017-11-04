@@ -11,8 +11,6 @@
         </ul>
       </h2>
       <div>
-        <nuxt-link to="#" class="c-btn c-btn--primary f-mr6">Termin hinzufügen</nuxt-link>
-        <nuxt-link to="#" class="c-btn c-btn--primary f-mr6">Trainingsplan anlegen</nuxt-link>
         <button v-on:click="showProfileSubmenu = !showProfileSubmenu" class="c-btn c-btn--icon">
           <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
             <path d="M0 0h24v24H0z" fill="none"/>
@@ -43,39 +41,45 @@
         </div>
       </div>
     </div>
-    <div class="c-card f-pa6">
+    <div class="c-card f-mb6 f-mb8-m f-pa6">
       <h2 class="">Basis Informationen</h2>
       <div class="o-grid">
         <div class="o-grid__item f-w-33-m f-mb6">
           <div class="c-data-item">
             <h4 class="c-data-item__title">Name</h4>
-            <span class="c-data-item__text">Christopher Ankunding</span>
+            <span class="c-data-item__text">{{name}}</span>
           </div>
         </div>
         <div class="o-grid__item f-w-33-m f-mb6">
           <div class="c-data-item">
             <h4 class="c-data-item__title">Geschlecht</h4>
-            <span class="c-data-item__text">männlich</span>
+            <span class="c-data-item__text">{{gender}}</span>
           </div>
         </div>
         <div class="o-grid__item f-w-33-m f-mb6">
           <div class="c-data-item">
             <h4 class="c-data-item__title">Alter</h4>
-            <span class="c-data-item__text">37</span>
+            <span class="c-data-item__text">{{age}}</span>
           </div>
         </div>
         <div class="o-grid__item f-w-33-m">
           <div class="c-data-item">
             <h4 class="c-data-item__title">E-Mail-Adresse</h4>
-            <span class="c-data-item__text">christopher.ankunding@gmail.com</span>
+            <span class="c-data-item__text">{{email}}</span>
           </div>
         </div>
         <div class="o-grid__item f-w-33-m">
           <div class="c-data-item">
             <h4 class="c-data-item__title">Telefonnummer</h4>
-            <span class="c-data-item__text">(0117) 957 0202</span>
+            <span class="c-data-item__text">{{phoneNumber}}</span>
           </div>
         </div>
+      </div>
+    </div>
+    <div class="c-card f-pa6">
+      <span v-if="!clientNotes" class="text-placeholder">Keine Notizen hinterlegt</span>
+      <div v-if="clientNotes">
+        {{ clientNotes }}
       </div>
     </div>
     <Sidebar :openState="openSidebar" @update="updateModalState"></Sidebar>
@@ -113,7 +117,13 @@
     data () {
       return {
         openSidebar: false,
-        showProfileSubmenu: false
+        showProfileSubmenu: false,
+        name: "Christopher Ankunding",
+        gender: "männlich",
+        age: "37",
+        email: "christopher.ankunding@gmail.com",
+        phoneNumber: "(0117) 957 0202",
+        clientNotes: ""
       }
     },
     

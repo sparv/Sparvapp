@@ -7,18 +7,9 @@
 
     <div class="c-table-flow__list">
       <nuxt-link :to="'/clients/' + client.id" class="c-table-flow__item f-mb3" v-for="(client, index) in clients" v-bind:item="client" v-bind:index="index" v-bind:key="client.id">
-        <div class="c-table-flow__item-data f-mb4 f-mb0-m f-ph6-m">
-          <h4 class="c-table-flow__item-title">Name</h4>
-          <span>{{ client.name }}</span>
-        </div>
-        <div class="c-table-flow__item-data f-mb4 f-mb0-m f-ph6-m">
-          <h4 class="c-table-flow__item-title">E-Mail-Adresse</h4>
-          <span>{{ client.email }}</span>
-        </div>
-        <div class="c-table-flow__item-data f-ph6-m">
-          <h4 class="c-table-flow__item-title">Telefonnummer</h4>
-          <span>{{ client.phoneNumber }}</span>
-        </div>
+        <TableFlowCellBasic label="Name" :text="client.name"></TableFlowCellBasic>
+        <TableFlowCellBasic label="E-Mail-Adresse" :text="client.email"></TableFlowCellBasic>
+        <TableFlowCellBasic label="Telefonnummer" :text="client.phoneNumber"></TableFlowCellBasic>
       </nuxt-link>
     </div>
     <Sidebar :openState="openSidebar" @update="updateModalState"></Sidebar>
@@ -30,13 +21,15 @@
   import { mapGetters } from 'vuex'
   
   import Sidebar from '~/components/Sidebar/Clients/AddClient.vue'
+  import TableFlowCellBasic from '~/components/Table/TableFlowCellBasic.vue'
 
 	export default {
 		layout: 'application',
     middleware: `validate`,
 
     components: {
-			Sidebar
+			Sidebar,
+      TableFlowCellBasic
 		},
     
     data () {
@@ -76,11 +69,11 @@
       padding: 0 24px;
     }
   }
-  
+
   .c-table-flow__item {
     display: flex;
     flex-wrap: wrap;
-    padding: 16px 8px;
+    padding: 0 8px;
     color: #15171a;
     font-size: 14px;
     text-decoration: none;
@@ -101,25 +94,4 @@
       border-radius: 5px;
     }
   }
-
-  .c-table-flow__item-data {
-    width: 50%;
-    @media (min-width: 860px) {
-      flex: 1 1 0;
-      width: auto;
-    }
-  }
-
-  .c-table-flow__item-title {
-    margin: 0 0 2px;
-    font-size: 12px;
-	  font-weight: bold;
-	  line-height: 1.29;
-	  letter-spacing: 0.7px;
-    color: #727375;
-    @media (min-width: 860px) {
-      font-size: 14px;
-    }
-  }
-
 </style>
