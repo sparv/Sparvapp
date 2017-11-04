@@ -26,7 +26,7 @@
             <div v-if="showUserSubmenu" class="c-submenu">
               <ul class="c-submenu__list">
                 <li class="c-submenu__item">
-                  <nuxt-link to="/settings/" class="">Einstellungen</nuxt-link>
+                  <nuxt-link to="/settings/" v-on:click.native="showUserSubmenu = !showUserSubmenu">Einstellungen</nuxt-link>
                 </li>
                 <li class="c-submenu__item">
                   <span v-on:click="logout">Logout</span>
