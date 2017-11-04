@@ -22,63 +22,74 @@
 </template>
 
 <script>
-	import axios from 'axios'
-	import moment from 'moment'
-	
-	import LoginHeader from '~/components/LoginHeader.vue'
+import axios from "axios";
+import moment from "moment";
 
-	export default {
-		layout: 'landingpage',
-		head: {
-			title: 'Login',
-			meta: [
-				{ hid: 'description', name: 'description', content: 'Home page description' }
-			]
-		},
-		
-		components: {
-			LoginHeader
-		},
-		
-		data: function () {
-			return {
-				email: '',
-				password: ''
-			}
-		},
-		
-		methods: {
-			loginSubmit: function (event) {
-				this.$validator.validateAll().then(validationState => {
-					if(validationState) {
-						axios({
-							url: `http://localhost:4040/login`,
-							method: `post`,
-							data: {
-								email: this.email,
-								password: this.password
-								},
-								withCredentials: false // Needed?
-						}).then((response) => {
-							console.log(response)
-							if (response.data.auth) {
-								const expirationDate = `${moment().add(1, `months`).utc().format(`ddd, D MMM YYYY hh:mm:ss`)} GMT`
-								console.log(expirationDate)
-								
-								this.$store.commit(`setAuthentication`, response.data.auth)
-								this.$store.commit(`setSessionId`, response.data.token) //rename setSessionId to be clearer that it is jwt token auth
-								this.$store.commit(`setEmail`, response.data.user)
-								this.$store.commit(`setName`, response.data.name)
-								
-								document.cookie = `token=${response.data.token} ;expires=${expirationDate}`
-								this.$router.push(`/dashboard`)
-							}
-						})
-					}
-				}).catch(error => {
-					console.log(error)
-				})
-			}
-		}
-	}
+import LoginHeader from "~/components/LoginHeader.vue";
+
+export default {
+  layout: "landingpage",
+  head: {
+    title: "Login",
+    meta: [
+      {
+        hid: "description",
+        name: "description",
+        content: "Home page description"
+      }
+    ]
+  },
+
+  components: {
+    LoginHeader
+  },
+
+  data: function() {
+    return {
+      email: "",
+      password: ""
+    };
+  },
+
+  methods: {
+    loginSubmit: function(event) {
+      this.$validator
+        .validateAll()
+        .then(validationState => {
+          if (validationState) {
+            axios({
+              url: `http://localhost:4040/login`,
+              method: `post`,
+              data: {
+                email: this.email,
+                password: this.password
+              },
+              withCredentials: false // Needed?
+            }).then(response => {
+              console.log(response);
+              if (response.data.auth) {
+                const expirationDate = `${moment()
+                  .add(1, `months`)
+                  .utc()
+                  .format(`ddd, D MMM YYYY hh:mm:ss`)} GMT`;
+                console.log(expirationDate);
+
+                this.$store.commit(`setAuthentication`, response.data.auth);
+                this.$store.commit(`setSessionId`, response.data.token); //rename setSessionId to be clearer that it is jwt token auth
+                this.$store.commit(`setEmail`, response.data.user);
+                this.$store.commit(`setName`, response.data.name);
+
+                document.cookie = `token=${response.data
+                  .token} ;expires=${expirationDate}`;
+                this.$router.push(`/dashboard`);
+              }
+            });
+          }
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    }
+  }
+};
 </script>

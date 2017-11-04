@@ -1,7 +1,7 @@
 <template>
   <header class="m-app-header">
     <div class="m-app-header-content--mobile">
-      <h1 class="f-ma0">Dashboard</h1>
+      <h1 class="f-ma0">{{siteTitle}}</h1>
     </div>
     <div class="m-app-header-content--desktop">
       <h1 class="f-db f-ma0">
@@ -42,24 +42,23 @@
 
 <script>
 export default {
-  props: ['username'],
-  
-  data: function () {
+  props: ["siteTitle", "username"],
+
+  data: function() {
     return {
-      title: `Test`,
       showUserSubmenu: false
-    }
+    };
   },
 
   methods: {
-    logout: function (event) {
-      document.cookie = `token=; expires=Thu, 01 Jan 1970 00:00:00 GMT`
-      this.$store.commit(`setAuthentication`, false)
-      this.$store.commit(`setSessionId`, null) //rename setSessionId to be clearer that it is jwt token auth
-      this.$store.commit(`setEmail`, null)
-      this.$store.commit(`setName`, null)
-      this.$router.push(`/`)
+    logout: function(event) {
+      document.cookie = `token=; expires=Thu, 01 Jan 1970 00:00:00 GMT`;
+      this.$store.commit(`setAuthentication`, false);
+      this.$store.commit(`setSessionId`, null); //rename setSessionId to be clearer that it is jwt token auth
+      this.$store.commit(`setEmail`, null);
+      this.$store.commit(`setName`, null);
+      this.$router.push(`/`);
     }
   }
-}
+};
 </script>

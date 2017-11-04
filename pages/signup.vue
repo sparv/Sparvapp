@@ -22,53 +22,60 @@
 </template>
 
 <script>
-	import axios from 'axios'
-	import moment from 'moment'
+import axios from "axios";
+import moment from "moment";
 
-	import LoginHeader from '~/components/LoginHeader.vue'
+import LoginHeader from "~/components/LoginHeader.vue";
 
-	export default {
-		layout: 'landingpage',
-		head: {
-			title: 'Sign Up',
-			meta: [
-				{ hid: 'description', name: 'description', content: 'Home page description' }
-			]
-		},
+export default {
+  layout: "landingpage",
+  head: {
+    title: "Sign Up",
+    meta: [
+      {
+        hid: "description",
+        name: "description",
+        content: "Home page description"
+      }
+    ]
+  },
 
-		components: {
-			LoginHeader
-		},
-		
-		data: function () {
-			return {
-				name: ``,
-        email: ``,
-				password: ``
-			}
-		},
-		
-		methods: {
-			registerSubmit: function (event) {
-				this.$validator.validateAll().then(validationState => {
-					if(validationState) {
-						axios({
-							url: `http://localhost:4040/register`,
-							method: `post`,
-							data: {
-								name: "",
-								email: this.email,
-								password: this.password
-							},
-							withCredentials: false // needed?
-						}).then((response) => {
-							console.log(response)
-						})
-					}
-				}).catch(error => {
-					console.log(error)
-				})
-			}
-		}
-	}
+  components: {
+    LoginHeader
+  },
+
+  data: function() {
+    return {
+      name: ``,
+      email: ``,
+      password: ``
+    };
+  },
+
+  methods: {
+    registerSubmit: function(event) {
+      this.$validator
+        .validateAll()
+        .then(validationState => {
+          if (validationState) {
+            axios({
+              url: `http://localhost:4040/register`,
+              method: `post`,
+              data: {
+                name: "",
+                email: this.email,
+                password: this.password
+              },
+              withCredentials: false // needed?
+            }).then(response => {
+              console.log(response);
+            });
+          }
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    }
+  }
+};
 </script>

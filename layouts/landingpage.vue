@@ -8,10 +8,10 @@
 </template>
 
 <script>
-  import LandingpageHeader from '~/components/LandingpageHeader.vue'
-  export default {
-    components: {
-      LandingpageHeader
-    }
+import LandingpageHeader from "~/components/LandingpageHeader.vue";
+export default {
+  components: {
+    LandingpageHeader
   }
+};
 </script>

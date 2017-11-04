@@ -1,6 +1,6 @@
 <template>
   <div>
-    <AppHeader :username="getName"></AppHeader>
+    <AppHeader :username="name" :siteTitle="siteTitle"></AppHeader>
     <main class="application-content">
       <nuxt/>
     </main>
@@ -9,25 +9,25 @@
 </template>
 
 <script>
-	import axios from 'axios'
-	import { mapGetters } from 'vuex'
+import axios from "axios";
+import { mapGetters } from "vuex";
 
-  import AppHeader from '~/components/AppHeader.vue'
-  import Tabbar from '~/components/Tabbar.vue'
+import AppHeader from "~/components/AppHeader.vue";
+import Tabbar from "~/components/Tabbar.vue";
 
-	export default {
-		middleware: `validate`,
+export default {
+  middleware: `validate`,
 
-    components: {
-      AppHeader,
-      Tabbar
-    },
-		
-		computed: {
-			...mapGetters([
-				`getEmail`,
-				`getName`
-			])
-		}
-	}
+  components: {
+    AppHeader,
+    Tabbar
+  },
+
+  computed: {
+    ...mapGetters({
+      siteTitle: "getApplicationTitle",
+      name: "getName"
+    })
+  }
+};
 </script>

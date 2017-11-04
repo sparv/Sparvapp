@@ -19,63 +19,63 @@
 </template>
 
 <script>
-  export default {
-    data () {
-      return {
-        mobileNavigationShow: false
-      }
-    }
+export default {
+  data() {
+    return {
+      mobileNavigationShow: false
+    };
   }
+};
 </script>
 
 <style lang="scss" scoped>
-  .m-site-header {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    padding: 24px 16px;
-    height: auto;
+.m-site-header {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 24px 16px;
+  height: auto;
 
-    @media (min-width: 860px) {
-      flex-direction: row;
-      padding: 0 48px;
-      height: 96px;
-    }
+  @media (min-width: 860px) {
+    flex-direction: row;
+    padding: 0 48px;
+    height: 96px;
   }
+}
 
-  .m-site-header__top {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 16px;
-    width: 100%;
+.m-site-header__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  width: 100%;
 
-    @media (min-width: 860px) {
-      margin-bottom: 0;
-    }
+  @media (min-width: 860px) {
+    margin-bottom: 0;
   }
+}
 
-  .m-site-header__toggle {
-    background: none;
-    border: none;
-    @media (min-width: 860px) {
-      display: none;
-    }
-  }
-
-  .m-site-header__bottom {
+.m-site-header__toggle {
+  background: none;
+  border: none;
+  @media (min-width: 860px) {
     display: none;
-    width: 100%;
-    @media (min-width: 860px) {
-      display: flex;
-      width: auto;
-    }
   }
+}
 
-  .m-site-header__bottom--open {
-    display: block;
-    @media (min-width: 860px) {
-      display: flex;
-    }
+.m-site-header__bottom {
+  display: none;
+  width: 100%;
+  @media (min-width: 860px) {
+    display: flex;
+    width: auto;
   }
+}
+
+.m-site-header__bottom--open {
+  display: block;
+  @media (min-width: 860px) {
+    display: flex;
+  }
+}
 </style>

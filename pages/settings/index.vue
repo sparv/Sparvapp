@@ -42,19 +42,18 @@
 
 <script>
 import axios from "axios";
-import moment from "moment";
 import A11yDialog from "a11y-dialog";
 import { mapGetters } from "vuex";
 
-import Modal from '~/components/Modal.vue'
+import Modal from "~/components/Modal.vue";
 
 export default {
   asyncData({ store }) {
     return axios({
-      url: `http://localhost:4040/validate`,
-      method: `post`,
+      url: 'http://localhost:4040/validate',
+      method: 'POST',
       headers: {
-        Authorization: `Bearer ${store.getters.getSessionId}`
+        Authorization: 'Bearer ${store.getters.getSessionId}'
       }
     }).then(response => {
       console.log(response);
@@ -66,7 +65,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters([`getEmail`, `getName`])
+    ...mapGetters(['getEmail', 'getName'])
   },
 
   mounted: function() {
@@ -77,8 +76,8 @@ export default {
   data: function() {
     return {
       userSettings: {
-        name: "",
-        email: ""
+        name: '',
+        email: ''
       }
     };
   }

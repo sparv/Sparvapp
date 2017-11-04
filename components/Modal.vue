@@ -30,6 +30,14 @@
 
 <script>
 export default {
-  props: ['elementId', 'icon', 'iconDescription', 'title', 'description', 'label', 'buttonText']
-}
+  props: [
+    "elementId",
+    "icon",
+    "iconDescription",
+    "title",
+    "description",
+    "label",
+    "buttonText"
+  ]
+};
 </script>

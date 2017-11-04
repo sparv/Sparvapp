@@ -17,81 +17,91 @@
 </template>
 
 <script>
-	import axios from 'axios'
-  import { mapGetters } from 'vuex'
-  
-  import Sidebar from '~/components/Sidebar/Clients/AddClient.vue'
-  import TableFlowCellBasic from '~/components/Table/TableFlowCellBasic.vue'
+import axios from "axios";
+import { mapGetters } from "vuex";
 
-	export default {
-		layout: 'application',
-    middleware: `validate`,
+import Sidebar from "~/components/Sidebar/Clients/AddClient.vue";
+import TableFlowCellBasic from "~/components/Table/TableFlowCellBasic.vue";
 
-    components: {
-			Sidebar,
-      TableFlowCellBasic
-		},
-    
-    data () {
-      return {
-        openSidebar: false,
-        clients: [{
+export default {
+  layout: "application",
+  middleware: `validate`,
+
+  components: {
+    Sidebar,
+    TableFlowCellBasic
+  },
+
+  mounted: function() {
+    this.$store.commit("setApplicationTitle", "Kunden");
+  },
+
+  data() {
+    return {
+      openSidebar: false,
+      clients: [
+        {
           id: "1",
-          name: 'Ursula Adler',
-          email: 'adler5683@gmail.com',
-          phoneNumber: '(0131) 550 7943'
-        },{
+          name: "Ursula Adler",
+          email: "adler5683@gmail.com",
+          phoneNumber: "(0131) 550 7943"
+        },
+        {
           id: "2",
-          name: 'Christopher Ankunding',
-          email: 'christopher.ankunding@aol.com',
-          phoneNumber: '(0117) 957 0202'
-        },{
+          name: "Christopher Ankunding",
+          email: "christopher.ankunding@aol.com",
+          phoneNumber: "(0117) 957 0202"
+        },
+        {
           id: "3",
-          name: 'Ivo Arnold',
-          email: 'ivo4278arnold@me.com',
-          phoneNumber: '(0117) 420 1973'
-        }]
-      }
-    },
+          name: "Ivo Arnold",
+          email: "ivo4278arnold@me.com",
+          phoneNumber: "(0117) 420 1973"
+        }
+      ]
+    };
+  },
 
-    methods: {
-      updateModalState: function(data) {
-        this.openSidebar = data
-      }
+  methods: {
+    updateModalState: function(data) {
+      this.openSidebar = data;
     }
-	}
+  }
+};
 </script>
 
 <style lang="scss" scoped>
-  .f-wrapper {
-    padding: 0;
-    @media (min-width: 860px) {
-      padding: 0 24px;
-    }
+.f-wrapper {
+  padding: 0;
+  @media (min-width: 860px) {
+    padding: 0 24px;
+  }
+}
+
+.c-table-flow__item {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0 8px;
+  color: #15171a;
+  font-size: 14px;
+  text-decoration: none;
+  background-color: #ffffff;
+  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.12);
+  transition: all 0.24s ease-in-out;
+
+  &:hover,
+  &:focus {
+    background-color: #f5f7fa;
+    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.16),
+      0 2px 8px 0 rgba(0, 0, 0, 0.12);
   }
 
-  .c-table-flow__item {
-    display: flex;
-    flex-wrap: wrap;
-    padding: 0 8px;
-    color: #15171a;
-    font-size: 14px;
-    text-decoration: none;
-	  background-color: #ffffff;
-    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.12);
-    transition: all 0.24s ease-in-out;
-    
-    &:hover, &:focus {
-      background-color: #f5f7fa;
-      box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.16), 0 2px 8px 0 rgba(0, 0, 0, 0.12);
-    }
-
-    @media (min-width: 860px) {
-      align-items: center;
-      padding: 24px 0px;
-      height: 80px;
-      font-size: 16px;
-      border-radius: 5px;
-    }
+  @media (min-width: 860px) {
+    align-items: center;
+    padding: 24px 0px;
+    height: 80px;
+    font-size: 16px;
+    border-radius: 5px;
   }
+}
 </style>

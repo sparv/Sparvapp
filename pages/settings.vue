@@ -1,7 +1,7 @@
 <template>
   <section class="f-wrapper">
     <div class="m-app-control f-mb8 f-mb10-m">
-      <h2 class="f-ma0">Einstellungen</h2>
+      <h2 class="f-ma0">{{siteTitle}}</h2>
     </div>
     <div class="m-app-settings">
       <div class="o-grid">
@@ -26,11 +26,20 @@
 </template>
 
 <script>
-	import axios from 'axios'
-	import { mapGetters } from 'vuex'
+import { mapGetters } from "vuex";
 
-	export default {
-		layout: 'application',
-    middleware: 'validate'
+export default {
+  layout: "application",
+  middleware: "validate",
+
+  mounted: function() {
+    this.$store.commit("setApplicationTitle", "Einstellungen");
+  },
+
+  computed: {
+    ...mapGetters({
+      siteTitle: "getApplicationTitle"
+    })
   }
+};
 </script>

@@ -59,69 +59,69 @@
 
 <script>
 export default {
-  props: ['openState'],
+  props: ["openState"],
 
   methods: {
     closeSidebar: function() {
-      this.$emit('update', false)
+      this.$emit("update", false);
     }
   }
-}
+};
 </script>
 
 
 <style lang="scss" scoped>
-  .c-sidebar-dimmer {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 10;
-    background: rgba(21,23,26,0.72);
-  }
-  
-  .c-sidebar {
-    position: fixed;
-    top: 0;
-    right: 0;
-    z-index: 15;
-    width: 560px;
-    height: 100vh;
-    overflow: hidden;
-    background: #FFF;
-    box-shadow: 0 2px 8px 0 rgba(0,0,0,0.12), 0 2px 12px 0 rgba(0,0,0,0.16);
-  }
+.c-sidebar-dimmer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  background: rgba(21, 23, 26, 0.72);
+}
 
-  .c-sidebar__header {
-    display: flex;
-    align-items: center;
-    height: 96px;
-    padding: 0 32px;
-    border-bottom: 2px solid #E8E8E8;
-  }
+.c-sidebar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 15;
+  width: 560px;
+  height: 100vh;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.12), 0 2px 12px 0 rgba(0, 0, 0, 0.16);
+}
 
-  .c-sidebar__content {
-    padding: 32px;
-    height: calc(100vh - 96px - 80px);
-    overflow-y: auto;
-  }
+.c-sidebar__header {
+  display: flex;
+  align-items: center;
+  height: 96px;
+  padding: 0 32px;
+  border-bottom: 2px solid #e8e8e8;
+}
 
-  .c-sidebar__footer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 80px;
-    padding: 16px 32px;
-    background: #F5F7FA;
-    box-shadow: 0 2px 8px 0 rgba(0,0,0,0.12), 0 2px 12px 0 rgba(0,0,0,0.16);
+.c-sidebar__content {
+  padding: 32px;
+  height: calc(100vh - 96px - 80px);
+  overflow-y: auto;
+}
 
-    .c-btn--text {
-      padding: 0;
-      color: #434547;
-      background: none;
-    }
+.c-sidebar__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 80px;
+  padding: 16px 32px;
+  background: #f5f7fa;
+  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.12), 0 2px 12px 0 rgba(0, 0, 0, 0.16);
+
+  .c-btn--text {
+    padding: 0;
+    color: #434547;
+    background: none;
   }
+}
 </style>

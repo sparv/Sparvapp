@@ -3,11 +3,15 @@
 </template>
 
 <script>
-	import axios from 'axios'
-	import { mapGetters } from 'vuex'
+import axios from "axios";
+import { mapGetters } from "vuex";
 
-	export default {
-		layout: 'application',
-		middleware: `validate`
-	}
+export default {
+  layout: "application",
+  middleware: `validate`,
+
+  mounted: function() {
+    this.$store.commit("setApplicationTitle", "Dashboard");
+  }
+};
 </script>

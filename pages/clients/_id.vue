@@ -93,49 +93,51 @@
 </template>
 
 <script>
-  import axios from 'axios'
-  import A11yDialog from "a11y-dialog";
-  import { mapGetters } from 'vuex'
-  
-  import Modal from '~/components/Modal.vue'
-  import Sidebar from '~/components/Sidebar/Clients/EditClient.vue'
+import axios from "axios";
+import A11yDialog from "a11y-dialog";
+import { mapGetters } from "vuex";
 
-	export default {
-    layout: 'application',
-    middleware: `validate`,
-    
-    components: {
-      Modal,
-      Sidebar
+import Modal from "~/components/Modal.vue";
+import Sidebar from "~/components/Sidebar/Clients/EditClient.vue";
+
+export default {
+  layout: "application",
+  middleware: `validate`,
+
+  components: {
+    Modal,
+    Sidebar
+  },
+
+  mounted: function() {
+    const el = document.getElementById("deleteClient");
+    const dialog = new A11yDialog(el);
+
+    this.$store.commit("setApplicationTitle", "Kunden");
+  },
+
+  data() {
+    return {
+      openSidebar: false,
+      showProfileSubmenu: false,
+      name: "Christopher Ankunding",
+      gender: "männlich",
+      age: "37",
+      email: "christopher.ankunding@gmail.com",
+      phoneNumber: "(0117) 957 0202",
+      clientNotes: ""
+    };
+  },
+
+  methods: {
+    openEditSidebar: function() {
+      this.showProfileSubmenu = false;
+      this.openSidebar = !this.openSidebar;
     },
-    
-    mounted: function() {
-      const el = document.getElementById('deleteClient');
-      const dialog = new A11yDialog(el);
-    },
-    
-    data () {
-      return {
-        openSidebar: false,
-        showProfileSubmenu: false,
-        name: "Christopher Ankunding",
-        gender: "männlich",
-        age: "37",
-        email: "christopher.ankunding@gmail.com",
-        phoneNumber: "(0117) 957 0202",
-        clientNotes: ""
-      }
-    },
-    
-    methods: {
-      openEditSidebar: function() {
-        this.showProfileSubmenu = false
-        this.openSidebar = !this.openSidebar
-      },
-      
-      updateModalState: function(data) {
-        this.openSidebar = data
-      }
+
+    updateModalState: function(data) {
+      this.openSidebar = data;
     }
-	}
+  }
+};
 </script>

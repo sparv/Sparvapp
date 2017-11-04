@@ -3,12 +3,16 @@ import Vuex from 'vuex'
 const createStore = () => {
 	return new Vuex.Store({
 		state: {
+			siteTitle: '',
 			isAuthenticated: false,
 			sessionID: ``,
 			email: ``,
 			name: ``
 		},
 		mutations: {
+			setApplicationTitle (state, string) {
+				state.siteTitle = string
+			},
 			setAuthentication (state, bool) {
 				state.isAuthenticated = bool
 			},
@@ -23,6 +27,9 @@ const createStore = () => {
 			}
 		},
 		getters: {
+			getApplicationTitle (state) {
+				return state.siteTitle
+			},
 			getAuthentication (state) {
 				return state.isAuthenticated
 			},

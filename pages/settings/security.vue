@@ -31,30 +31,29 @@
 </template>
 
 <script>
-	import axios from 'axios'
-	import moment from 'moment'
+import axios from "axios";
 
-	export default {
-		asyncData ({ store }) {
-			return axios({
-				url: `http://localhost:4040/validate`,
-				method: `post`,
-				headers: {
-					'Authorization': `Bearer ${store.getters.getSessionId}`
-				}
-			}).then((response) => {
-				console.log(response)
-			})
-		},
+export default {
+  asyncData({ store }) {
+    return axios({
+      url: `http://localhost:4040/validate`,
+      method: 'POST',
+      headers: {
+        Authorization: 'Bearer ${store.getters.getSessionId}'
+      }
+    }).then(response => {
+      console.log(response);
+    });
+  },
 
-		data: function () {
-      return {
-        userSettings: {
-          oldPassword: ``,
-          newPassword: ``,
-          newPasswordRepeat: ``
-				}
-			}
-		}
-	}
+  data: function() {
+    return {
+      userSettings: {
+        oldPassword: '',
+        newPassword: '',
+        newPasswordRepeat: ''
+      }
+    };
+  }
+};
 </script>
