@@ -1,0 +1,103 @@
+/*------------------------------------------------------------------
+||  Sidebar
+-------------------------------------------------------------------*/
+.c-sidebar-dimmer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  background: rgba(21, 23, 26, 0.72);
+}
+
+.c-sidebar {
+  position: fixed;
+  top: 32px;
+  right: 0;
+  z-index: 15;
+  width: 100%;
+  height: calc(100vh - 32px);
+  overflow: hidden;
+  background: #fff;
+  border-radius: 10px 10px 0 0;
+  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.12), 0 2px 12px 0 rgba(0, 0, 0, 0.16);
+
+  @media (min-width: $breakpoint-medium) {
+    top: 0;
+    width: 560px;
+    height: 100vh;
+    border-radius: 0;
+  }
+}
+
+.c-sidebar__header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 0 32px;
+  height: 56px;
+  border-bottom: 2px solid #e8e8e8;
+
+  h2 {
+    @media (max-width: $breakpoint-medium) {
+      padding: 0 16px;
+      width: 100%;
+      font-size: 20px;
+      line-height: 30px;
+      text-align: center;
+    }
+  }
+  
+  @media (min-width: $breakpoint-medium) {
+    height: 96px;
+  }
+}
+
+.c-sidebar__close {
+  position: absolute;
+  top: 16px;
+  left: 12px;
+  @media (min-width: $breakpoint-medium) {
+    display: none;
+  }
+}
+
+.c-sidebar__content {
+  padding: 24px 12px;
+  height: calc(100vh - 32px - 56px - 64px);
+  overflow-y: auto;
+
+  @media (min-width: $breakpoint-medium) {
+    padding: 32px;
+    height: calc(100vh - 96px - 80px);
+  }
+}
+
+.c-sidebar__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+  padding: 16px 12px;
+  background: #f5f7fa;
+  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.12), 0 2px 12px 0 rgba(0, 0, 0, 0.16);
+
+  @media (min-width: $breakpoint-medium) {
+    padding: 16px 32px;
+    height: 80px;
+  }
+
+  .c-btn--text {
+    display: none;
+
+    @media (min-width: $breakpoint-medium) {
+      display: inline-block;
+      padding: 0;
+      color: #434547;
+      background: none;
+    }
+  }
+}

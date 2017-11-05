@@ -1,7 +1,13 @@
 <template>
   <header class="m-app-header">
     <div class="m-app-header-content--mobile">
+      <nuxt-link to="#" class="m-app-header__action-left" v-if="leftAction">
+        <img src="~/assets/images/arrow_left.svg" alt="">
+      </nuxt-link>
       <h1 class="f-ma0">{{siteTitle}}</h1>
+      <div class="m-app-header__action-right" v-if="rightAction" @click="showSidebar">
+        <img src="~/assets/images/add.svg" alt="">
+      </div>
     </div>
     <div class="m-app-header-content--desktop">
       <h1 class="f-db f-ma0">
@@ -41,9 +47,17 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 export default {
   props: ["siteTitle", "username"],
 
+  computed: {
+    ...mapGetters({
+      leftAction: "getMobileAppBarLeftAction",
+      rightAction: "getMobileAppBarRightAction"
+    })
+  },
+  
   data: function() {
     return {
       showUserSubmenu: false
@@ -51,6 +65,10 @@ export default {
   },
 
   methods: {
+    showSidebar: function() {
+      this.$store.commit("setApplicationSidebar", true);
+    },
+    
     logout: function(event) {
       document.cookie = `token=; expires=Thu, 01 Jan 1970 00:00:00 GMT`;
       this.$store.commit(`setAuthentication`, false);
@@ -62,3 +80,29 @@ export default {
   }
 };
 </script>
+
+
+<style lang="scss" scoped>
+.m-app-header {
+  position: fixed;
+  width: 100%;
+  z-index: 10;
+
+  @media (min-width: 860px) {
+    position: static;
+  }
+}
+
+.m-app-header__action-left {
+  position: absolute;
+  top: 16px;
+  left: 8px;
+}
+
+.m-app-header__action-right {
+  position: absolute;
+  top: 16px;
+  right: 8px;
+}
+</style>
+

@@ -16,12 +16,13 @@
         <form>
           <div class="f-mb7">
             <label class="c-label f-db f-mb3" for="">{{ label }}</label>
-            <input class="c-input f-w-100" name="text" type="text">
+            <input class="c-input f-w-100" name="text" type="text" v-model="nameInput">
           </div>
         </form>
         <div class="f-fr">
           <button class="c-btn c-btn--text" data-a11y-dialog-hide>Abbrechen</button>
-          <button class="c-btn c-btn--error" disabled>{{ buttonText }}</button>
+          <button class="c-btn c-btn--error" v-if="this.nameInput === name">{{ buttonText }}</button>
+          <button class="c-btn c-btn--error" v-else disabled>{{ buttonText }}</button>
         </div>
       </div>
     </div>
@@ -32,12 +33,19 @@
 export default {
   props: [
     "elementId",
+    "name",
     "icon",
     "iconDescription",
     "title",
     "description",
     "label",
     "buttonText"
-  ]
+  ],
+
+  data: function() {
+    return {
+      nameInput: ""
+    }
+  }
 };
 </script>

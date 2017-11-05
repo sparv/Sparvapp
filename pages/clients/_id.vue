@@ -20,7 +20,7 @@
         <div v-show="showProfileSubmenu" class="c-submenu">
           <ul class="c-submenu__list">
             <li class="c-submenu__item">
-              <button @click="openEditSidebar">
+              <button @click="showSidebar">
                 <svg class="f-mr5" fill="#15171A" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
                   <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/>
                   <path d="M0 0h24v24H0z" fill="none"/>
@@ -46,8 +46,14 @@
       <div class="o-grid">
         <div class="o-grid__item f-w-33-m f-mb6">
           <div class="c-data-item">
-            <h4 class="c-data-item__title">Name</h4>
-            <span class="c-data-item__text">{{name}}</span>
+            <h4 class="c-data-item__title">Vorname</h4>
+            <span class="c-data-item__text">{{first_name}}</span>
+          </div>
+        </div>
+        <div class="o-grid__item f-w-33-m f-mb6">
+          <div class="c-data-item">
+            <h4 class="c-data-item__title">Nachname</h4>
+            <span class="c-data-item__text">{{last_name}}</span>
           </div>
         </div>
         <div class="o-grid__item f-w-33-m f-mb6">
@@ -62,7 +68,7 @@
             <span class="c-data-item__text">{{age}}</span>
           </div>
         </div>
-        <div class="o-grid__item f-w-33-m">
+        <div class="o-grid__item f-w-33-m f-mb6 f-mb0-m">
           <div class="c-data-item">
             <h4 class="c-data-item__title">E-Mail-Adresse</h4>
             <span class="c-data-item__text">{{email}}</span>
@@ -82,8 +88,9 @@
         {{ clientNotes }}
       </div>
     </div>
-    <Sidebar :openState="openSidebar" @update="updateModalState"></Sidebar>
+    <Sidebar :sidebarState="openSidebar"></Sidebar>
     <Modal elementId="deleteClient" 
+            :name="fullName"
             icon="/images/delete.svg"
             iconDescription="Test"
             title="Kunde löschen"
@@ -114,13 +121,26 @@ export default {
     const dialog = new A11yDialog(el);
 
     this.$store.commit("setApplicationTitle", "Kunden");
+
+    this.$store.commit("setMobileAppBarLeftAction", false);
+    this.$store.commit("setMobileAppBarRightAction", true);
+  },
+
+  computed: {
+    ...mapGetters({
+      openSidebar: "getApplicationSidebar"
+    }),
+
+    fullName: function () {
+      return this.first_name + " " + this.last_name
+    }
   },
 
   data() {
     return {
-      openSidebar: false,
       showProfileSubmenu: false,
-      name: "Christopher Ankunding",
+      first_name: "Christopher",
+      last_name: "Ankunding",
       gender: "männlich",
       age: "37",
       email: "christopher.ankunding@gmail.com",
@@ -130,13 +150,9 @@ export default {
   },
 
   methods: {
-    openEditSidebar: function() {
+    showSidebar: function() {
       this.showProfileSubmenu = false;
-      this.openSidebar = !this.openSidebar;
-    },
-
-    updateModalState: function(data) {
-      this.openSidebar = data;
+      this.$store.commit("setApplicationSidebar", true);
     }
   }
 };

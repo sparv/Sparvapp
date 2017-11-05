@@ -32,6 +32,7 @@
       </div>
     </div>
     <Modal elementId="deleteUser" 
+            :name="name"
             icon="/images/delete.svg"
             iconDescription="Test"
             title="Kunde löschen"
@@ -65,7 +66,9 @@ export default {
   },
 
   computed: {
-    ...mapGetters(['getEmail', 'getName'])
+    ...mapGetters({
+      name: 'getName'
+    })
   },
 
   mounted: function() {

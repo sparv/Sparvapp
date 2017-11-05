@@ -2,7 +2,7 @@
   <section class="f-wrapper">
 		<div class="m-app-control f-mb8 f-mb10-m">
       <h2 class="f-ma0">Kunden</h2>
-      <button class="c-btn c-btn--primary" @click="openSidebar = !openSidebar">Neuen Kunden hinzufügen</button>
+      <button class="c-btn c-btn--primary" @click="showSidebar">Neuen Kunden hinzufügen</button>
     </div>
 
     <div class="c-table-flow__list">
@@ -12,7 +12,7 @@
         <TableFlowCellBasic label="Telefonnummer" :text="client.phoneNumber"></TableFlowCellBasic>
       </nuxt-link>
     </div>
-    <Sidebar :openState="openSidebar" @update="updateModalState"></Sidebar>
+    <Sidebar :sidebarState="openSidebar"></Sidebar>
   </section>
 </template>
 
@@ -34,11 +34,18 @@ export default {
 
   mounted: function() {
     this.$store.commit("setApplicationTitle", "Kunden");
+    this.$store.commit("setMobileAppBarLeftAction", false);
+    this.$store.commit("setMobileAppBarRightAction", true);
+  },
+
+  computed: {
+    ...mapGetters({
+      openSidebar: "getApplicationSidebar"
+    })
   },
 
   data() {
     return {
-      openSidebar: false,
       clients: [
         {
           id: "1",
@@ -57,14 +64,32 @@ export default {
           name: "Ivo Arnold",
           email: "ivo4278arnold@me.com",
           phoneNumber: "(0117) 420 1973"
+        },
+        {
+          id: "4",
+          name: "Ivo Arnold",
+          email: "ivo4278arnold@me.com",
+          phoneNumber: "(0117) 420 1973"
+        },
+        {
+          id: "5",
+          name: "Ivo Arnold",
+          email: "ivo4278arnold@me.com",
+          phoneNumber: "(0117) 420 1973"
+        },
+        {
+          id: "6",
+          name: "Ivo Arnold",
+          email: "ivo4278arnold@me.com",
+          phoneNumber: "(0117) 420 1973"
         }
       ]
     };
   },
 
   methods: {
-    updateModalState: function(data) {
-      this.openSidebar = data;
+    showSidebar: function() {
+      this.$store.commit("setApplicationSidebar", true);
     }
   }
 };
@@ -81,7 +106,7 @@ export default {
 .c-table-flow__item {
   display: flex;
   flex-wrap: wrap;
-  padding: 0 8px;
+  padding: 16px 8px 0 8px;
   color: #15171a;
   font-size: 14px;
   text-decoration: none;

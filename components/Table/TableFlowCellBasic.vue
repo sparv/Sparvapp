@@ -31,5 +31,9 @@ export default {
     font-size: 14px;
   }
 }
+
+span {
+  word-wrap: break-word;
+}
 </style>
 

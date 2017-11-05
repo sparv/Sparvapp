@@ -4,6 +4,9 @@ const createStore = () => {
 	return new Vuex.Store({
 		state: {
 			siteTitle: '',
+			applicatonSidebar: false,
+			mobileAppBarLeftAction: false,
+			mobileAppBarRightAction: false,
 			isAuthenticated: false,
 			sessionID: ``,
 			email: ``,
@@ -12,6 +15,15 @@ const createStore = () => {
 		mutations: {
 			setApplicationTitle (state, string) {
 				state.siteTitle = string
+			},
+			setApplicationSidebar (state, bool) {
+				state.applicatonSidebar = bool
+			},
+			setMobileAppBarLeftAction (state, bool) {
+				state.mobileAppBarLeftAction = bool
+			},
+			setMobileAppBarRightAction (state, bool) {
+				state.mobileAppBarRightAction = bool
 			},
 			setAuthentication (state, bool) {
 				state.isAuthenticated = bool
@@ -29,6 +41,15 @@ const createStore = () => {
 		getters: {
 			getApplicationTitle (state) {
 				return state.siteTitle
+			},
+			getApplicationSidebar (state) {
+				return state.applicatonSidebar
+			},
+			getMobileAppBarLeftAction (state) {
+				return state.mobileAppBarLeftAction
+			},
+			getMobileAppBarRightAction (state) {
+				return state.mobileAppBarRightAction
 			},
 			getAuthentication (state) {
 				return state.isAuthenticated

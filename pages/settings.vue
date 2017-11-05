@@ -34,6 +34,8 @@ export default {
 
   mounted: function() {
     this.$store.commit("setApplicationTitle", "Einstellungen");
+    this.$store.commit("setMobileAppBarLeftAction", false);
+    this.$store.commit("setMobileAppBarRightAction", false);
   },
 
   computed: {
