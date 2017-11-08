@@ -63,26 +63,14 @@ export default {
               data: {
                 email: this.email,
                 password: this.password
-              },
-              withCredentials: false // Needed?
-            }).then(response => {
-              console.log(response);
-              if (response.data.auth) {
-                const expirationDate = `${moment()
-                  .add(1, `months`)
-                  .utc()
-                  .format(`ddd, D MMM YYYY hh:mm:ss`)} GMT`;
-                console.log(expirationDate);
-
-                this.$store.commit(`setAuthentication`, response.data.auth);
-                this.$store.commit(`setSessionId`, response.data.token); //rename setSessionId to be clearer that it is jwt token auth
-                this.$store.commit(`setEmail`, response.data.user);
-                this.$store.commit(`setName`, response.data.name);
-
-                document.cookie = `token=${response.data
-                  .token} ;expires=${expirationDate}`;
-                this.$router.push(`/dashboard`);
               }
+            })
+            .then(response => {
+              this.$store.commit(`setAuthUser`, response.data);
+              this.$router.push(`/dashboard`);
+            })
+            .catch(error => {
+              console.log(error);
             });
           }
         })

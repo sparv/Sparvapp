@@ -1,6 +1,6 @@
 <template>
   <div>
-    <AppHeader :username="name" :siteTitle="siteTitle"></AppHeader>
+    <AppHeader :siteTitle="siteTitle"></AppHeader>
     <main class="application-content">
       <nuxt/>
     </main>
@@ -25,8 +25,7 @@ export default {
 
   computed: {
     ...mapGetters({
-      siteTitle: "getApplicationTitle",
-      name: "getName"
+      siteTitle: "getApplicationTitle"
     })
   }
 };

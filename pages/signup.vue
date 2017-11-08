@@ -46,9 +46,8 @@ export default {
 
   data: function() {
     return {
-      name: ``,
-      email: ``,
-      password: ``
+      email: "",
+      password: ""
     };
   },
 
@@ -59,16 +58,19 @@ export default {
         .then(validationState => {
           if (validationState) {
             axios({
-              url: `http://localhost:4040/register`,
-              method: `post`,
+              url: `http://localhost:4040/users`,
+              method: `POST`,
               data: {
-                name: "",
                 email: this.email,
                 password: this.password
-              },
-              withCredentials: false // needed?
-            }).then(response => {
-              console.log(response);
+              }
+            })
+            .then(response => {
+              this.$store.commit(`setAuthUser`, response.data);
+              this.$router.push(`/dashboard`);
+            })
+            .catch(error => {
+              console.log(error);
             });
           }
         })

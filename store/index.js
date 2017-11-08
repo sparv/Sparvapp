@@ -7,10 +7,8 @@ const createStore = () => {
 			applicatonSidebar: false,
 			mobileAppBarLeftAction: false,
 			mobileAppBarRightAction: false,
-			isAuthenticated: false,
-			sessionID: ``,
-			email: ``,
-			name: ``
+
+			authUser: null
 		},
 		mutations: {
 			setApplicationTitle (state, string) {
@@ -25,18 +23,9 @@ const createStore = () => {
 			setMobileAppBarRightAction (state, bool) {
 				state.mobileAppBarRightAction = bool
 			},
-			setAuthentication (state, bool) {
-				state.isAuthenticated = bool
+			setAuthUser (state, user) {
+				state.authUser = user
 			},
-			setSessionId (state, string) {
-				state.sessionID = string
-			},
-			setEmail (state, string) {
-				state.email = string
-			},
-			setName (state, string) {
-				state.name = string
-			}
 		},
 		getters: {
 			getApplicationTitle (state) {
@@ -51,18 +40,9 @@ const createStore = () => {
 			getMobileAppBarRightAction (state) {
 				return state.mobileAppBarRightAction
 			},
-			getAuthentication (state) {
-				return state.isAuthenticated
+			getAuthUser (state) {
+				return state.authUser
 			},
-			getEmail (state) {
-				return state.email
-			},
-			getSessionId (state) {
-				return state.sessionID
-			},
-			getName (state) {
-				return state.name
-			}
 		}
 	})
 }
