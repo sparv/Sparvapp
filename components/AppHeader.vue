@@ -26,7 +26,7 @@
           <li class="f-ml8 m-app-header-nav__item">
             <details v-on:click="showUserSubmenu = !showUserSubmenu">
               <summary>
-                <img :alt="username" class="f-db" src="https://avatars3.githubusercontent.com/u/1376207?s=40&amp;v=4" height="24" width="24">
+                <img class="f-db" src="https://avatars3.githubusercontent.com/u/1376207?s=40&amp;v=4" height="24" width="24" alt="Profilbilder angemeldeten Nutzers">
               </summary>
             </details>
             <div v-if="showUserSubmenu" class="c-submenu">
@@ -49,15 +49,16 @@
 <script>
 import { mapGetters } from "vuex";
 export default {
-  props: ["siteTitle", "username"],
+  props: ["siteTitle"],
 
   computed: {
     ...mapGetters({
+      user: "getAuthUser",
       leftAction: "getMobileAppBarLeftAction",
       rightAction: "getMobileAppBarRightAction"
     })
   },
-  
+
   data: function() {
     return {
       showUserSubmenu: false
@@ -68,13 +69,9 @@ export default {
     showSidebar: function() {
       this.$store.commit("setApplicationSidebar", true);
     },
-    
+
     logout: function(event) {
-      document.cookie = `token=; expires=Thu, 01 Jan 1970 00:00:00 GMT`;
-      this.$store.commit(`setAuthentication`, false);
-      this.$store.commit(`setSessionId`, null); //rename setSessionId to be clearer that it is jwt token auth
-      this.$store.commit(`setEmail`, null);
-      this.$store.commit(`setName`, null);
+      this.$store.commit(`setAuthUser`, null);
       this.$router.push(`/`);
     }
   }
@@ -105,4 +102,3 @@ export default {
   right: 8px;
 }
 </style>
-

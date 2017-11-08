@@ -13,15 +13,13 @@
           <h3 class="f-mb0 display-3">{{ title }}</h3>
         </div>
         <p>{{ description }}</p>
-        <form>
-          <div class="f-mb7">
-            <label class="c-label f-db f-mb3" for="">{{ label }}</label>
-            <input class="c-input f-w-100" name="text" type="text" v-model="nameInput">
-          </div>
-        </form>
+        <div class="f-mb7">
+          <label class="c-label f-db f-mb3" for="">{{ label }}</label>
+          <input class="c-input f-w-100" name="text" type="text" v-model="nameInput">
+        </div>
         <div class="f-fr">
           <button class="c-btn c-btn--text" data-a11y-dialog-hide>Abbrechen</button>
-          <button class="c-btn c-btn--error" v-if="this.nameInput === name">{{ buttonText }}</button>
+          <button class="c-btn c-btn--error" v-if="this.nameInput === user.surname" @click="submitForm">{{ buttonText }}</button>
           <button class="c-btn c-btn--error" v-else disabled>{{ buttonText }}</button>
         </div>
       </div>
@@ -30,10 +28,13 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   props: [
     "elementId",
-    "name",
+    "user",
+    "customerId",
     "icon",
     "iconDescription",
     "title",
@@ -45,6 +46,28 @@ export default {
   data: function() {
     return {
       nameInput: ""
+    }
+  },
+
+  methods: {
+    submitForm: function() {
+      axios({
+        url: `http://localhost:4040/customers/${this.customerId}`,
+        method: `DELETE`,
+        headers: {
+          'Authorization': `Bearer ${this.$store.authUser.token}`
+        },
+        data: {
+          surname: this.surname
+        }
+      })
+      .then(response => {
+        console.log(response)
+        this.$router.push(`/clients`);
+      })
+      .catch(error => {
+        console.log(error)
+      });
     }
   }
 };
