@@ -6,13 +6,13 @@
     </div>
 
     <div class="c-table-flow__list">
-      <nuxt-link :to="'/clients/' + client.id" class="c-table-flow__item f-mb3" v-for="(client, index) in clients" v-bind:item="client" v-bind:index="index" v-bind:key="client.id">
-        <TableFlowCellBasic label="Name" :text="client.name"></TableFlowCellBasic>
+      <nuxt-link :to="'/clients/' + client.customer_id" class="c-table-flow__item f-mb3" v-for="(client, index) in clients" v-bind:item="client" v-bind:index="index" v-bind:key="client.id">
+        <TableFlowCellBasic label="Name" :text="client.surname"></TableFlowCellBasic>
         <TableFlowCellBasic label="E-Mail-Adresse" :text="client.email"></TableFlowCellBasic>
-        <TableFlowCellBasic label="Telefonnummer" :text="client.phoneNumber"></TableFlowCellBasic>
+        <TableFlowCellBasic label="Telefonnummer" :text="client.phone"></TableFlowCellBasic>
       </nuxt-link>
     </div>
-    <Sidebar :sidebarState="openSidebar"></Sidebar>
+    <Sidebar :sidebarState="openSidebar" @pushDataToList="pushNewClientToData"></Sidebar>
   </section>
 </template>
 
@@ -32,6 +32,20 @@ export default {
     TableFlowCellBasic
   },
 
+  asyncData ({ store }) {
+    return axios({
+      url: `http://localhost:4040/customers`,
+      method: `GET`,
+      headers: {
+        'Authorization': `Bearer ${store.state.authUser.token}`
+      }
+    })
+    .then((res) => {
+      console.log(res.data);
+      return { clients: res.data.customer_list }
+    })
+  },
+
   mounted: function() {
     this.$store.commit("setApplicationTitle", "Kunden");
     this.$store.commit("setMobileAppBarLeftAction", false);
@@ -46,50 +60,17 @@ export default {
 
   data() {
     return {
-      clients: [
-        {
-          id: "1",
-          name: "Ursula Adler",
-          email: "adler5683@gmail.com",
-          phoneNumber: "(0131) 550 7943"
-        },
-        {
-          id: "2",
-          name: "Christopher Ankunding",
-          email: "christopher.ankunding@aol.com",
-          phoneNumber: "(0117) 957 0202"
-        },
-        {
-          id: "3",
-          name: "Ivo Arnold",
-          email: "ivo4278arnold@me.com",
-          phoneNumber: "(0117) 420 1973"
-        },
-        {
-          id: "4",
-          name: "Ivo Arnold",
-          email: "ivo4278arnold@me.com",
-          phoneNumber: "(0117) 420 1973"
-        },
-        {
-          id: "5",
-          name: "Ivo Arnold",
-          email: "ivo4278arnold@me.com",
-          phoneNumber: "(0117) 420 1973"
-        },
-        {
-          id: "6",
-          name: "Ivo Arnold",
-          email: "ivo4278arnold@me.com",
-          phoneNumber: "(0117) 420 1973"
-        }
-      ]
-    };
+      clients: []
+    }
   },
 
   methods: {
     showSidebar: function() {
       this.$store.commit("setApplicationSidebar", true);
+    },
+
+    pushNewClientToData: function(data) {
+      this.clients.push(data);
     }
   }
 };

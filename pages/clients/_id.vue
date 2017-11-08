@@ -7,7 +7,7 @@
             <nuxt-link to="/clients/">Kunden</nuxt-link>
             <span class="f-mh3">/</span>
           </li>
-          <li class="c-single-breadcrumb__item">Christopher Ankunding</li>
+          <li class="c-single-breadcrumb__item">{{fullName}}</li>
         </ul>
       </h2>
       <div>
@@ -47,13 +47,13 @@
         <div class="o-grid__item f-w-33-m f-mb6">
           <div class="c-data-item">
             <h4 class="c-data-item__title">Vorname</h4>
-            <span class="c-data-item__text">{{first_name}}</span>
+            <span class="c-data-item__text">{{forename}}</span>
           </div>
         </div>
         <div class="o-grid__item f-w-33-m f-mb6">
           <div class="c-data-item">
             <h4 class="c-data-item__title">Nachname</h4>
-            <span class="c-data-item__text">{{last_name}}</span>
+            <span class="c-data-item__text">{{surname}}</span>
           </div>
         </div>
         <div class="o-grid__item f-w-33-m f-mb6">
@@ -77,7 +77,7 @@
         <div class="o-grid__item f-w-33-m">
           <div class="c-data-item">
             <h4 class="c-data-item__title">Telefonnummer</h4>
-            <span class="c-data-item__text">{{phoneNumber}}</span>
+            <span class="c-data-item__text">{{phone}}</span>
           </div>
         </div>
       </div>
@@ -88,9 +88,10 @@
         {{ clientNotes }}
       </div>
     </div>
-    <Sidebar :sidebarState="openSidebar"></Sidebar>
+    <Sidebar :sidebarState="openSidebar" :customerId="customerId"></Sidebar>
     <Modal elementId="deleteClient" 
-            :name="fullName"
+            :name="surname"
+            :customerId="customerId"
             icon="/images/delete.svg"
             iconDescription="Test"
             title="Kunde löschen"
@@ -104,7 +105,7 @@ import axios from "axios";
 import A11yDialog from "a11y-dialog";
 import { mapGetters } from "vuex";
 
-import Modal from "~/components/Modal.vue";
+import Modal from "~/components/Modal/DeleteClient.vue";
 import Sidebar from "~/components/Sidebar/Clients/EditClient.vue";
 
 export default {
@@ -114,6 +115,26 @@ export default {
   components: {
     Modal,
     Sidebar
+  },
+
+  asyncData ({ store, params }) {
+    return axios({
+      url: `http://localhost:4040/customers/${params.id}`,
+      method: `GET`,
+      headers: {
+        'Authorization': `Bearer ${store.state.authUser.token}`
+      }
+    })
+    .then((res) => {
+      console.log(res.data);
+      return {
+        customerId: res.data.customer_id,
+        forename: res.data.forename,
+        surname: res.data.surname,
+        email: res.data.email,
+        phone: res.data.phone
+      }
+    })
   },
 
   mounted: function() {
@@ -132,19 +153,20 @@ export default {
     }),
 
     fullName: function () {
-      return this.first_name + " " + this.last_name
+      return this.forename + " " + this.surname
     }
   },
 
   data() {
     return {
       showProfileSubmenu: false,
-      first_name: "Christopher",
-      last_name: "Ankunding",
-      gender: "männlich",
-      age: "37",
-      email: "christopher.ankunding@gmail.com",
-      phoneNumber: "(0117) 957 0202",
+      customerId: "",
+      forename: "",
+      surname: "",
+      gender: "",
+      age: "",
+      email: "",
+      phone: "",
       clientNotes: ""
     };
   },
