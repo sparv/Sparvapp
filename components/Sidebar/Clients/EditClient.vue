@@ -8,8 +8,8 @@
           </button>
           <h2 class="f-ma0">Kunde bearbeiten</h2>
         </div>
-        <div class="c-sidebar__content">
-          <form @submit.prevent="submitForm">
+        <form @submit.prevent="submitForm">
+          <div class="c-sidebar__content">
             <div class="f-mb6 f-mb7-m">
               <label class="c-label f-db f-mb3" for="">Vorname</label>
               <input class="c-input f-w-100" name="vorname" type="text" :value="this.forename" ref="forename">
@@ -48,12 +48,12 @@
               <label class="c-label f-db f-mb3" for="">Notiz</label>
               <textarea class="c-input c-input--textarea" name="" id=""></textarea>
             </div>
-            <div class="c-sidebar__footer">
-              <span class="c-btn c-btn--text" @click="hideSidebar">Abbrechen</span>
-              <button class="c-btn c-btn--primary f-w-100 f-w-auto-m">Änderungen speichern</button>
-            </div>
-          </form>
-        </div>
+          </div>
+          <div class="c-sidebar__footer">
+            <span class="c-btn c-btn--text" @click="hideSidebar">Abbrechen</span>
+            <button class="c-btn c-btn--primary f-w-100 f-w-auto-m">Änderungen speichern</button>
+          </div>
+        </form>
       </div>
       <div class="c-sidebar-dimmer"></div>
     </div>

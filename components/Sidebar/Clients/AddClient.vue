@@ -10,45 +10,45 @@
         </div>
         <form @submit.prevent="submitForm">
           <div class="c-sidebar__content">
-              <div class="f-mb6 f-mb7-m">
-                <label class="c-label f-db f-mb3" for="">Vorname</label>
-                <input class="c-input f-w-100" name="vorname" type="text" v-model="forename">
-              </div>
-              <div class="f-mb6 f-mb7-m">
-                <label class="c-label f-db f-mb3" for="">Nachname</label>
-                <input class="c-input f-w-100" name="nachname" type="text" v-model="surname">
-              </div>
-              <div class="f-mb6 f-mb7-m">
-                <label class="c-label f-db f-mb3" for="">E-Mail-Adresse</label>
-                <input class="c-input f-w-100" name="e-mail-adresse" type="email" v-model="email">
-              </div>
-              <div class="f-mb6 f-mb7-m">
-                <label class="c-label f-db f-mb3" for="">Telefonnummer</label>
-                <input class="c-input f-w-100" name="telefonnummer" type="phone" v-model="phone">
-              </div>
-              <div class="f-mb6 f-mb7-m">
-                <fieldset>
-                  <legend>Geschlecht</legend>
-                  <div class="f-mb3">
-                    <label for="gender_male"><input class="f-mr3" type="radio" name="gender" value="1" id="gender_male" v-model="gender" checked>Männlich</label>
-                  </div>
-                  <div class="f-mb3">
-                    <label for="gender_female"><input class="f-mr3" type="radio" name="gender" value="2" id="gender_female" v-model="gender" >Weiblich</label>
-                  </div>
-                  <div class="f-mb3">
-                    <label for="gender_neutral"><input class="f-mr3" type="radio" name="gender" value="3" id="gender_neutral" v-model="gender" >keine Angaben</label>
-                  </div>
-                </fieldset>
-              </div>
-              <div class="f-mb6 f-mb7-m">
-                <label class="c-label f-db f-mb3" for="">Alter</label>
-                <input class="c-input f-w-100" name="telefonnummer" type="text" v-model="age">
-              </div>
-              <div>
-                <label class="c-label f-db f-mb3" for="">Notiz</label>
-                <textarea class="c-input c-input--textarea" name="" id=""></textarea>
-              </div>
+            <div class="f-mb6 f-mb7-m">
+              <label class="c-label f-db f-mb3" for="">Vorname</label>
+              <input class="c-input f-w-100" name="vorname" type="text" v-model="forename">
             </div>
+            <div class="f-mb6 f-mb7-m">
+              <label class="c-label f-db f-mb3" for="">Nachname</label>
+              <input class="c-input f-w-100" name="nachname" type="text" v-model="surname">
+            </div>
+            <div class="f-mb6 f-mb7-m">
+              <label class="c-label f-db f-mb3" for="">E-Mail-Adresse</label>
+              <input class="c-input f-w-100" name="e-mail-adresse" type="email" v-model="email">
+            </div>
+            <div class="f-mb6 f-mb7-m">
+              <label class="c-label f-db f-mb3" for="">Telefonnummer</label>
+              <input class="c-input f-w-100" name="telefonnummer" type="phone" v-model="phone">
+            </div>
+            <div class="f-mb6 f-mb7-m">
+              <fieldset>
+                <legend>Geschlecht</legend>
+                <div class="f-mb3">
+                  <label for="gender_male"><input class="f-mr3" type="radio" name="gender" value="1" id="gender_male" v-model="gender" checked>Männlich</label>
+                </div>
+                <div class="f-mb3">
+                  <label for="gender_female"><input class="f-mr3" type="radio" name="gender" value="2" id="gender_female" v-model="gender" >Weiblich</label>
+                </div>
+                <div class="f-mb3">
+                  <label for="gender_neutral"><input class="f-mr3" type="radio" name="gender" value="3" id="gender_neutral" v-model="gender" >keine Angaben</label>
+                </div>
+              </fieldset>
+            </div>
+            <div class="f-mb6 f-mb7-m">
+              <label class="c-label f-db f-mb3" for="">Alter</label>
+              <input class="c-input f-w-100" name="telefonnummer" type="text" v-model="age">
+            </div>
+            <div>
+              <label class="c-label f-db f-mb3" for="">Notiz</label>
+              <textarea class="c-input c-input--textarea" name="" id=""></textarea>
+            </div>
+          </div>
           <div class="c-sidebar__footer">
             <span class="c-btn c-btn--text" @click="hideSidebar">Abbrechen</span>
             <button class="c-btn c-btn--primary f-w-100 f-w-auto-m">Kunde hinzufügen</button>
