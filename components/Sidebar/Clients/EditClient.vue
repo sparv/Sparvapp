@@ -65,7 +65,40 @@ import axios from 'axios'
 import { mapGetters } from "vuex";
 
 export default {
-  props: ["sidebarState", "customerId", "forename", "surname", "email", "phone", "gender", "age"],
+  props: {
+    sidebarState: {
+      type: Boolean,
+      required: true
+    },
+    customerId: {
+      type: String,
+      required: true
+    },
+    forename: {
+      type: String,
+      required: true
+    },
+    surname: {
+      type: String,
+      required: true
+    },
+    email: {
+      type: String,
+      required: true
+    },
+    phone: {
+      type: String,
+      required: true
+    },
+    gender: {
+      type: String,
+      required: true
+    },
+    age: {
+      type: Number,
+      required: true
+    }
+  },
   
   methods: {
     submitForm: function() {

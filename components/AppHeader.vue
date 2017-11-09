@@ -49,7 +49,12 @@
 <script>
 import { mapGetters } from "vuex";
 export default {
-  props: ["siteTitle"],
+  props: {
+    siteTitle: {
+      type: String,
+      required: true
+    }
+  },
 
   computed: {
     ...mapGetters({

@@ -34,17 +34,16 @@ import axios from "axios";
 import { mapGetters } from "vuex";
 
 export default {
-  props: [
-    "elementId",
-    "name",
-    "customerId",
-    "icon",
-    "iconDescription",
-    "title",
-    "description",
-    "label",
-    "buttonText"
-  ],
+  props: {
+    name: {
+      type: String,
+      required: true
+    },
+    customerId: {
+      type: String,
+      required: true
+    },
+  },
 
   computed: {
     ...mapGetters({

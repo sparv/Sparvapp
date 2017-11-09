@@ -65,7 +65,12 @@ import axios from 'axios'
 import { mapGetters } from "vuex";
 
 export default {
-  props: ['sidebarState'],
+  props: {
+    sidebarState: {
+      type: Boolean,
+      required: true
+    }
+  },
   
   data() {
     return {

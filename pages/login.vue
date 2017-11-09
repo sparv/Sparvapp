@@ -3,7 +3,7 @@
 		<div class="f-wrapper f-wrapper--login">
 			<div class="c-card f-pv6 f-ph5 f-pa8-m">
 				<LoginHeader title="Login"></LoginHeader>
-				<form v-on:submit.prevent="loginSubmit">
+				<form v-on:submit.prevent="submitForm">
 					<div class="f-mb7">
 						<label class="c-label f-db f-mb3" for="">E-Mail-Adresse</label>
 						<input class="c-input f-w-100" :class="{'c-input--error': errors.has('email') }" v-model="email" v-validate="'required|email'" name="email" type="text">
@@ -29,21 +29,11 @@ import LoginHeader from "~/components/LoginHeader.vue";
 
 export default {
   layout: "landingpage",
-  head: {
-    title: "Login",
-    meta: [
-      {
-        hid: "description",
-        name: "description",
-        content: "Home page description"
-      }
-    ]
-  },
-
+  
   components: {
     LoginHeader
   },
-
+  
   data: function() {
     return {
       email: "",
@@ -52,31 +42,30 @@ export default {
   },
 
   methods: {
-    loginSubmit: function(event) {
-      this.$validator
-        .validateAll()
-        .then(validationState => {
-          if (validationState) {
-            axios({
-              url: `http://localhost:4040/login`,
-              method: `post`,
-              data: {
-                email: this.email,
-                password: this.password
-              }
-            })
-            .then(response => {
-              this.$store.commit(`setAuthUser`, response.data);
-              this.$router.push(`/dashboard`);
-            })
-            .catch(error => {
-              console.log(error);
-            });
-          }
-        })
-        .catch(error => {
-          console.log(error);
-        });
+    submitForm: function() {
+      this.$validator.validateAll()
+      .then(validationState => {
+        if (validationState) {
+          axios({
+            url: `http://localhost:4040/login`,
+            method: `POST`,
+            data: {
+              email: this.email,
+              password: this.password
+            }
+          })
+          .then(response => {
+            this.$store.commit(`setAuthUser`, response.data);
+            this.$router.push(`/dashboard`);
+          })
+          .catch(error => {
+            console.log(error);
+          });
+        }
+      })
+      .catch(error => {
+        console.log(error);
+      });
     }
   }
 };
