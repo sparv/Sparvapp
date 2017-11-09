@@ -12,48 +12,47 @@
           <form @submit.prevent="submitForm">
             <div class="f-mb6 f-mb7-m">
               <label class="c-label f-db f-mb3" for="">Vorname</label>
-              <input class="c-input f-w-100" name="vorname" type="text" v-model="forename">
+              <input class="c-input f-w-100" name="vorname" type="text" :value="this.forename" ref="forename">
             </div>
             <div class="f-mb6 f-mb7-m">
               <label class="c-label f-db f-mb3" for="">Nachname</label>
-              <input class="c-input f-w-100" name="nachname" type="text" v-model="surname">
+              <input class="c-input f-w-100" name="nachname" type="text" :value="this.surname" ref="surname">
             </div>
             <div class="f-mb6 f-mb7-m">
               <label class="c-label f-db f-mb3" for="">E-Mail-Adresse</label>
-              <input class="c-input f-w-100" name="e-mail-adresse" type="email" v-model="email">
+              <input class="c-input f-w-100" name="e-mail-adresse" type="email" :value="this.email" ref="email">
             </div>
             <div class="f-mb6 f-mb7-m">
               <label class="c-label f-db f-mb3" for="">Telefonnummer</label>
-              <input class="c-input f-w-100" name="telefonnummer" type="phone" v-model="phone">
+              <input class="c-input f-w-100" name="telefonnummer" type="phone" :value="this.phone" ref="phone">
             </div>
             <div class="f-mb6 f-mb7-m">
               <fieldset>
                 <legend>Geschlecht</legend>
                 <div class="f-mb3">
-                  <label for="gender_male"><input class="f-mr3" type="radio" name="gender" value="1" id="gender_male" v-model="gender" checked>Männlich</label>
+                  <label for="gender_male"><input class="f-mr3" type="radio" name="gender" value="1" id="gender_male" checked>Männlich</label>
                 </div>
                 <div class="f-mb3">
-                  <label for="gender_female"><input class="f-mr3" type="radio" name="gender" value="2" id="gender_female" v-model="gender">Weiblich</label>
+                  <label for="gender_female"><input class="f-mr3" type="radio" name="gender" value="2" id="gender_female">Weiblich</label>
                 </div>
                 <div class="f-mb3">
-                  <label for="gender_neutral"><input class="f-mr3" type="radio" name="gender" value="3" id="gender_neutral" v-model="gender">keine Angaben</label>
+                  <label for="gender_neutral"><input class="f-mr3" type="radio" name="gender" value="3" id="gender_neutral">keine Angaben</label>
                 </div>
               </fieldset>
             </div>
             <div class="f-mb6 f-mb7-m">
               <label class="c-label f-db f-mb3" for="">Alter</label>
-              <input class="c-input f-w-100" name="telefonnummer" type="text" v-model="age">
+              <input class="c-input f-w-100" name="telefonnummer" type="text" :value="this.age" ref="age">
             </div>
             <div>
               <label class="c-label f-db f-mb3" for="">Notiz</label>
               <textarea class="c-input c-input--textarea" name="" id=""></textarea>
             </div>
-            <button class="c-btn c-btn--primary f-w-100 f-w-auto-m">Kunde hinzufügen</button>
+            <div class="c-sidebar__footer">
+              <span class="c-btn c-btn--text" @click="hideSidebar">Abbrechen</span>
+              <button class="c-btn c-btn--primary f-w-100 f-w-auto-m">Änderungen speichern</button>
+            </div>
           </form>
-        </div>
-        <div class="c-sidebar__footer">
-          <button class="c-btn c-btn--text" @click="hideSidebar">Abbrechen</button>
-          <button class="c-btn c-btn--primary f-w-100 f-w-auto-m">Änderungen speichern</button>
         </div>
       </div>
       <div class="c-sidebar-dimmer"></div>
@@ -66,18 +65,7 @@ import axios from 'axios'
 import { mapGetters } from "vuex";
 
 export default {
-  props: ["sidebarState", "customerId"],
-  
-  data() {
-    return {
-      forename: "",
-      surname: "",
-      email: "bla@bla.de",
-      phone: 0,
-      gender: "",
-      age: ""
-    }
-  },
+  props: ["sidebarState", "customerId", "forename", "surname", "email", "phone", "gender", "age"],
   
   methods: {
     submitForm: function() {
@@ -88,12 +76,11 @@ export default {
           'Authorization': `Bearer ${this.$store.state.authUser.token}`
         },
         data: {
-          forename: this.forename,
-          surname: this.surname,
-          email: this.email,
-          phone: this.phone,
-          gender: this.gender,
-          age: this.age
+          forename: this.$refs.forename.value == "" ? "" : this.$refs.forename.value,
+          surname: this.$refs.surname.value == "" ? "" : this.$refs.surname.value,
+          email: this.$refs.email.value == "" ? "" : this.$refs.email.value,
+          phone: this.$refs.phone.value == "" ? "" : this.$refs.phone.value,
+          age: this.$refs.age.value == "" ? "" : this.$refs.age.value
         }
       })
       .then(response => {

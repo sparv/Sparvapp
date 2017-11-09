@@ -88,7 +88,7 @@
         {{ clientNotes }}
       </div>
     </div>
-    <Sidebar :sidebarState="openSidebar" :customerId="customerId"></Sidebar>
+    <Sidebar :sidebarState="openSidebar" :customerId="customerId" :forename="forename" :surname="surname" :email="email" :phone="phone" :gender="gender" :age="age"></Sidebar>
     <Modal :name="surname" :customerId="customerId"></Modal>
   </section>
 </template>
@@ -119,13 +119,13 @@ export default {
       }
     })
     .then((res) => {
-      console.log(res.data);
+      const client = res.data;
       return {
-        customerId: res.data.customer_id,
-        forename: res.data.forename,
-        surname: res.data.surname,
-        email: res.data.email,
-        phone: res.data.phone
+        customerId: client.customer_id,
+        forename: client.forename,
+        surname: client.surname,
+        email: client.email,
+        phone: client.phone
       }
     })
   },
