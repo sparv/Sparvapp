@@ -89,14 +89,7 @@
       </div>
     </div>
     <Sidebar :sidebarState="openSidebar" :customerId="customerId"></Sidebar>
-    <Modal elementId="deleteClient" 
-            :name="surname"
-            :customerId="customerId"
-            icon="/images/delete.svg"
-            iconDescription="Test"
-            title="Kunde löschen"
-            description="Bist Du Dir sicher, dass du diesen Kunden löschen möchtest? Das Löschen kann nicht rückgängig gemacht werden. Bitte gebe zur Bestätigung den Nachnamen des Kunden ein." label="Gib den Nachname des Kunden zur Bestätigung ein"
-            buttonText="Kunde löschen"></Modal>
+    <Modal :name="surname" :customerId="customerId"></Modal>
   </section>
 </template>
 

@@ -1,5 +1,5 @@
 <template>
-  <div :id="elementId" class="dialog" aria-hidden="true">
+  <div id="deleteClient" class="dialog" aria-hidden="true">
     <div class="dialog-overlay " tabindex="-1" data-a11y-dialog-hide></div>
     <div class="dialog-content" role="dialog" aria-labelledby="dialog-title">
       <div role="document">
@@ -8,32 +8,36 @@
         </button>
         <div class="dialog__header f-mb7">
           <span class="dialog__icon f-mr6">
-            <img :src="icon" :alt="iconDescription" width="32" height="32">
+            <img src="/images/delete.svg" alt="" width="32" height="32">
           </span>
-          <h3 class="f-mb0 display-3">{{ title }}</h3>
+          <h3 class="f-mb0 display-3">Kunde löschen</h3>
         </div>
-        <p>{{ description }}</p>
-        <form>
+        <p>Bist Du Dir sicher, dass du diesen Kunden löschen möchtest? Das Löschen kann nicht rückgängig gemacht werden. Bitte gebe zur Bestätigung den Nachnamen des Kunden ein.</p>
+        <form @submit.prevent="submitForm">
           <div class="f-mb7">
-            <label class="c-label f-db f-mb3" for="">{{ label }}</label>
+            <label class="c-label f-db f-mb3" for="">Gib den Nachname des Kunden zur Bestätigung ein</label>
             <input class="c-input f-w-100" name="text" type="text" v-model="nameInput">
           </div>
+          <div class="f-fr">
+            <button class="c-btn c-btn--text" data-a11y-dialog-hide>Abbrechen</button>
+            <button class="c-btn c-btn--error" v-if="this.nameInput === name">Kunde löschen</button>
+            <button class="c-btn c-btn--error" v-else disabled>Kunde löschen</button>
+          </div>
         </form>
-        <div class="f-fr">
-          <button class="c-btn c-btn--text" data-a11y-dialog-hide>Abbrechen</button>
-          <button class="c-btn c-btn--error" v-if="this.nameInput === name">{{ buttonText }}</button>
-          <button class="c-btn c-btn--error" v-else disabled>{{ buttonText }}</button>
-        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import axios from "axios";
+import { mapGetters } from "vuex";
+
 export default {
   props: [
     "elementId",
     "name",
+    "customerId",
     "icon",
     "iconDescription",
     "title",
@@ -42,9 +46,37 @@ export default {
     "buttonText"
   ],
 
+  computed: {
+    ...mapGetters({
+      user: 'getAuthUser'
+    })
+  },
+
   data: function() {
     return {
       nameInput: ""
+    }
+  },
+
+  methods: {
+    submitForm: function() {
+      axios({
+        url: `http://localhost:4040/customers/${this.customerId}`,
+        method: `DELETE`,
+        headers: {
+          'Authorization': `Bearer ${this.user.token}`
+        },
+        data: {
+          surname: this.nameInput
+        }
+      })
+      .then(response => {
+        console.log(response)
+        this.$router.push(`/clients`);
+      })
+      .catch(error => {
+        console.log(error)
+      });
     }
   }
 };
