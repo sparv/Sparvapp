@@ -19,7 +19,7 @@
         </div>
         <div class="f-fr">
           <button class="c-btn c-btn--text" data-a11y-dialog-hide>Abbrechen</button>
-          <button class="c-btn c-btn--error" v-if="this.nameInput === user.surname" @click="submitForm">Kunde löschen</button>
+          <button class="c-btn c-btn--error" v-if="this.nameInput === name" @click="submitForm">Kunde löschen</button>
           <button class="c-btn c-btn--error" v-else disabled>Kunde löschen</button>
         </div>
       </div>

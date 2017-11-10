@@ -36,13 +36,7 @@
         <button class="c-btn c-btn--error" data-a11y-dialog-show="deleteUser">Account endgültig löschen</button>
       </div>
     </div>
-    <Modal elementId="deleteUser" 
-            :user="user"
-            icon="/images/delete.svg"
-            iconDescription="Test"
-            title="Kunde löschen"
-            description="Bist Du Dir sicher, dass du diesen Kunden löschen möchtest? Das Löschen kann nicht rückgängig gemacht werden. Bitte gebe zur Bestätigung den Nachnamen des Kunden ein." label="Gib den Nachname des Kunden zur Bestätigung ein"
-            buttonText="Kunde löschen"></Modal>
+    <Modal :name="surname" :customerId="customerId"></Modal>
   </div>
 </template>
 

@@ -87,7 +87,7 @@ export default {
       required: true
     },
     phone: {
-      type: String,
+      type: Number,
       required: true
     },
     gender: {
@@ -95,7 +95,7 @@ export default {
       required: true
     },
     age: {
-      type: Number,
+      type: String,
       required: true
     }
   },
