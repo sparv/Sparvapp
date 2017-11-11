@@ -9,11 +9,10 @@
 </template>
 
 <script>
-import axios from "axios";
-import { mapGetters } from "vuex";
+import { mapGetters } from 'vuex'
 
-import AppHeader from "~/components/AppHeader.vue";
-import Tabbar from "~/components/Tabbar.vue";
+import AppHeader from '~/components/AppHeader.vue'
+import Tabbar from '~/components/Tabbar.vue'
 
 export default {
   middleware: `validate`,
@@ -25,8 +24,8 @@ export default {
 
   computed: {
     ...mapGetters({
-      siteTitle: "getApplicationTitle"
+      siteTitle: 'getApplicationTitle'
     })
   }
-};
+}
 </script>

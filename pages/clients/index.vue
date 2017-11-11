@@ -17,14 +17,14 @@
 </template>
 
 <script>
-import axios from "axios";
-import { mapGetters } from "vuex";
+import axios from 'axios'
+import { mapGetters } from 'vuex'
 
-import Sidebar from "~/components/Sidebar/Clients/AddClient.vue";
-import TableFlowCellBasic from "~/components/Table/TableFlowCellBasic.vue";
+import Sidebar from '~/components/Sidebar/Clients/AddClient.vue'
+import TableFlowCellBasic from '~/components/Table/TableFlowCellBasic.vue'
 
 export default {
-  layout: "application",
+  layout: 'application',
   middleware: `validate`,
 
   components: {
@@ -40,40 +40,40 @@ export default {
         'Authorization': `Bearer ${store.state.authUser.token}`
       }
     })
-    .then((res) => {
-      console.log(res.data);
-      return { clients: res.data.customer_list }
-    })
+      .then((res) => {
+        console.log(res.data)
+        return { clients: res.data.customer_list }
+      })
   },
 
-  mounted: function() {
-    this.$store.commit("setApplicationTitle", "Kunden");
-    this.$store.commit("setMobileAppBarLeftAction", false);
-    this.$store.commit("setMobileAppBarRightAction", true);
+  mounted: function () {
+    this.$store.commit('setApplicationTitle', 'Kunden')
+    this.$store.commit('setMobileAppBarLeftAction', false)
+    this.$store.commit('setMobileAppBarRightAction', true)
   },
 
   computed: {
     ...mapGetters({
-      openSidebar: "getApplicationSidebar"
+      openSidebar: 'getApplicationSidebar'
     })
   },
 
-  data() {
+  data () {
     return {
       clients: []
     }
   },
 
   methods: {
-    showSidebar: function() {
-      this.$store.commit("setApplicationSidebar", true);
+    showSidebar: function () {
+      this.$store.commit('setApplicationSidebar', true)
     },
 
-    pushNewClientToData: function(data) {
-      this.clients.push(data);
+    pushNewClientToData: function (data) {
+      this.clients.push(data)
     }
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>

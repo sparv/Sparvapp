@@ -31,20 +31,20 @@
 </template>
 
 <script>
-import axios from "axios";
+import axios from 'axios'
 
 export default {
-  asyncData({ store }) {
+  asyncData ({ store }) {
   },
 
-  data: function() {
+  data: function () {
     return {
       userSettings: {
         oldPassword: '',
         newPassword: '',
         newPasswordRepeat: ''
       }
-    };
+    }
   }
-};
+}
 </script>

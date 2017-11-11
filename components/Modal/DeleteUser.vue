@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import axios from "axios";
+import axios from 'axios'
 
 export default {
   props: {
@@ -39,17 +39,17 @@ export default {
     customerId: {
       type: String,
       required: true
-    },
+    }
   },
 
-  data: function() {
+  data: function () {
     return {
-      nameInput: ""
+      nameInput: ''
     }
   },
 
   methods: {
-    submitForm: function() {
+    submitForm: function () {
       axios({
         url: `http://localhost:4040/customers/${this.customerId}`,
         method: `DELETE`,
@@ -60,14 +60,14 @@ export default {
           surname: this.surname
         }
       })
-      .then(response => {
-        console.log(response)
-        this.$router.push(`/clients`);
-      })
-      .catch(error => {
-        console.log(error)
-      });
+        .then(response => {
+          console.log(response)
+          this.$router.push(`/clients`)
+        })
+        .catch(error => {
+          console.log(error)
+        })
     }
   }
-};
+}
 </script>

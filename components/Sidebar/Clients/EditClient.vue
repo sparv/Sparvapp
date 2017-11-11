@@ -62,7 +62,6 @@
 
 <script>
 import axios from 'axios'
-import { mapGetters } from "vuex";
 
 export default {
   props: {
@@ -99,9 +98,9 @@ export default {
       required: true
     }
   },
-  
+
   methods: {
-    submitForm: function() {
+    submitForm: function () {
       axios({
         url: `http://localhost:4040/customers/${this.customerId}`,
         method: `PUT`,
@@ -109,24 +108,24 @@ export default {
           'Authorization': `Bearer ${this.$store.state.authUser.token}`
         },
         data: {
-          forename: this.$refs.forename.value == "" ? "" : this.$refs.forename.value,
-          surname: this.$refs.surname.value == "" ? "" : this.$refs.surname.value,
-          email: this.$refs.email.value == "" ? "" : this.$refs.email.value,
-          phone: this.$refs.phone.value == "" ? "" : this.$refs.phone.value,
-          age: this.$refs.age.value == "" ? "" : this.$refs.age.value
+          forename: this.$refs.forename.value === '' ? '' : this.$refs.forename.value,
+          surname: this.$refs.surname.value === '' ? '' : this.$refs.surname.value,
+          email: this.$refs.email.value === '' ? '' : this.$refs.email.value,
+          phone: this.$refs.phone.value === '' ? '' : this.$refs.phone.value,
+          age: this.$refs.age.value === '' ? '' : this.$refs.age.value
         }
       })
-      .then(response => {
-        console.log(response)
-      })
-      .catch(error => {
-        console.log(error)
-      });
+        .then(response => {
+          console.log(response)
+        })
+        .catch(error => {
+          console.log(error)
+        })
     },
-    
-    hideSidebar: function() {
-      this.$store.commit("setApplicationSidebar", false);
+
+    hideSidebar: function () {
+      this.$store.commit('setApplicationSidebar', false)
     }
   }
-};
+}
 </script>

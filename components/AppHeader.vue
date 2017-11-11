@@ -47,7 +47,7 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters } from 'vuex'
 export default {
   props: {
     siteTitle: {
@@ -58,29 +58,29 @@ export default {
 
   computed: {
     ...mapGetters({
-      user: "getAuthUser",
-      leftAction: "getMobileAppBarLeftAction",
-      rightAction: "getMobileAppBarRightAction"
+      user: 'getAuthUser',
+      leftAction: 'getMobileAppBarLeftAction',
+      rightAction: 'getMobileAppBarRightAction'
     })
   },
 
-  data: function() {
+  data: function () {
     return {
       showUserSubmenu: false
-    };
+    }
   },
 
   methods: {
-    showSidebar: function() {
-      this.$store.commit("setApplicationSidebar", true);
+    showSidebar: function () {
+      this.$store.commit('setApplicationSidebar', true)
     },
 
-    logout: function(event) {
-      this.$store.commit(`setAuthUser`, null);
-      this.$router.push(`/`);
+    logout: function (event) {
+      this.$store.commit(`setAuthUser`, null)
+      this.$router.push(`/`)
     }
   }
-};
+}
 </script>
 
 

@@ -26,22 +26,22 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters } from 'vuex'
 
 export default {
-  layout: "application",
-  middleware: "validate",
+  layout: 'application',
+  middleware: 'validate',
 
-  mounted: function() {
-    this.$store.commit("setApplicationTitle", "Einstellungen");
-    this.$store.commit("setMobileAppBarLeftAction", false);
-    this.$store.commit("setMobileAppBarRightAction", false);
+  mounted: function () {
+    this.$store.commit('setApplicationTitle', 'Einstellungen')
+    this.$store.commit('setMobileAppBarLeftAction', false)
+    this.$store.commit('setMobileAppBarRightAction', false)
   },
 
   computed: {
     ...mapGetters({
-      siteTitle: "getApplicationTitle"
+      siteTitle: 'getApplicationTitle'
     })
   }
-};
+}
 </script>

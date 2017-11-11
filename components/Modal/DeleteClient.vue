@@ -30,8 +30,8 @@
 </template>
 
 <script>
-import axios from "axios";
-import { mapGetters } from "vuex";
+import axios from 'axios'
+import { mapGetters } from 'vuex'
 
 export default {
   props: {
@@ -42,7 +42,7 @@ export default {
     customerId: {
       type: String,
       required: true
-    },
+    }
   },
 
   computed: {
@@ -51,14 +51,14 @@ export default {
     })
   },
 
-  data: function() {
+  data: function () {
     return {
-      nameInput: ""
+      nameInput: ''
     }
   },
 
   methods: {
-    submitForm: function() {
+    submitForm: function () {
       axios({
         url: `http://localhost:4040/customers/${this.customerId}`,
         method: `DELETE`,
@@ -69,14 +69,14 @@ export default {
           surname: this.nameInput
         }
       })
-      .then(response => {
-        console.log(response)
-        this.$router.push(`/clients`);
-      })
-      .catch(error => {
-        console.log(error)
-      });
+        .then(response => {
+          console.log(response)
+          this.$router.push(`/clients`)
+        })
+        .catch(error => {
+          console.log(error)
+        })
     }
   }
-};
+}
 </script>

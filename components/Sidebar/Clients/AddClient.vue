@@ -62,7 +62,6 @@
 
 <script>
 import axios from 'axios'
-import { mapGetters } from "vuex";
 
 export default {
   props: {
@@ -71,20 +70,20 @@ export default {
       required: true
     }
   },
-  
-  data() {
+
+  data () {
     return {
-      forename: "",
-      surname: "",
-      email: "",
-      phone: "",
-      gender: "",
-      age: ""
+      forename: '',
+      surname: '',
+      email: '',
+      phone: '',
+      gender: '',
+      age: ''
     }
   },
-  
+
   methods: {
-    submitForm: function() {
+    submitForm: function () {
       const newClient = {
         forename: this.forename,
         surname: this.surname,
@@ -102,30 +101,30 @@ export default {
         },
         data: newClient
       })
-      .then(response => {
-        this.pushData(newClient);
-        
-        this.forename = ''
-        this.surname = ''
-        this.email = ''
-        this.phone = ''
-        this.gender = ''
-        this.age = ''
+        .then(response => {
+          this.pushData(newClient)
 
-        this.$store.commit("setApplicationSidebar", false);
-      })
-      .catch(error => {
-        console.log(error)
-      });
-    },
-    
-    hideSidebar: function() {
-      this.$store.commit("setApplicationSidebar", false);
+          this.forename = ''
+          this.surname = ''
+          this.email = ''
+          this.phone = ''
+          this.gender = ''
+          this.age = ''
+
+          this.$store.commit('setApplicationSidebar', false)
+        })
+        .catch(error => {
+          console.log(error)
+        })
     },
 
-    pushData: function(data) {
+    hideSidebar: function () {
+      this.$store.commit('setApplicationSidebar', false)
+    },
+
+    pushData: function (data) {
       this.$emit('pushDataToList', data)
     }
   }
-};
+}
 </script>

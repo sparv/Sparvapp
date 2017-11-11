@@ -20,12 +20,12 @@
 
 <script>
 export default {
-  data() {
+  data () {
     return {
       mobileNavigationShow: false
-    };
+    }
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>

@@ -94,15 +94,15 @@
 </template>
 
 <script>
-import axios from "axios";
-import A11yDialog from "a11y-dialog";
-import { mapGetters } from "vuex";
+import axios from 'axios'
+import A11yDialog from 'a11y-dialog'
+import { mapGetters } from 'vuex'
 
-import Modal from "~/components/Modal/DeleteClient.vue";
-import Sidebar from "~/components/Sidebar/Clients/EditClient.vue";
+import Modal from '~/components/Modal/DeleteClient.vue'
+import Sidebar from '~/components/Sidebar/Clients/EditClient.vue'
 
 export default {
-  layout: "application",
+  layout: 'application',
   middleware: `validate`,
 
   components: {
@@ -118,57 +118,56 @@ export default {
         'Authorization': `Bearer ${store.state.authUser.token}`
       }
     })
-    .then((res) => {
-      const client = res.data;
-      return {
-        customerId: client.customer_id,
-        forename: client.forename,
-        surname: client.surname,
-        email: client.email,
-        phone: client.phone
-      }
-    })
+      .then((res) => {
+        const client = res.data
+        return {
+          customerId: client.customer_id,
+          forename: client.forename,
+          surname: client.surname,
+          email: client.email,
+          phone: client.phone
+        }
+      })
   },
 
-  mounted: function() {
-    const el = document.getElementById("deleteClient");
-    const dialog = new A11yDialog(el);
+  mounted: function () {
+    const el = document.getElementById('deleteClient')
 
-    this.$store.commit("setApplicationTitle", "Kunden");
+    this.$store.commit('setApplicationTitle', 'Kunden')
 
-    this.$store.commit("setMobileAppBarLeftAction", false);
-    this.$store.commit("setMobileAppBarRightAction", true);
+    this.$store.commit('setMobileAppBarLeftAction', false)
+    this.$store.commit('setMobileAppBarRightAction', true)
   },
 
   computed: {
     ...mapGetters({
-      openSidebar: "getApplicationSidebar"
+      openSidebar: 'getApplicationSidebar'
     }),
 
     fullName: function () {
-      return this.forename + " " + this.surname
+      return this.forename + ' ' + this.surname
     }
   },
 
-  data() {
+  data () {
     return {
       showProfileSubmenu: false,
-      customerId: "",
-      forename: "",
-      surname: "",
-      gender: "",
-      age: "",
-      email: "",
-      phone: "",
-      clientNotes: ""
-    };
+      customerId: '',
+      forename: '',
+      surname: '',
+      gender: '',
+      age: '',
+      email: '',
+      phone: '',
+      clientNotes: ''
+    }
   },
 
   methods: {
-    showSidebar: function() {
-      this.showProfileSubmenu = false;
-      this.$store.commit("setApplicationSidebar", true);
+    showSidebar: function () {
+      this.showProfileSubmenu = false
+      this.$store.commit('setApplicationSidebar', true)
     }
   }
-};
+}
 </script>

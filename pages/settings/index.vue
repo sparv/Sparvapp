@@ -41,11 +41,11 @@
 </template>
 
 <script>
-import axios from "axios";
-import A11yDialog from "a11y-dialog";
-import { mapGetters } from "vuex";
+import axios from 'axios'
+import A11yDialog from 'a11y-dialog'
+import { mapGetters } from 'vuex'
 
-import Modal from "~/components/Modal/DeleteUser.vue";
+import Modal from '~/components/Modal/DeleteUser.vue'
 
 export default {
   components: {
@@ -58,13 +58,12 @@ export default {
     })
   },
 
-  mounted: function() {
-    const el = document.getElementById('deleteUser');
-    const dialog = new A11yDialog(el);
+  mounted: function () {
+    const el = document.getElementById('deleteUser')
   },
 
   methods: {
-    submitForm: function() {
+    submitForm: function () {
       axios({
         url: `http://localhost:4040/users`,
         method: `PUT`,
@@ -77,13 +76,13 @@ export default {
           email: this.user.email
         }
       })
-      .then(response => {
-        console.log(response)
-      })
-      .catch(error => {
-        console.log(error)
-      });
+        .then(response => {
+          console.log(response)
+        })
+        .catch(error => {
+          console.log(error)
+        })
     }
   }
-};
+}
 </script>

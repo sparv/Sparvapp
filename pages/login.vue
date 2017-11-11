@@ -22,51 +22,50 @@
 </template>
 
 <script>
-import axios from "axios";
-import moment from "moment";
+import axios from 'axios'
 
-import LoginHeader from "~/components/LoginHeader.vue";
+import LoginHeader from '~/components/LoginHeader.vue'
 
 export default {
-  layout: "landingpage",
-  
+  layout: 'landingpage',
+
   components: {
     LoginHeader
   },
-  
-  data: function() {
+
+  data: function () {
     return {
-      email: "",
-      password: ""
-    };
+      email: '',
+      password: ''
+    }
   },
 
   methods: {
-    submitForm: function() {
+    submitForm: function () {
       this.$validator.validateAll()
-      .then(validationState => {
-        if (validationState) {
-          axios({
-            url: `http://localhost:4040/login`,
-            method: `POST`,
-            data: {
-              email: this.email,
-              password: this.password
-            }
-          })
-          .then(response => {
-            this.$store.commit(`setAuthUser`, response.data);
-            this.$router.push(`/dashboard`);
-          })
-          .catch(error => {
-            console.log(error);
-          });
-        }
-      })
-      .catch(error => {
-        console.log(error);
-      });
+        .then(validationState => {
+          if (validationState) {
+            axios({
+              url: `http://localhost:4040/login`,
+              method: `POST`,
+              data: {
+                email: this.email,
+                password: this.password
+              }
+            })
+              .then(response => {
+                this.$store.commit(`setAuthUser`, response.data)
+                this.$router.push(`/dashboard`)
+              })
+              .catch(error => {
+                console.log(error)
+              })
+          }
+        })
+        .catch(error => {
+          console.log(error)
+        })
     }
   }
-};
+}
 </script>
