@@ -131,7 +131,10 @@ export default {
   },
 
   mounted: function () {
+    /* eslint-disable */
     const el = document.getElementById('deleteClient')
+    const dialog = new A11yDialog(el)
+    /* eslint-enable */
 
     this.$store.commit('setApplicationTitle', 'Kunden')
 

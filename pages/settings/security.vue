@@ -31,12 +31,8 @@
 </template>
 
 <script>
-import axios from 'axios'
 
 export default {
-  asyncData ({ store }) {
-  },
-
   data: function () {
     return {
       userSettings: {
