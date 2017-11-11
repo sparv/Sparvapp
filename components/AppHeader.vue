@@ -24,6 +24,9 @@
             <nuxt-link to="/clients">Kunden</nuxt-link>
           </li>
           <li class="f-ml8 m-app-header-nav__item">
+            <nuxt-link to="/expercises">Übungen</nuxt-link>
+          </li>
+          <li class="f-ml8 m-app-header-nav__item">
             <details v-on:click="showUserSubmenu = !showUserSubmenu">
               <summary>
                 <img class="f-db" src="https://avatars3.githubusercontent.com/u/1376207?s=40&amp;v=4" height="24" width="24" alt="Profilbilder angemeldeten Nutzers">
