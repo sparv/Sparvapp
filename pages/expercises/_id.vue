@@ -53,7 +53,7 @@
             <div class="f-mb6">
               <img src="~/assets/images/exercise-icon-big.svg" class="f-db f-w-100" alt="">
             </div>
-            <span class="token f-db f-w-100">Einsteigerlevel</span>
+            <span class="f-db f-w-100 token token--positiv">Einsteigerlevel</span>
           </div>
         </div>
         <div class="o-grid__item f-w-two-thirds-m">

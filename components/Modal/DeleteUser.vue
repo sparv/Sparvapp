@@ -10,17 +10,17 @@
           <span class="dialog__icon f-mr6">
             <img src="/images/delete.svg" alt="" width="32" height="32">
           </span>
-          <h3 class="f-mb0 display-3">Kunde löschen</h3>
+          <h3 class="f-mb0 display-3">Deinen Account löschen</h3>
         </div>
-        <p>Bist Du Dir sicher, dass du diesen Kunden löschen möchtest? Das Löschen kann nicht rückgängig gemacht werden. Bitte gebe zur Bestätigung den Nachnamen des Kunden ein." label="Gib den Nachname des Kunden zur Bestätigung ein</p>
+        <p>Bist Du Dir sicher, dass Du Deinen Account löschen möchtest? Das Löschen kann nicht rückgängig gemacht werden.</p>
         <div class="f-mb7">
-          <label class="c-label f-db f-mb3" for="">Gib den Nachname des Kunden zur Bestätigung ein</label>
+          <label class="c-label f-db f-mb3" for="">Gib Deinen Nachname zur Bestätigung ein</label>
           <input class="c-input f-w-100" name="text" type="text" v-model="nameInput">
         </div>
         <div class="f-fr">
           <button class="c-btn c-btn--text" data-a11y-dialog-hide>Abbrechen</button>
-          <button class="c-btn c-btn--error" v-if="this.nameInput === name" @click="submitForm">Kunde löschen</button>
-          <button class="c-btn c-btn--error" v-else disabled>Kunde löschen</button>
+          <button class="c-btn c-btn--error" v-if="this.nameInput === name" @click="submitForm">Account löschen</button>
+          <button class="c-btn c-btn--error" v-else disabled>Account löschen</button>
         </div>
       </div>
     </div>

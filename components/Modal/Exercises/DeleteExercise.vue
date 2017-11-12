@@ -12,7 +12,7 @@
           </span>
           <h3 class="f-mb0 display-3">Übung löschen</h3>
         </div>
-        <p>Bist Du Dir sicher, dass du diese Übung löschen möchtest? Das Löschen kann nicht rückgängig gemacht werden. Bitte gebe zur Bestätigung den Namen der Übung ein.</p>
+        <p>Bist Du Dir sicher, dass du diese Übung löschen möchtest? Das Löschen kann nicht rückgängig gemacht werden.</p>
         <form @submit.prevent="submitForm">
           <div class="f-mb7">
             <label class="c-label f-db f-mb3" for="">Gib den Namen der Übung zur Bestätigung ein</label>

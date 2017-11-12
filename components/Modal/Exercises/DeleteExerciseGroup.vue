@@ -12,7 +12,7 @@
           </span>
           <h3 class="f-mb0 display-3">Gruppe löschen</h3>
         </div>
-        <p>Bist Du Dir sicher, dass du diese Gruppe löschen möchtest? Das Löschen kann nicht rückgängig gemacht werden. Bitte gebe zur Bestätigung den Namen der Gruppe ein.</p>
+        <p>Bist Du Dir sicher, dass du diese Gruppe löschen möchtest? Das Löschen kann nicht rückgängig gemacht werden.</p>
         <form @submit.prevent="submitForm">
           <div class="f-mb7">
             <label class="c-label f-db f-mb3" for="">Gib den Namen der Gruppe zur Bestätigung ein</label>

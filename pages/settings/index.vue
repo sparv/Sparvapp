@@ -65,6 +65,15 @@ export default {
     /* eslint-enable */
   },
 
+  data () {
+    return {
+      customerId: "",
+      forename: "",
+      surname: "",
+      email: ""
+    }
+  },
+
   methods: {
     submitForm: function () {
       axios({
