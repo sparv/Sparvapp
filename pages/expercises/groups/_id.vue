@@ -120,12 +120,17 @@ export default {
       switch (triggerType) {
         case 'add':
           this.showAddSidebar = true
+          this.showEditSidebar = false
           break
         case 'edit':
+          this.showAddSidebar = false
           this.showEditSidebar = true
+
+          this.showProfileSubmenu = !this.showProfileSubmenu
           break
         default:
-          console.log('Sorry.')
+          this.showAddSidebar = false
+          this.showEditSidebar = false
       }
     }
   }
