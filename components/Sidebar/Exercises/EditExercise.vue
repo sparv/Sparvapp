@@ -6,7 +6,7 @@
           <button class="c-sidebar__close" @click="hideSidebar">
             <img src="~/assets/images/close.svg" alt="">
           </button>
-          <h2 class="f-ma0">Neue Gruppe hinzufügen</h2>
+          <h2 class="f-ma0">Übung bearbeiten</h2>
         </div>
         <form @submit.prevent="submitForm">
           <div class="c-sidebar__content">
@@ -15,8 +15,18 @@
               <input class="c-input f-w-100" name="name" type="text" v-model="name">
             </div>
             <div class="f-mb6 f-mb7-m">
-              <label class="c-label f-db f-mb3" for="">Farbauswahl</label>
-              <input class="c-input f-w-100" name="color" type="text" v-model="color">
+              <fieldset>
+                <legend>Schwierigkeitsgrad</legend>
+                <div class="f-mb3">
+                  <label for="gender_male"><input class="f-mr3" type="radio" name="gender" value="1" id="difficulty_level" checked>Einsteiger</label>
+                </div>
+                <div class="f-mb3">
+                  <label for="gender_female"><input class="f-mr3" type="radio" name="gender" value="2" id="difficulty_level">Weiblich</label>
+                </div>
+                <div class="f-mb3">
+                  <label for="gender_neutral"><input class="f-mr3" type="radio" name="gender" value="3" id="difficulty_level">keine Angaben</label>
+                </div>
+              </fieldset>
             </div>
             <div>
               <label class="c-label f-db f-mb3" for="">Beschreibung</label>
@@ -25,7 +35,7 @@
           </div>
           <div class="c-sidebar__footer">
             <span class="c-btn c-btn--text" @click="hideSidebar">Abbrechen</span>
-            <button class="c-btn c-btn--primary f-w-100 f-w-auto-m">Gruppe hinzufügen</button>
+            <button class="c-btn c-btn--primary f-w-100 f-w-auto-m">Änderungen speichern</button>
           </div>
         </form>
       </div>

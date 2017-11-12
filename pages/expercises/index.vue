@@ -6,7 +6,7 @@
     </div>
     <div class="o-grid">
       <div class="o-grid__item f-w-50-ns f-w-33-l" v-for="(group, index) in exerciseGroups" v-bind:item="group" v-bind:index="index" v-bind:key="group.id">
-        <nuxt-link :to="'/expercises/groups/' + group.id" class="f-db f-mb8 c-card c-group-item" :style="{ borderColor: group.groupColor }">
+        <nuxt-link :to="'/expercises/groups/' + group.id" class="f-db f-mb6 f-mb8-m c-card c-group-item" :style="{ borderColor: group.groupColor }">
           <h3>{{group.name}}</h3>
           <p>{{group.description}}</p>
           <span>{{group.experciseCount}} Übungen</span>
@@ -100,8 +100,8 @@ export default {
 <style lang="scss" scoped>
 .c-group-item {
   position: relative;
-  padding: 24px 16px 16px 16px;
-  height: 192px;
+  padding: 16px;
+  height: 160px;
   color: #727375;
 	border-radius: 5px;
   text-decoration: none;
@@ -110,17 +110,26 @@ export default {
   border-left: 8px solid red;
   transition: all 0.24s ease-in-out;
 
+  @media (min-width: 860px) {
+    padding: 24px 16px 16px 16px;
+    height: 192px;
+  }
+
   &:hover, &:focus {
     background-color: #f5f7fa;
 	  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.16), 0 2px 8px 0 rgba(0, 0, 0, 0.12);
   }
 
   h3 {
-    margin-bottom: 12px;
-    font-size: 24px;
+    margin-bottom: 8px;
+    font-size: 20px;
     font-weight: bold;
     line-height: 1.25;
     color: #15171a;
+    @media (min-width: 860px) {
+      margin-bottom: 12px;
+      font-size: 24px;
+    }
   }
 
   p {

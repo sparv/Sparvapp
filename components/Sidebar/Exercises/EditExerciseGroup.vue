@@ -6,7 +6,7 @@
           <button class="c-sidebar__close" @click="hideSidebar">
             <img src="~/assets/images/close.svg" alt="">
           </button>
-          <h2 class="f-ma0">Neue Gruppe hinzufügen</h2>
+          <h2 class="f-ma0">Gruppe bearbeiten</h2>
         </div>
         <form @submit.prevent="submitForm">
           <div class="c-sidebar__content">
@@ -25,7 +25,7 @@
           </div>
           <div class="c-sidebar__footer">
             <span class="c-btn c-btn--text" @click="hideSidebar">Abbrechen</span>
-            <button class="c-btn c-btn--primary f-w-100 f-w-auto-m">Gruppe hinzufügen</button>
+            <button class="c-btn c-btn--primary f-w-100 f-w-auto-m">Änderungen speichern</button>
           </div>
         </form>
       </div>

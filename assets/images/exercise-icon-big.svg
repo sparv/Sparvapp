@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="306" height="306" viewBox="0 0 306 306">
+  <defs>
+    <rect id="exercise-icon-big-a" width="306" height="306" x="24" y="24" rx="10"/>
+  </defs>
+  <g fill="none" fill-rule="evenodd" transform="translate(-24 -24)">
+    <use fill="#F5F7FA" xlink:href="#exercise-icon-big-a"/>
+    <rect width="304" height="304" x="25" y="25" stroke="#DCDDE0" stroke-width="2" rx="10"/>
+  </g>
+</svg>
