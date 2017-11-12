@@ -1,17 +1,17 @@
 <template>
   <section class="f-pv8 f-ph5 f-pa12-m">
-		<div class="f-wrapper f-wrapper--login">
-    	<div class="c-card f-pv6 f-ph5 f-pa8-m">
-				<LoginHeader title="Registrierung"></LoginHeader>
-      	<form v-on:submit.prevent="submitForm">
-        	<div class="f-mb7">
-          	<label class="c-label f-db f-mb3" for="">E-Mail-Adresse</label>
-          	<input class="c-input f-w-100" :class="{'c-input--error': errors.has('email') }" v-model="email" v-validate="'required|email'" name="email" type="text">
-						<span v-show="errors.has('email')" class="c-input__error-msg">{{ errors.first('email') }}</span>
+    <div class="f-wrapper f-wrapper--login">
+      <div class="c-card f-pv6 f-ph5 f-pa8-m">
+        <LoginHeader title="Registrierung"></LoginHeader>
+        <form v-on:submit.prevent="submitForm">
+          <div class="f-mb7">
+            <label class="c-label f-db f-mb3" for="">E-Mail-Adresse</label>
+            <input class="c-input f-w-100" :class="{'c-input--error': errors.has('email') }" id="email" name="email" type="email" v-model="email" v-validate="'required|email'" data-vv-validate-on="none">
+            <span v-show="errors.has('email')" class="c-input__error-msg">{{ errors.first('email') }}</span>
         	</div>
-        	<div class="f-mb7">
-          	<label class="c-label f-db f-mb3" for="">Passwort</label>
-          	<input class="c-input f-w-100" :class="{'c-input--error': errors.has('password') }" v-model="password" v-validate="'required'" name="password" type="password">
+          <div class="f-mb7">
+            <label class="c-label f-db f-mb3" for="">Passwort</label>
+          	<input class="c-input f-w-100" :class="{'c-input--error': errors.has('password') }" id="password" name="password" type="password" v-model="password" v-validate="'required'" data-vv-validate-on="none">
 						<span v-show="errors.has('password')" class="c-input__error-msg">{{ errors.first('password') }}</span>
         	</div>
         	<button class="c-btn c-btn--primary f-w-100">Account erstellen</button>

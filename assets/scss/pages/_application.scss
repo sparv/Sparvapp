@@ -7,7 +7,7 @@
   box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.12);
 
   @media (min-width: $breakpoint-medium) {
-    padding: 0 48px;
+    padding: 0 24px;
   }
 }
 
@@ -16,7 +16,7 @@
   align-items: center;
   justify-content: center;
   height: 56px;
-  
+
   h1 {
     width: calc(100% - 48px - 32px);
     font-size: 20px;
@@ -75,7 +75,7 @@
     justify-content: space-between;
     height: 96px;
     border-bottom: 2px solid #E1E3E6;
-    
+
     h2 {
       font-size: 30px;
       line-height: 1.25;

@@ -33,14 +33,14 @@
 		"eslint-plugin-standard": "^3.0.1",
 		"jsdom": "^11.2.0",
 		"node-sass": "^4.5.3",
-		"sass-loader": "^6.0.6",
-		"vee-validate": "^2.0.0-rc.19"
+		"sass-loader": "^6.0.6"
 	},
 	"dependencies": {
-		"a11y-dialog": "^4.0.0",
+    "a11y-dialog": "^4.0.0",
 		"axios": "^0.16.2",
 		"moment": "^2.18.1",
-		"nuxt": "^1.0.0-rc11"
+		"nuxt": "^1.0.0-rc11",
+    "vee-validate": "^2.0.0-rc.19"
 	},
 	"ava": {
 		"require": [

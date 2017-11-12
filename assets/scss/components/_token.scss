@@ -1,0 +1,32 @@
+/*------------------------------------------------------------------
+||  Token
+-------------------------------------------------------------------*/
+.token {
+  display: inline-block;
+  padding: 8px 16px;
+	font-size: 12px;
+  font-weight: bold;
+  line-height: 1.2;
+  text-align: center;
+	letter-spacing: 0.96px;
+  border-radius: 5px;
+  text-transform: uppercase;
+}
+
+.token--neutral {
+  color: gray;
+	background-color: gray;
+  border: solid 1px gray;
+}
+
+.token--positiv {
+  color: #208059;
+	background-color: #c0e8d8;
+  border: solid 1px #81d0b1;
+}
+
+.token--negativ {
+  color: red;
+	background-color: red;
+  border: solid 1px red;
+}

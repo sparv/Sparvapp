@@ -120,20 +120,3 @@ export default {
   }
 }
 </script>
-
-
-<style lang="scss" scoped>
-.token {
-  padding: 8px 16px;
-	font-size: 12px;
-  font-weight: bold;
-  line-height: 1.2;
-  text-align: center;
-	letter-spacing: 0.96px;
-	color: #208059;
-  border-radius: 5px;
-	background-color: #c0e8d8;
-  border: solid 1px #81d0b1;
-  text-transform: uppercase;
-}
-</style>

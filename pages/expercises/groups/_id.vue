@@ -50,12 +50,12 @@
             <img src="~/assets/images/exercise-icon.svg" class="f-db" alt="">
           </span>
         </div>
-        <div class="c-table-flow__item-data f-mb4 f-mb0-m f-ph6-m flex-grow">
+        <div class="c-table-flow__item-data f-mb4 f-mb0-m f-ph6-m f-flex-auto f-flex-grow">
           <h4 class="c-table-flow__item-title">Name</h4>
-          <span>{{exercise.title}}</span>
+          <span class="c-table-flow__item-text">{{exercise.title}}</span>
         </div>
         <div class="c-table-flow__item-data f-mb4 f-mb0-m f-ph6-m">
-          <span class="token">{{exercise.experciseLevel}}</span>
+          <span class="token token--positiv">{{exercise.experciseLevel}}</span>
         </div>
       </nuxt-link>
     </div>
@@ -139,75 +139,5 @@ export default {
   @media (min-width: 860px) {
     padding: 0 24px;
   }
-}
-
-.c-table-flow__item {
-  display: flex;
-  flex-wrap: wrap;
-  padding: 16px 8px 0 8px;
-  color: #15171a;
-  font-size: 14px;
-  text-decoration: none;
-  background-color: #ffffff;
-  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.12);
-  transition: all 0.24s ease-in-out;
-
-  &:hover,
-  &:focus {
-    background-color: #f5f7fa;
-    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.16),
-      0 2px 8px 0 rgba(0, 0, 0, 0.12);
-  }
-
-  @media (min-width: 860px) {
-    align-items: center;
-    padding: 24px 0px;
-    height: 80px;
-    font-size: 16px;
-    border-radius: 5px;
-  }
-}
-
-.flex-grow {
-  flex-grow: 2;
-}
-
-.token {
-  padding: 8px 16px;
-	font-size: 12px;
-  font-weight: bold;
-  line-height: 1.2;
-	letter-spacing: 0.96px;
-	color: #208059;
-  border-radius: 5px;
-	background-color: #c0e8d8;
-  border: solid 1px #81d0b1;
-  text-transform: uppercase;
-}
-
-
-
-.c-table-flow__item-data {
-  width: 50%;
-  @media (min-width: 860px) {
-    // flex: 1 1 0;
-    width: auto;
-  }
-}
-
-.c-table-flow__item-title {
-  margin: 0 0 2px;
-  font-size: 12px;
-  font-weight: bold;
-  line-height: 1.29;
-  letter-spacing: 0.7px;
-  color: #727375;
-  @media (min-width: 860px) {
-    font-size: 14px;
-  }
-}
-
-span {
-  word-wrap: break-word;
 }
 </style>

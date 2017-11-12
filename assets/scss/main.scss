@@ -11,7 +11,10 @@
 
 @import "./components/form";
 @import "./components/card";
+@import "./components/table";
 @import "./components/modal";
+@import "./components/token";
+@import "./components/groups";
 @import "./components/buttons";
 @import "./components/submenu";
 @import "./components/sidebar";
@@ -19,11 +22,12 @@
 @import "./components/breadcrumb";
 @import "./components/sidebar-menu";
 
+@import "./functional/float";
+@import "./functional/widths";
 @import "./functional/display";
 @import "./functional/spacing";
-@import "./functional/widths";
+@import "./functional/flexbox";
 @import "./functional/clearfix";
-@import "./functional/float";
 
 @import "./pages/base";
 @import "./pages/application";

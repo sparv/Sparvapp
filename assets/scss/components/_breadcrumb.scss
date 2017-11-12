@@ -13,9 +13,9 @@
 
 .c-single-breadcrumb__item {
   display: inline-block;
-}
 
-.c-single-breadcrumb__item--first a {
-  color: #727375;
-  text-decoration: none;
+  a {
+    color: #727375;
+    text-decoration: none;
+  }
 }
