@@ -67,10 +67,10 @@ export default {
 
   data () {
     return {
-      customerId: "",
-      forename: "",
-      surname: "",
-      email: ""
+      customerId: '',
+      forename: '',
+      surname: '',
+      email: ''
     }
   },
 

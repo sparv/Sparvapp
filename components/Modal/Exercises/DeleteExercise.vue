@@ -50,6 +50,10 @@ export default {
     return {
       nameInput: ''
     }
+  },
+
+  methods: {
+    submitForm: function () {}
   }
 }
 </script>

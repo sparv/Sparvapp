@@ -73,7 +73,6 @@ import AddSidebar from '~/components/Sidebar/Exercises/AddExercise.vue'
 import EditSidebar from '~/components/Sidebar/Exercises/EditExerciseGroup.vue'
 import Modal from '~/components/Modal/Exercises/deleteExerciseGroup.vue'
 
-
 export default {
   layout: 'application',
   middleware: `validate`,
@@ -119,14 +118,14 @@ export default {
       this.$store.commit('setApplicationSidebar', true)
 
       switch (triggerType) {
-        case "add":
+        case 'add':
           this.showAddSidebar = true
-          break;
-        case "edit":
+          break
+        case 'edit':
           this.showEditSidebar = true
-          break;
+          break
         default:
-        console.log("Sorry.");
+          console.log('Sorry.')
       }
     }
   }

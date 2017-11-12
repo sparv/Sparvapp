@@ -71,7 +71,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 import A11yDialog from 'a11y-dialog'
 import { mapGetters } from 'vuex'
 
@@ -108,7 +107,7 @@ export default {
   data () {
     return {
       showProfileSubmenu: false,
-      name: ""
+      name: ''
     }
   },
 
