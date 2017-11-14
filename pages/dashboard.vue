@@ -3,7 +3,6 @@
 </template>
 
 <script>
-import Cookie from 'js-cookie'
 import { mapGetters } from 'vuex'
 
 export default {
