@@ -63,7 +63,7 @@ export default {
         url: `http://localhost:4040/customers/${this.customerId}`,
         method: `DELETE`,
         headers: {
-          'Authorization': `Bearer ${this.user.token}`
+          'Authorization': `Bearer ${this.user.authToken}`
         },
         data: {
           surname: this.nameInput

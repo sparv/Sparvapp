@@ -80,7 +80,7 @@ export default {
         url: `http://localhost:4040/users`,
         method: `PUT`,
         headers: {
-          'Authorization': `Bearer ${this.$store.state.authUser.token}`
+          'Authorization': `Bearer ${this.$store.state.authToken}`
         },
         data: {
           forename: this.user.forename,

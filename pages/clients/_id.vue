@@ -103,7 +103,7 @@ import Sidebar from '~/components/Sidebar/Clients/EditClient.vue'
 
 export default {
   layout: 'application',
-  middleware: `validate`,
+  middleware: ['check-auth', 'authenticated'],
 
   components: {
     Modal,
@@ -115,7 +115,7 @@ export default {
       url: `http://localhost:4040/customers/${params.id}`,
       method: `GET`,
       headers: {
-        'Authorization': `Bearer ${store.state.authUser.token}`
+        'Authorization': `Bearer ${store.state.authToken}`
       }
     })
       .then((res) => {

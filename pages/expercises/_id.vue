@@ -79,7 +79,7 @@ import Sidebar from '~/components/Sidebar/Exercises/EditExercise.vue'
 
 export default {
   layout: 'application',
-  middleware: `validate`,
+  middleware: ['check-auth', 'authenticated'],
 
   components: {
     Modal,

@@ -25,7 +25,7 @@ import TableFlowCellBasic from '~/components/Table/TableFlowCellBasic.vue'
 
 export default {
   layout: 'application',
-  middleware: `validate`,
+  middleware: ['check-auth', 'authenticated'],
 
   components: {
     Sidebar,
@@ -37,7 +37,7 @@ export default {
       url: `http://localhost:4040/customers`,
       method: `GET`,
       headers: {
-        'Authorization': `Bearer ${store.state.authUser.token}`
+        'Authorization': `Bearer ${store.state.authToken}`
       }
     })
       .then((res) => {

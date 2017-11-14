@@ -105,7 +105,7 @@ export default {
         url: `http://localhost:4040/customers/${this.customerId}`,
         method: `PUT`,
         headers: {
-          'Authorization': `Bearer ${this.$store.state.authUser.token}`
+          'Authorization': `Bearer ${this.$store.state.authToken}`
         },
         data: {
           forename: this.$refs.forename.value === '' ? '' : this.$refs.forename.value,

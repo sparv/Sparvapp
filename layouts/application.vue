@@ -15,8 +15,6 @@ import AppHeader from '~/components/AppHeader.vue'
 import Tabbar from '~/components/Tabbar.vue'
 
 export default {
-  middleware: `validate`,
-
   components: {
     AppHeader,
     Tabbar

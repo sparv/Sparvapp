@@ -30,7 +30,7 @@ import { mapGetters } from 'vuex'
 
 export default {
   layout: 'application',
-  middleware: 'validate',
+  middleware: ['check-auth', 'authenticated'],
 
   mounted: function () {
     this.$store.commit('setApplicationTitle', 'Einstellungen')

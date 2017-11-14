@@ -36,11 +36,12 @@
 		"sass-loader": "^6.0.6"
 	},
 	"dependencies": {
-    "a11y-dialog": "^4.0.0",
+		"a11y-dialog": "^4.0.0",
 		"axios": "^0.16.2",
+		"js-cookie": "^2.2.0",
 		"moment": "^2.18.1",
 		"nuxt": "^1.0.0-rc11",
-    "vee-validate": "^2.0.0-rc.19"
+		"vee-validate": "^2.0.0-rc.19"
 	},
 	"ava": {
 		"require": [

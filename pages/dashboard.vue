@@ -3,9 +3,18 @@
 </template>
 
 <script>
+import Cookie from 'js-cookie'
+import { mapGetters } from 'vuex'
+
 export default {
   layout: 'application',
-  middleware: `validate`,
+  middleware: ['check-auth', 'authenticated'],
+
+  computed: {
+    ...mapGetters({
+      token: 'getAuthToken'
+    })
+  },
 
   mounted: function () {
     this.$store.commit('setApplicationTitle', 'Dashboard')

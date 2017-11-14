@@ -23,7 +23,7 @@ import Sidebar from '~/components/Sidebar/Exercises/AddExerciseGroup.vue'
 
 export default {
   layout: 'application',
-  middleware: `validate`,
+  middleware: ['check-auth', 'authenticated'],
 
   components: {
     Sidebar

@@ -8,7 +8,8 @@ const createStore = () => {
       mobileAppBarLeftAction: false,
       mobileAppBarRightAction: false,
 
-      authUser: null
+      authUser: null,
+      authToken: ''
     },
     mutations: {
       setApplicationTitle (state, string) {
@@ -25,6 +26,9 @@ const createStore = () => {
       },
       setAuthUser (state, user) {
         state.authUser = user
+      },
+      setAuthToken (state, string) {
+        state.authToken = string
       }
     },
     getters: {
@@ -42,6 +46,9 @@ const createStore = () => {
       },
       getAuthUser (state) {
         return state.authUser
+      },
+      getAuthToken (state) {
+        return state.authToken
       }
     }
   })

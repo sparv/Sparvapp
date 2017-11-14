@@ -23,6 +23,7 @@
 
 <script>
 import axios from 'axios'
+import { setToken } from '~/utils/auth.js'
 
 import LoginHeader from '~/components/LoginHeader.vue'
 
@@ -56,6 +57,8 @@ export default {
             })
               .then(response => {
                 this.$store.commit(`setAuthUser`, response.data)
+                this.$store.commit(`setAuthToken`, response.data.token)
+                setToken(response.data.token, { expires: 1 })
                 this.$router.push(`/dashboard`)
               })
               .catch(error => {

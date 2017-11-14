@@ -75,7 +75,7 @@ import Modal from '~/components/Modal/Exercises/deleteExerciseGroup.vue'
 
 export default {
   layout: 'application',
-  middleware: `validate`,
+  middleware: ['check-auth', 'authenticated'],
 
   components: {
     AddSidebar,
