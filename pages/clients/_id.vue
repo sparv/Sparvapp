@@ -200,7 +200,7 @@ export default {
         })
     },
 
-    deleteCustomer: function() {
+    deleteCustomer: function () {
       axios({
         url: `http://localhost:4040/customers/${this.customerId}`,
         method: `DELETE`,

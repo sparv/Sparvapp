@@ -105,7 +105,7 @@ export default {
 
     hideSidebar: function () {
       this.$store.commit('setApplicationSidebar', false)
-    },
+    }
   }
 }
 </script>

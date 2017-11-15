@@ -68,7 +68,7 @@ export default {
       this.$store.commit('setApplicationSidebar', true)
     },
 
-    addNewCustomer: function(customer) {
+    addNewCustomer: function (customer) {
       axios({
         url: `http://localhost:4040/customers`,
         method: `POST`,

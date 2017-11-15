@@ -7,18 +7,18 @@
       <div class="c-card__content f-pv6 f-ph4 f-pv7-m f-ph6-m">
         <form @submit.prevent="submitForm">
           <div class="f-mb6 f-mb7-m">
-            <label class="c-label f-db f-mb3" for="">Vorname</label>
-            <input class="c-input f-w-100" :class="{'c-input--error': errors.has('forename') }" :value="forename" ref="forename" name="forename" type="text">
+            <label class="c-label f-db f-mb3" for="forename">Vorname</label>
+            <input class="c-input f-w-100" :class="{'c-input--error': errors.has('forename') }" id="forename" :value="forename" ref="forename" name="forename" type="text">
             <span v-show="errors.has('forename')" class="c-input__error-msg">{{ errors.first('forename') }}</span>
           </div>
           <div class="f-mb6 f-mb7-m">
-            <label class="c-label f-db f-mb3" for="">Nachname</label>
-            <input class="c-input f-w-100" :class="{'c-input--error': errors.has('surname') }" :value="surname" ref="surname" name="surname" type="text">
+            <label class="c-label f-db f-mb3" for="surname">Nachname</label>
+            <input class="c-input f-w-100" :class="{'c-input--error': errors.has('surname') }" id="surname" :value="surname" ref="surname" name="surname" type="text">
             <span v-show="errors.has('surname')" class="c-input__error-msg">{{ errors.first('surname') }}</span>
           </div>
           <div class="f-mb6 f-mb7-m">
-            <label class="c-label f-db f-mb3" for="">E-Mail-Adresse</label>
-            <input class="c-input f-w-100" :class="{'c-input--error': errors.has('email') }" :value="email" ref="email" name="email" type="email">
+            <label class="c-label f-db f-mb3" for="email">E-Mail-Adresse</label>
+            <input class="c-input f-w-100" :class="{'c-input--error': errors.has('email') }" id="email" :value="email" ref="email" name="email" type="email" v-validate="'email'">
             <span v-show="errors.has('email')" class="c-input__error-msg">{{ errors.first('email') }}</span>
           </div>
           <div class="f-cf">
@@ -81,7 +81,6 @@ export default {
 
   data () {
     return {
-      customerId: '',
       forename: '',
       surname: '',
       email: ''
@@ -93,14 +92,17 @@ export default {
       var updatedData = {}
 
       if (this.$refs.forename.value !== this.forename) {
+        this.forename = this.$refs.forename.value
         updatedData.forename = this.$refs.forename.value
       }
 
       if (this.$refs.surname.value !== this.surname) {
+        this.surname = this.$refs.surname.value
         updatedData.surname = this.$refs.surname.value
       }
 
       if (this.$refs.email.value !== this.email) {
+        this.email = this.$refs.email.value
         updatedData.email = this.$refs.email.value
       }
 
@@ -115,7 +117,7 @@ export default {
         }
       })
         .then(response => {
-          var updatedData = {}
+          updatedData = {}
           console.log(response)
         })
         .catch(error => {
