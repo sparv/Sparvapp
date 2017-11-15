@@ -7,19 +7,19 @@
       <div class="c-card__content f-pv6 f-ph4 f-pv7-m f-ph6-m">
         <form @submit.prevent="submitForm">
           <div class="f-mb6 f-mb7-m">
-            <label class="c-label f-db f-mb3" for="">Vorname</label>
-            <input class="c-input f-w-100" :class="{'c-input--error': errors.has('user.forename') }" v-model="user.forename" name="user.forename" type="text">
-            <span v-show="errors.has('user.forename')" class="c-input__error-msg">{{ errors.first('user.forename') }}</span>
+            <label class="c-label f-db f-mb3" for="forename">Vorname</label>
+            <input class="c-input f-w-100" :class="{'c-input--error': errors.has('forename') }" id="forename" :value="forename" ref="forename" name="forename" type="text">
+            <span v-show="errors.has('forename')" class="c-input__error-msg">{{ errors.first('forename') }}</span>
           </div>
           <div class="f-mb6 f-mb7-m">
-            <label class="c-label f-db f-mb3" for="">Nachname</label>
-            <input class="c-input f-w-100" :class="{'c-input--error': errors.has('user.surname') }" v-model="user.surname" name="user.surname" type="text">
-            <span v-show="errors.has('user.surname')" class="c-input__error-msg">{{ errors.first('user.surname') }}</span>
+            <label class="c-label f-db f-mb3" for="surname">Nachname</label>
+            <input class="c-input f-w-100" :class="{'c-input--error': errors.has('surname') }" id="surname" :value="surname" ref="surname" name="surname" type="text">
+            <span v-show="errors.has('surname')" class="c-input__error-msg">{{ errors.first('surname') }}</span>
           </div>
           <div class="f-mb6 f-mb7-m">
-            <label class="c-label f-db f-mb3" for="">E-Mail-Adresse</label>
-            <input class="c-input f-w-100" :class="{'c-input--error': errors.has('user.email') }" v-model="user.email" v-validate="'email'" name="user.email" type="email">
-            <span v-show="errors.has('user.email')" class="c-input__error-msg">{{ errors.first('user.email') }}</span>
+            <label class="c-label f-db f-mb3" for="email">E-Mail-Adresse</label>
+            <input class="c-input f-w-100" :class="{'c-input--error': errors.has('email') }" id="email" :value="email" ref="email" name="email" type="email" v-validate="'email'">
+            <span v-show="errors.has('email')" class="c-input__error-msg">{{ errors.first('email') }}</span>
           </div>
           <div class="f-cf">
             <button class="c-btn c-btn--primary f-w-100 f-w-auto-m f-fr-m">Änderungen speichern</button>
@@ -36,14 +36,13 @@
         <button class="c-btn c-btn--error" data-a11y-dialog-show="deleteUser">Account endgültig löschen</button>
       </div>
     </div>
-    <Modal :name="surname" :customerId="customerId"></Modal>
+    <Modal :surname="surname" @submitDeleteUserForm="deleteUser"></Modal>
   </div>
 </template>
 
 <script>
 import axios from 'axios'
 import A11yDialog from 'a11y-dialog'
-import { mapGetters } from 'vuex'
 
 import Modal from '~/components/Modal/DeleteUser.vue'
 
@@ -52,10 +51,25 @@ export default {
     Modal
   },
 
-  computed: {
-    ...mapGetters({
-      user: 'getAuthUser'
+  asyncData ({ store }) {
+    return axios({
+      url: `http://localhost:4040/users`,
+      method: `GET`,
+      headers: {
+        'Authorization': `Bearer ${store.state.authToken}`
+      }
     })
+      .then((res) => {
+        const forename = res.data.forename !== null ? res.data.forename : ''
+        const surname = res.data.surname !== null ? res.data.surname : ''
+        const email = res.data.email !== null ? res.data.email : ''
+
+        return {
+          forename: forename,
+          surname: surname,
+          email: email
+        }
+      })
   },
 
   mounted: function () {
@@ -67,7 +81,6 @@ export default {
 
   data () {
     return {
-      customerId: '',
       forename: '',
       surname: '',
       email: ''
@@ -76,6 +89,23 @@ export default {
 
   methods: {
     submitForm: function () {
+      var updatedData = {}
+
+      if (this.$refs.forename.value !== this.forename) {
+        this.forename = this.$refs.forename.value
+        updatedData.forename = this.$refs.forename.value
+      }
+
+      if (this.$refs.surname.value !== this.surname) {
+        this.surname = this.$refs.surname.value
+        updatedData.surname = this.$refs.surname.value
+      }
+
+      if (this.$refs.email.value !== this.email) {
+        this.email = this.$refs.email.value
+        updatedData.email = this.$refs.email.value
+      }
+
       axios({
         url: `http://localhost:4040/users`,
         method: `PUT`,
@@ -83,13 +113,30 @@ export default {
           'Authorization': `Bearer ${this.$store.state.authToken}`
         },
         data: {
-          forename: this.user.forename,
-          surname: this.user.surname,
-          email: this.user.email
+          meta: updatedData
         }
       })
         .then(response => {
+          updatedData = {}
           console.log(response)
+        })
+        .catch(error => {
+          console.log(error)
+        })
+    },
+
+    deleteUser: function () {
+      axios({
+        url: 'http://localhost:4040/users',
+        method: `DELETE`,
+        headers: {
+          'Authorization': `Bearer ${this.$store.state.authToken}`
+        },
+        data: {}
+      })
+        .then(response => {
+          console.log(response)
+          this.$router.push(`/`)
         })
         .catch(error => {
           console.log(error)

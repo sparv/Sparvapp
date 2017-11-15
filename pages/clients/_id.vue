@@ -83,13 +83,13 @@
       </div>
     </div>
     <div class="c-card f-pa6">
-      <span v-if="!clientNotes" class="text-placeholder">Keine Notizen hinterlegt</span>
-      <div v-if="clientNotes">
-        {{ clientNotes }}
+      <span v-if="!notes" class="text-placeholder">Keine Notizen hinterlegt</span>
+      <div v-if="notes">
+        {{ notes }}
       </div>
     </div>
-    <Sidebar :sidebarState="openSidebar" :customerId="customerId" :forename="forename" :surname="surname" :email="email" :phone="phone" :gender="gender" :age="age"></Sidebar>
-    <Modal :name="surname" :customerId="customerId"></Modal>
+    <Sidebar :sidebarState="openSidebar" :user="userData" @submitEditCustomer="editCustomer"></Sidebar>
+    <Modal :surname="surname" @submitDeleteCustomerForm="deleteCustomer"></Modal>
   </section>
 </template>
 
@@ -119,14 +119,7 @@ export default {
       }
     })
       .then((res) => {
-        const client = res.data
-        return {
-          customerId: client.customer_id,
-          forename: client.forename,
-          surname: client.surname,
-          email: client.email,
-          phone: client.phone
-        }
+        return res.data
       })
   },
 
@@ -137,7 +130,6 @@ export default {
     /* eslint-enable */
 
     this.$store.commit('setApplicationTitle', 'Kunden')
-
     this.$store.commit('setMobileAppBarLeftAction', false)
     this.$store.commit('setMobileAppBarRightAction', true)
   },
@@ -149,6 +141,18 @@ export default {
 
     fullName: function () {
       return this.forename + ' ' + this.surname
+    },
+
+    userData: function () {
+      return {
+        forename: this.forename,
+        surname: this.surname,
+        gender: this.gender,
+        age: this.age,
+        email: this.email,
+        phone: this.phone,
+        notes: this.notes
+      }
     }
   },
 
@@ -162,7 +166,7 @@ export default {
       age: '',
       email: '',
       phone: '',
-      clientNotes: ''
+      notes: ''
     }
   },
 
@@ -170,6 +174,50 @@ export default {
     showSidebar: function () {
       this.showProfileSubmenu = false
       this.$store.commit('setApplicationSidebar', true)
+    },
+
+    editCustomer: function (editedUserData) {
+      axios({
+        url: `http://localhost:4040/customers/${this.customer_id}`,
+        method: `PUT`,
+        headers: {
+          'Authorization': `Bearer ${this.$store.state.authToken}`
+        },
+        data: {
+          forename: editedUserData.forename,
+          surname: editedUserData.surname,
+          email: editedUserData.email,
+          phone: editedUserData.phone,
+          age: editedUserData.age,
+          notes: editedUserData.notes
+        }
+      })
+        .then(response => {
+          console.log(response)
+        })
+        .catch(error => {
+          console.log(error)
+        })
+    },
+
+    deleteCustomer: function () {
+      axios({
+        url: `http://localhost:4040/customers/${this.customerId}`,
+        method: `DELETE`,
+        headers: {
+          'Authorization': `Bearer ${this.$store.state.authToken}`
+        },
+        data: {
+          surname: this.surname
+        }
+      })
+        .then(response => {
+          console.log(response)
+          this.$router.push(`/clients`)
+        })
+        .catch(error => {
+          console.log(error)
+        })
     }
   }
 }
