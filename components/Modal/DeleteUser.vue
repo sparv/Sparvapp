@@ -15,11 +15,11 @@
         <p>Bist Du Dir sicher, dass Du Deinen Account löschen möchtest? Das Löschen kann nicht rückgängig gemacht werden.</p>
         <div class="f-mb7">
           <label class="c-label f-db f-mb3" for="">Gib Deinen Nachname zur Bestätigung ein</label>
-          <input class="c-input f-w-100" name="text" type="text" v-model="nameInput">
+          <input class="c-input f-w-100" name="text" type="text" v-model="name">
         </div>
         <div class="f-fr">
           <button class="c-btn c-btn--text" data-a11y-dialog-hide>Abbrechen</button>
-          <button class="c-btn c-btn--error" v-if="this.nameInput === name" @click="submitForm">Account löschen</button>
+          <button class="c-btn c-btn--error" v-if="this.name === surname" @click="submitForm">Account löschen</button>
           <button class="c-btn c-btn--error" v-else disabled>Account löschen</button>
         </div>
       </div>
@@ -28,15 +28,9 @@
 </template>
 
 <script>
-import axios from 'axios'
-
 export default {
   props: {
-    name: {
-      type: String,
-      required: true
-    },
-    customerId: {
+    surname: {
       type: String,
       required: true
     }
@@ -44,29 +38,13 @@ export default {
 
   data: function () {
     return {
-      nameInput: ''
+      name: ''
     }
   },
 
   methods: {
     submitForm: function () {
-      axios({
-        url: `http://localhost:4040/customers/${this.customerId}`,
-        method: `DELETE`,
-        headers: {
-          'Authorization': `Bearer ${this.$store.authToken}`
-        },
-        data: {
-          surname: this.surname
-        }
-      })
-        .then(response => {
-          console.log(response)
-          this.$router.push(`/clients`)
-        })
-        .catch(error => {
-          console.log(error)
-        })
+      this.$emit('submitDeleteUserForm')
     }
   }
 }

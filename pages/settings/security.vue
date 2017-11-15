@@ -5,21 +5,16 @@
       <h3 class="f-ma0 c-card__header-title">Passwort ändern</h3>
     </div>
     <div class="c-card__content f-pv7 f-ph6">
-      <form>
+      <form @submit.prevent="submitForm">
         <div class="f-mb7">
           <label class="c-label f-db f-mb3" for="">Altes Passwort</label>
-          <input class="c-input f-w-100" :class="{'c-input--error': errors.has('userSettings.oldPassword') }" v-model="userSettings.oldPassword" v-validate="'required'" name="userSettings.oldPassword" type="password">
-          <span v-show="errors.has('userSettings.oldPassword')" class="c-input__error-msg">{{ errors.first('userSettings.oldPassword') }}</span>
+          <input class="c-input f-w-100" :class="{'c-input--error': errors.has('oldPassword') }" v-model="oldPassword" v-validate="'required'" name="oldPassword" type="password">
+          <span v-show="errors.has('oldPassword')" class="c-input__error-msg">{{ errors.first('oldPassword') }}</span>
         </div>
         <div class="f-mb7">
           <label class="c-label f-db f-mb3" for="">Neues Passwort</label>
-          <input class="c-input f-w-100" :class="{'c-input--error': errors.has('userSettings.newPassword') }" v-model="userSettings.newPassword" v-validate="'required'" name="userSettings.newPassword" type="password">
-          <span v-show="errors.has('userSettings.newPassword')" class="c-input__error-msg">{{ errors.first('userSettings.newPassword') }}</span>
-        </div>
-        <div class="f-mb7">
-          <label class="c-label f-db f-mb3" for="">Passwort bestätigen</label>
-          <input class="c-input f-w-100" :class="{'c-input--error': errors.has('userSettings.newPasswordRepeat') }" v-model="userSettings.newPasswordRepeat" v-validate="'required'" name="userSettings.newPasswordRepeat" type="password">
-          <span v-show="errors.has('userSettings.newPasswordRepeat')" class="c-input__error-msg">{{ errors.first('userSettings.newPasswordRepeat') }}</span>
+          <input class="c-input f-w-100" :class="{'c-input--error': errors.has('newPassword') }" v-model="newPassword" v-validate="'required'" name="newPassword" type="password">
+          <span v-show="errors.has('newPassword')" class="c-input__error-msg">{{ errors.first('newPassword') }}</span>
         </div>
         <div class="f-cf">
           <button class="c-btn c-btn--primary f-w-100 f-w-auto-m f-fr-m">Neues Passwort speichern</button>
@@ -32,14 +27,37 @@
 
 <script>
 
+import axios from 'axios'
+
 export default {
   data: function () {
     return {
-      userSettings: {
-        oldPassword: '',
-        newPassword: '',
-        newPasswordRepeat: ''
-      }
+      oldPassword: '',
+      newPassword: ''
+    }
+  },
+
+  methods: {
+    submitForm: function () {
+      axios({
+        url: `http://localhost:4040/users`,
+        method: `PUT`,
+        headers: {
+          'Authorization': `Bearer ${this.$store.state.authToken}`
+        },
+        data: {
+          security: {
+            password_old: this.oldPassword,
+            password_new: this.newPassword
+          }
+        }
+      })
+        .then(response => {
+          console.log(response)
+        })
+        .catch(error => {
+          console.log(error)
+        })
     }
   }
 }
