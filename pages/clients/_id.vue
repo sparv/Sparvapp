@@ -83,13 +83,13 @@
       </div>
     </div>
     <div class="c-card f-pa6">
-      <span v-if="!clientNotes" class="text-placeholder">Keine Notizen hinterlegt</span>
-      <div v-if="clientNotes">
-        {{ clientNotes }}
+      <span v-if="!notes" class="text-placeholder">Keine Notizen hinterlegt</span>
+      <div v-if="notes">
+        {{ notes }}
       </div>
     </div>
-    <Sidebar :sidebarState="openSidebar" :customerId="customerId" :forename="forename" :surname="surname" :email="email" :phone="phone" :gender="gender" :age="age"></Sidebar>
-    <Modal :name="surname" :customerId="customerId"></Modal>
+    <Sidebar :sidebarState="openSidebar" :customerId="customerId" :forename="forename" :surname="surname" :email="email" :phone="phone" :gender="gender" :age="age" :notes="notes"></Sidebar>
+    <Modal :surname="surname" @submitDeleteCustomerForm="deleteCustomer"></Modal>
   </section>
 </template>
 
@@ -125,7 +125,10 @@ export default {
           forename: client.forename,
           surname: client.surname,
           email: client.email,
-          phone: client.phone
+          phone: client.phone,
+          gender: client.gender,
+          age: client.age,
+          notes: client.notes
         }
       })
   },
@@ -170,6 +173,26 @@ export default {
     showSidebar: function () {
       this.showProfileSubmenu = false
       this.$store.commit('setApplicationSidebar', true)
+    },
+
+    deleteCustomer: function() {
+      axios({
+        url: `http://localhost:4040/customers/${this.customerId}`,
+        method: `DELETE`,
+        headers: {
+          'Authorization': `Bearer ${this.$store.state.authToken}`
+        },
+        data: {
+          surname: this.surname
+        }
+      })
+        .then(response => {
+          console.log(response)
+          this.$router.push(`/clients`)
+        })
+        .catch(error => {
+          console.log(error)
+        })
     }
   }
 }

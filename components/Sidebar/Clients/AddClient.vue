@@ -11,42 +11,43 @@
         <form @submit.prevent="submitForm">
           <div class="c-sidebar__content">
             <div class="f-mb6 f-mb7-m">
-              <label class="c-label f-db f-mb3" for="">Vorname</label>
-              <input class="c-input f-w-100" name="vorname" type="text" v-model="forename">
+              <label class="c-label f-db f-mb3" for="forename">Vorname</label>
+              <input class="c-input f-w-100" id="forename" name="forename" type="text" v-model="forename">
             </div>
             <div class="f-mb6 f-mb7-m">
-              <label class="c-label f-db f-mb3" for="">Nachname</label>
-              <input class="c-input f-w-100" name="nachname" type="text" v-model="surname">
+              <label class="c-label f-db f-mb3" for="surname">Nachname</label>
+              <input class="c-input f-w-100" id="surname" name="surname" type="text" v-model="surname">
             </div>
             <div class="f-mb6 f-mb7-m">
-              <label class="c-label f-db f-mb3" for="">E-Mail-Adresse</label>
-              <input class="c-input f-w-100" name="e-mail-adresse" type="email" v-model="email">
+              <label class="c-label f-db f-mb3" for="email">E-Mail-Adresse</label>
+              <input class="c-input f-w-100" :class="{'c-input--error': errors.has('email') }" id="email" name="email" type="email" v-model="email" v-validate="'email'">
+              <span v-show="errors.has('email')" class="c-input__error-msg">{{ errors.first('email') }}</span>
             </div>
             <div class="f-mb6 f-mb7-m">
-              <label class="c-label f-db f-mb3" for="">Telefonnummer</label>
-              <input class="c-input f-w-100" name="telefonnummer" type="phone" v-model="phone">
+              <label class="c-label f-db f-mb3" for="phone">Telefonnummer</label>
+              <input class="c-input f-w-100" id="phone" name="phone" type="phone" v-model="phone">
             </div>
             <div class="f-mb6 f-mb7-m">
               <fieldset>
                 <legend>Geschlecht</legend>
                 <div class="f-mb3">
-                  <label for="gender_male"><input class="f-mr3" type="radio" name="gender" value="1" id="gender_male" v-model="gender" checked>Männlich</label>
+                  <label for="gender_male"><input class="f-mr3" type="radio" name="gender" value="male" id="gender_male" v-model="gender" checked>Männlich</label>
                 </div>
                 <div class="f-mb3">
-                  <label for="gender_female"><input class="f-mr3" type="radio" name="gender" value="2" id="gender_female" v-model="gender" >Weiblich</label>
+                  <label for="gender_female"><input class="f-mr3" type="radio" name="gender" value="female" id="gender_female" v-model="gender" >Weiblich</label>
                 </div>
                 <div class="f-mb3">
-                  <label for="gender_neutral"><input class="f-mr3" type="radio" name="gender" value="3" id="gender_neutral" v-model="gender" >keine Angaben</label>
+                  <label for="gender_neutral"><input class="f-mr3" type="radio" name="gender" value="no_details" id="gender_neutral" v-model="gender" >keine Angaben</label>
                 </div>
               </fieldset>
             </div>
             <div class="f-mb6 f-mb7-m">
-              <label class="c-label f-db f-mb3" for="">Alter</label>
-              <input class="c-input f-w-100" name="telefonnummer" type="text" v-model="age">
+              <label class="c-label f-db f-mb3" for="age">Alter</label>
+              <input class="c-input f-w-100" id="age" name="age" type="text" v-model="age">
             </div>
             <div>
-              <label class="c-label f-db f-mb3" for="">Notiz</label>
-              <textarea class="c-input c-input--textarea" name="" id=""></textarea>
+              <label class="c-label f-db f-mb3" for="notes">Notiz</label>
+              <textarea class="c-input c-input--textarea" id="notes" name="notes" v-model="notes"></textarea>
             </div>
           </div>
           <div class="c-sidebar__footer">
@@ -61,7 +62,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 
 export default {
   props: {
@@ -78,53 +78,34 @@ export default {
       email: '',
       phone: '',
       gender: '',
-      age: ''
+      age: '',
+      notes: ''
     }
   },
 
   methods: {
     submitForm: function () {
-      const newClient = {
+      const newCustomer = {
         forename: this.forename,
         surname: this.surname,
         email: this.email,
         phone: this.phone,
         gender: this.gender,
-        age: this.age
+        age: this.age,
+        notes: this.notes
       }
 
-      axios({
-        url: `http://localhost:4040/customers`,
-        method: `POST`,
-        headers: {
-          'Authorization': `Bearer ${this.$store.state.authToken}`
-        },
-        data: newClient
-      })
-        .then(response => {
-          this.pushData(newClient)
-
-          this.forename = ''
-          this.surname = ''
-          this.email = ''
-          this.phone = ''
-          this.gender = ''
-          this.age = ''
-
-          this.$store.commit('setApplicationSidebar', false)
-        })
-        .catch(error => {
-          console.log(error)
+      this.$validator.validateAll()
+        .then(validationState => {
+          if (validationState) {
+            this.$emit('submitNewCustomer', newCustomer)
+          }
         })
     },
 
     hideSidebar: function () {
       this.$store.commit('setApplicationSidebar', false)
     },
-
-    pushData: function (data) {
-      this.$emit('pushDataToList', data)
-    }
   }
 }
 </script>

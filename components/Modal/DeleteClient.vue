@@ -16,11 +16,11 @@
         <form @submit.prevent="submitForm">
           <div class="f-mb7">
             <label class="c-label f-db f-mb3" for="">Gib den Nachname des Kunden zur Bestätigung ein</label>
-            <input class="c-input f-w-100" name="text" type="text" v-model="nameInput">
+            <input class="c-input f-w-100" name="text" type="text" v-model="name">
           </div>
           <div class="f-fr">
             <button class="c-btn c-btn--text" data-a11y-dialog-hide>Abbrechen</button>
-            <button class="c-btn c-btn--error" v-if="this.nameInput === name">Kunde löschen</button>
+            <button class="c-btn c-btn--error" v-if="this.name === surname">Kunde löschen</button>
             <button class="c-btn c-btn--error" v-else disabled>Kunde löschen</button>
           </div>
         </form>
@@ -30,52 +30,23 @@
 </template>
 
 <script>
-import axios from 'axios'
-import { mapGetters } from 'vuex'
-
 export default {
   props: {
-    name: {
-      type: String,
-      required: true
-    },
-    customerId: {
+    surname: {
       type: String,
       required: true
     }
   },
 
-  computed: {
-    ...mapGetters({
-      user: 'getAuthUser'
-    })
-  },
-
   data: function () {
     return {
-      nameInput: ''
+      name: ''
     }
   },
 
   methods: {
     submitForm: function () {
-      axios({
-        url: `http://localhost:4040/customers/${this.customerId}`,
-        method: `DELETE`,
-        headers: {
-          'Authorization': `Bearer ${this.user.authToken}`
-        },
-        data: {
-          surname: this.nameInput
-        }
-      })
-        .then(response => {
-          console.log(response)
-          this.$router.push(`/clients`)
-        })
-        .catch(error => {
-          console.log(error)
-        })
+      this.$emit('submitDeleteCustomerForm')
     }
   }
 }

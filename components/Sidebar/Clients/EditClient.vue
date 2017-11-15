@@ -30,13 +30,13 @@
               <fieldset>
                 <legend>Geschlecht</legend>
                 <div class="f-mb3">
-                  <label for="gender_male"><input class="f-mr3" type="radio" name="gender" value="1" id="gender_male" checked>Männlich</label>
+                  <label for="gender_male"><input class="f-mr3" type="radio" name="gender" value="male" id="gender_male" checked>Männlich</label>
                 </div>
                 <div class="f-mb3">
-                  <label for="gender_female"><input class="f-mr3" type="radio" name="gender" value="2" id="gender_female">Weiblich</label>
+                  <label for="gender_female"><input class="f-mr3" type="radio" name="gender" value="female" id="gender_female">Weiblich</label>
                 </div>
                 <div class="f-mb3">
-                  <label for="gender_neutral"><input class="f-mr3" type="radio" name="gender" value="3" id="gender_neutral">keine Angaben</label>
+                  <label for="gender_neutral"><input class="f-mr3" type="radio" name="gender" value="no_details" id="gender_neutral">keine Angaben</label>
                 </div>
               </fieldset>
             </div>
@@ -46,7 +46,7 @@
             </div>
             <div>
               <label class="c-label f-db f-mb3" for="">Notiz</label>
-              <textarea class="c-input c-input--textarea" name="" id=""></textarea>
+              <textarea class="c-input c-input--textarea" id="" name="notes" :value="this.notes" ref="notes"></textarea>
             </div>
           </div>
           <div class="c-sidebar__footer">
@@ -86,7 +86,7 @@ export default {
       required: true
     },
     phone: {
-      type: Number,
+      type: String,
       required: true
     },
     gender: {
@@ -94,6 +94,10 @@ export default {
       required: true
     },
     age: {
+      type: String,
+      required: true
+    },
+    notes: {
       type: String,
       required: true
     }
@@ -112,7 +116,8 @@ export default {
           surname: this.$refs.surname.value === '' ? '' : this.$refs.surname.value,
           email: this.$refs.email.value === '' ? '' : this.$refs.email.value,
           phone: this.$refs.phone.value === '' ? '' : this.$refs.phone.value,
-          age: this.$refs.age.value === '' ? '' : this.$refs.age.value
+          age: this.$refs.age.value === '' ? '' : this.$refs.age.value,
+          notes: this.$refs.notes.value === '' ? '' : this.$refs.notes.value
         }
       })
         .then(response => {

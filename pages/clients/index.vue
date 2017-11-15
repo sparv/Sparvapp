@@ -12,7 +12,7 @@
         <TableFlowCellBasic label="Telefonnummer" :text="client.phone"></TableFlowCellBasic>
       </nuxt-link>
     </div>
-    <Sidebar :sidebarState="openSidebar" @pushDataToList="pushNewClientToData"></Sidebar>
+    <Sidebar :sidebarState="openSidebar" @submitNewCustomer="addNewCustomer"></Sidebar>
   </section>
 </template>
 
@@ -68,8 +68,22 @@ export default {
       this.$store.commit('setApplicationSidebar', true)
     },
 
-    pushNewClientToData: function (data) {
-      this.clients.push(data)
+    addNewCustomer: function(customer) {
+      axios({
+        url: `http://localhost:4040/customers`,
+        method: `POST`,
+        headers: {
+          'Authorization': `Bearer ${this.$store.state.authToken}`
+        },
+        data: customer
+      })
+        .then(response => {
+          this.clients.push(customer)
+          this.$store.commit('setApplicationSidebar', false)
+        })
+        .catch(error => {
+          console.log(error)
+        })
     }
   }
 }
