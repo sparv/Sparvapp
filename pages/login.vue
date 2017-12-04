@@ -2,8 +2,9 @@
 	<section class="f-pv8 f-ph5 f-pa12-m">
 		<div class="f-wrapper f-wrapper--login">
 			<div class="c-card f-pv6 f-ph5 f-pa8-m">
-				<LoginHeader title="Login"></LoginHeader>
-				<form v-on:submit.prevent="submitForm">
+				<LoginHeader title="Login" />
+				<FormError v-show="formError" :message="formErrorMessage" />
+        <form v-on:submit.prevent="submitForm">
 					<div class="f-mb7">
 						<label class="c-label f-db f-mb3" for="">E-Mail-Adresse</label>
 						<input class="c-input f-w-100" :class="{'c-input--error': errors.has('email') }" id="email" name="email" type="email" v-model="email" v-validate="'required|email'">
@@ -14,7 +15,7 @@
 						<input class="c-input f-w-100" :class="{'c-input--error': errors.has('password') }" id="password" name="password" type="password" v-model="password" v-validate="'required'">
 						<span v-show="errors.has('password')" class="c-input__error-msg">{{ errors.first('password') }}</span>
 					</div>
-					<button class="c-btn c-btn--primary f-w-100">Einloggen</button>
+					<LoadingButton :isSendingRequest="isLoggingIn" :fullWidth="true" buttonText="Einloggen" />
 				</form>
 			</div>
 		</div>
@@ -26,16 +27,23 @@ import axios from 'axios'
 import { setToken } from '~/utils/auth.js'
 
 import LoginHeader from '~/components/LoginHeader.vue'
+import FormError from '~/components/Form/FormError.vue'
+import LoadingButton from '~/components/Buttons/LoadingButton.vue'
 
 export default {
   layout: 'landingpage',
 
   components: {
-    LoginHeader
+    FormError,
+    LoginHeader,
+    LoadingButton
   },
 
   data: function () {
     return {
+      isLoggingIn: false,
+      formError: false,
+      formErrorMessage: '',
       email: '',
       password: ''
     }
@@ -46,6 +54,7 @@ export default {
       this.$validator.validateAll()
         .then(validationState => {
           if (validationState) {
+            this.isLoggingIn = true
             axios({
               url: `http://localhost:4040/login`,
               method: `POST`,
@@ -62,11 +71,18 @@ export default {
               })
               .catch(error => {
                 console.log(error)
+                const response = error.response
+
+                this.formError = true
+                this.formErrorMessage = response.data.message
+                this.isLoggingIn = false
               })
           }
         })
         .catch(error => {
           console.log(error)
+          this.formError = true
+          this.isLoggingIn = false
         })
     }
   }

@@ -3,6 +3,7 @@
     <div class="f-wrapper f-wrapper--login">
       <div class="c-card f-pv6 f-ph5 f-pa8-m">
         <LoginHeader title="Registrierung"></LoginHeader>
+        <FormError v-show="formError" :message="formErrorMessage" />
         <form v-on:submit.prevent="submitForm">
           <div class="f-mb7">
             <label class="c-label f-db f-mb3" for="">Vorname</label>
@@ -24,7 +25,7 @@
           	<input class="c-input f-w-100" :class="{'c-input--error': errors.has('password') }" id="password" name="password" type="password" v-model="password" v-validate="'required'">
 						<span v-show="errors.has('password')" class="c-input__error-msg">{{ errors.first('password') }}</span>
         	</div>
-        	<button class="c-btn c-btn--primary f-w-100">Account erstellen</button>
+          <LoadingButton :isSendingRequest="isSigningUp" :fullWidth="true" buttonText="Account erstellen" />
       	</form>
     	</div>
   	</div>
@@ -36,16 +37,23 @@ import axios from 'axios'
 import { setToken } from '~/utils/auth.js'
 
 import LoginHeader from '~/components/LoginHeader.vue'
+import FormError from '~/components/Form/FormError.vue'
+import LoadingButton from '~/components/Buttons/LoadingButton.vue'
 
 export default {
   layout: 'landingpage',
 
   components: {
-    LoginHeader
+    FormError,
+    LoginHeader,
+    LoadingButton
   },
 
   data: function () {
     return {
+      isSigningUp: false,
+      formError: false,
+      formErrorMessage: '',
       forename: '',
       surname: '',
       email: '',
@@ -59,6 +67,7 @@ export default {
         .validateAll()
         .then(validationState => {
           if (validationState) {
+            this.isSigningUp = true
             axios({
               url: `http://localhost:4040/users`,
               method: `POST`,
@@ -77,11 +86,18 @@ export default {
               })
               .catch(error => {
                 console.log(error)
+                const response = error.response
+
+                this.formError = true
+                this.formErrorMessage = response.data.message
+                this.isSigningUp = false
               })
           }
         })
         .catch(error => {
           console.log(error)
+          this.formError = true
+          this.isSigningUp = false
         })
     }
   }
