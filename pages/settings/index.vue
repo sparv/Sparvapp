@@ -8,18 +8,15 @@
         <form @submit.prevent="submitForm">
           <div class="f-mb6 f-mb7-m">
             <label class="c-label f-db f-mb3" for="forename">Vorname</label>
-            <input class="c-input f-w-100" :class="{'c-input--error': errors.has('forename') }" id="forename" :value="forename" ref="forename" name="forename" type="text">
-            <span v-show="errors.has('forename')" class="c-input__error-msg">{{ errors.first('forename') }}</span>
+            <input class="c-input f-w-100" id="forename" :value="forename" ref="forename" name="forename" type="text">
           </div>
           <div class="f-mb6 f-mb7-m">
             <label class="c-label f-db f-mb3" for="surname">Nachname</label>
-            <input class="c-input f-w-100" :class="{'c-input--error': errors.has('surname') }" id="surname" :value="surname" ref="surname" name="surname" type="text">
-            <span v-show="errors.has('surname')" class="c-input__error-msg">{{ errors.first('surname') }}</span>
+            <input class="c-input f-w-100" id="surname" :value="surname" ref="surname" name="surname" type="text">
           </div>
           <div class="f-mb6 f-mb7-m">
             <label class="c-label f-db f-mb3" for="email">E-Mail-Adresse</label>
-            <input class="c-input f-w-100" :class="{'c-input--error': errors.has('email') }" id="email" :value="email" ref="email" name="email" type="email" v-validate="'email'">
-            <span v-show="errors.has('email')" class="c-input__error-msg">{{ errors.first('email') }}</span>
+            <input class="c-input f-w-100" id="email" :value="email" ref="email" name="email" type="email">
           </div>
           <div class="f-cf">
             <button class="c-btn c-btn--primary f-w-100 f-w-auto-m f-fr-m">Änderungen speichern</button>
