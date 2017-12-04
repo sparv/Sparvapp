@@ -5,6 +5,16 @@
         <LoginHeader title="Registrierung"></LoginHeader>
         <form v-on:submit.prevent="submitForm">
           <div class="f-mb7">
+            <label class="c-label f-db f-mb3" for="">Vorname</label>
+            <input class="c-input f-w-100" :class="{'c-input--error': errors.has('forename') }" id="forename" name="forename" type="forename" v-model="forename" v-validate="'required'" data-vv-validate-on="none">
+            <span v-show="errors.has('forename')" class="c-input__error-msg">{{ errors.first('forename') }}</span>
+        	</div>
+          <div class="f-mb7">
+            <label class="c-label f-db f-mb3" for="">Nachname</label>
+            <input class="c-input f-w-100" :class="{'c-input--error': errors.has('surname') }" id="surname" name="surname" type="surname" v-model="surname" v-validate="'required'" data-vv-validate-on="none">
+            <span v-show="errors.has('surname')" class="c-input__error-msg">{{ errors.first('surname') }}</span>
+        	</div>
+          <div class="f-mb7">
             <label class="c-label f-db f-mb3" for="">E-Mail-Adresse</label>
             <input class="c-input f-w-100" :class="{'c-input--error': errors.has('email') }" id="email" name="email" type="email" v-model="email" v-validate="'required|email'" data-vv-validate-on="none">
             <span v-show="errors.has('email')" class="c-input__error-msg">{{ errors.first('email') }}</span>
@@ -36,6 +46,8 @@ export default {
 
   data: function () {
     return {
+      forename: '',
+      surname: '',
       email: '',
       password: ''
     }
@@ -51,6 +63,8 @@ export default {
               url: `http://localhost:4040/users`,
               method: `POST`,
               data: {
+                forename: this.forename,
+                surname: this.surname,
                 email: this.email,
                 password: this.password
               }

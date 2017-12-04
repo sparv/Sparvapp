@@ -14,13 +14,12 @@
         </div>
         <p>Bist Du Dir sicher, dass Du Deinen Account löschen möchtest? Das Löschen kann nicht rückgängig gemacht werden.</p>
         <div class="f-mb7">
-          <label class="c-label f-db f-mb3" for="">Gib Deinen Nachname zur Bestätigung ein</label>
-          <input class="c-input f-w-100" name="text" type="text" v-model="name">
+          <label class="c-label f-db f-mb3" for="password">Gib Dein Passwort zur Bestätigung ein</label>
+          <input class="c-input f-w-100" name="password" id="password" type="password" v-model="password">
         </div>
         <div class="f-fr">
           <button class="c-btn c-btn--text" data-a11y-dialog-hide>Abbrechen</button>
-          <button class="c-btn c-btn--error" v-if="this.name === surname" @click="submitForm">Account löschen</button>
-          <button class="c-btn c-btn--error" v-else disabled>Account löschen</button>
+          <button class="c-btn c-btn--error" @click="submitForm">Account löschen</button>
         </div>
       </div>
     </div>
@@ -29,22 +28,15 @@
 
 <script>
 export default {
-  props: {
-    surname: {
-      type: String,
-      required: true
-    }
-  },
-
   data: function () {
     return {
-      name: ''
+      password: ''
     }
   },
 
   methods: {
     submitForm: function () {
-      this.$emit('submitDeleteUserForm')
+      this.$emit('submitDeleteUserForm', this.password)
     }
   }
 }

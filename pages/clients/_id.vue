@@ -159,7 +159,6 @@ export default {
   data () {
     return {
       showProfileSubmenu: false,
-      customerId: '',
       forename: '',
       surname: '',
       gender: '',
@@ -202,7 +201,7 @@ export default {
 
     deleteCustomer: function () {
       axios({
-        url: `http://localhost:4040/customers/${this.customerId}`,
+        url: `http://localhost:4040/customers/${this.customer_id}`,
         method: `DELETE`,
         headers: {
           'Authorization': `Bearer ${this.$store.state.authToken}`

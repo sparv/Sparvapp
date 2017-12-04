@@ -36,13 +36,14 @@
         <button class="c-btn c-btn--error" data-a11y-dialog-show="deleteUser">Account endgültig löschen</button>
       </div>
     </div>
-    <Modal :surname="surname" @submitDeleteUserForm="deleteUser"></Modal>
+    <Modal @submitDeleteUserForm="deleteUser"></Modal>
   </div>
 </template>
 
 <script>
 import axios from 'axios'
 import A11yDialog from 'a11y-dialog'
+import { unsetToken } from '~/utils/auth.js'
 
 import Modal from '~/components/Modal/DeleteUser.vue'
 
@@ -125,17 +126,22 @@ export default {
         })
     },
 
-    deleteUser: function () {
+    deleteUser: function (password) {
       axios({
         url: 'http://localhost:4040/users',
         method: `DELETE`,
         headers: {
           'Authorization': `Bearer ${this.$store.state.authToken}`
         },
-        data: {}
+        data: {
+          password: password
+        }
       })
         .then(response => {
           console.log(response)
+          this.$store.commit(`setAuthUser`, null)
+          this.$store.commit(`setAuthToken`, '')
+          unsetToken()
           this.$router.push(`/`)
         })
         .catch(error => {
