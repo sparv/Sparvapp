@@ -78,7 +78,16 @@ export default {
         data: customer
       })
         .then(response => {
-          this.clients.push(customer)
+          axios({
+            url: `http://localhost:4040/customers`,
+            method: `GET`,
+            headers: {
+              'Authorization': `Bearer ${this.$store.state.authToken}`
+            }
+          })
+          .then((res) => {
+            this.clients = res.data.customer_list
+          })
           this.$store.commit('setApplicationSidebar', false)
         })
         .catch(error => {
