@@ -10,15 +10,15 @@
         <form @submit.prevent="submitForm">
           <div class="f-mb6 f-mb7-m">
             <label class="c-label f-db f-mb3" for="forename">Vorname</label>
-            <input class="c-input f-w-100" id="forename" :value="forename" ref="forename" name="forename" type="text">
+            <input class="c-input f-w-100" id="forename" :value="forename" name="forename" type="text">
           </div>
           <div class="f-mb6 f-mb7-m">
             <label class="c-label f-db f-mb3" for="surname">Nachname</label>
-            <input class="c-input f-w-100" id="surname" :value="surname" ref="surname" name="surname" type="text">
+            <input class="c-input f-w-100" id="surname" :value="surname" name="surname" type="text">
           </div>
           <div class="f-mb6 f-mb7-m">
             <label class="c-label f-db f-mb3" for="email">E-Mail-Adresse</label>
-            <input class="c-input f-w-100" id="email" :value="email" ref="email" name="email" type="email">
+            <input class="c-input f-w-100" id="email" :value="email" name="email" type="email">
           </div>
           <div class="f-cf">
             <div class="f-w-100 f-w-auto-m f-fr-m">
@@ -93,34 +93,31 @@ export default {
       formSuccess: false,
       formSuccessMessage: '',
       formError: false,
-      formErrorMessage: '',
-      forename: '',
-      surname: '',
-      email: ''
+      formErrorMessage: ''
     }
   },
 
   methods: {
-    submitForm: function () {
+    submitForm: function (event) {
       var updatedData = {}
 
       this.formSuccess = false
       this.formError = false
       this.isSendingRequest = true
 
-      if (this.$refs.forename.value !== this.forename) {
-        this.forename = this.$refs.forename.value
-        updatedData.forename = this.$refs.forename.value
+      if (event.target.forename.value !== this.forename) {
+        this.forename = event.target.forename.value
+        updatedData.forename = event.target.forename.value
       }
 
-      if (this.$refs.surname.value !== this.surname) {
-        this.surname = this.$refs.surname.value
-        updatedData.surname = this.$refs.surname.value
+      if (event.target.surname.value !== this.surname) {
+        this.surname = event.target.surname.value
+        updatedData.surname = event.target.surname.value
       }
 
-      if (this.$refs.email.value !== this.email) {
-        this.email = this.$refs.email.value
-        updatedData.email = this.$refs.email.value
+      if (event.target.email.value !== this.email) {
+        this.email = event.target.email.value
+        updatedData.email = event.target.email.value
       }
 
       axios({
@@ -136,13 +133,13 @@ export default {
         .then(response => {
           updatedData = {}
           this.formSuccess = true
-          this.formSuccessMessage = "Success"
+          this.formSuccessMessage = response.data.message
           this.isSendingRequest = false
           console.log(response)
         })
         .catch(error => {
           this.formError = true
-          this.formErrorMessage = "Error"
+          this.formErrorMessage = error.response.statusText
           this.isSendingRequest = false
           console.log(error)
         })

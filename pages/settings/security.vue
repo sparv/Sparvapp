@@ -76,15 +76,15 @@ export default {
       })
         .then(response => {
           this.formSuccess = true
-          this.formSuccessMessage = "Success"
+          this.formSuccessMessage = response.data.message
           this.isSendingRequest = false
           console.log(response)
         })
         .catch(error => {
           this.formError = true
-          this.formErrorMessage = "Error"
+          this.formErrorMessage = error.response.statusText
           this.isSendingRequest = false
-          console.log(error)
+          console.log(error.response)
         })
     }
   }
