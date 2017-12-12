@@ -37,7 +37,7 @@
                   <label for="gender_female"><input class="f-mr3" type="radio" name="gender" value="female" id="gender_female" v-model="gender" >Weiblich</label>
                 </div>
                 <div class="f-mb3">
-                  <label for="gender_neutral"><input class="f-mr3" type="radio" name="gender" value="no_details" id="gender_neutral" v-model="gender" >keine Angaben</label>
+                  <label for="gender_neutral"><input class="f-mr3" type="radio" name="gender" value="neutral" id="gender_neutral" v-model="gender" >keine Angaben</label>
                 </div>
               </fieldset>
             </div>

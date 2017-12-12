@@ -187,6 +187,7 @@ export default {
           surname: editedUserData.surname,
           email: editedUserData.email,
           phone: editedUserData.phone,
+          gender: editedUserData.gender,
           age: editedUserData.age,
           notes: editedUserData.notes
         }
