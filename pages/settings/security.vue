@@ -5,6 +5,8 @@
       <h3 class="f-ma0 c-card__header-title">Passwort ändern</h3>
     </div>
     <div class="c-card__content f-pv7 f-ph6">
+      <FormError v-if="formError" :message="formErrorMessage" />
+      <FormSuccess v-if="formSuccess" :message="formSuccessMessage" />
       <form @submit.prevent="submitForm">
         <div class="f-mb7">
           <label class="c-label f-db f-mb3" for="">Altes Passwort</label>
@@ -17,7 +19,9 @@
           <span v-show="errors.has('newPassword')" class="c-input__error-msg">{{ errors.first('newPassword') }}</span>
         </div>
         <div class="f-cf">
-          <button class="c-btn c-btn--primary f-w-100 f-w-auto-m f-fr-m">Neues Passwort speichern</button>
+          <div class="f-w-100 f-w-auto-m f-fr-m">
+            <LoadingButton :isSendingRequest="isSendingRequest" :fullWidth="false" buttonText="Neues Passwort speichern" />
+          </div>
         </div>
       </form>
     </div>
@@ -26,12 +30,26 @@
 </template>
 
 <script>
-
 import axios from 'axios'
 
+import FormError from '~/components/Form/FormError.vue'
+import FormSuccess from '~/components/Form/FormSuccess.vue'
+import LoadingButton from '~/components/Buttons/LoadingButton.vue'
+
 export default {
+  components: {
+    FormError,
+    FormSuccess,
+    LoadingButton
+  },
+
   data: function () {
     return {
+      isSendingRequest: false,
+      formSuccess: false,
+      formSuccessMessage: '',
+      formError: false,
+      formErrorMessage: '',
       oldPassword: '',
       newPassword: ''
     }
@@ -39,6 +57,10 @@ export default {
 
   methods: {
     submitForm: function () {
+      this.formSuccess = false
+      this.formError = false
+      this.isSendingRequest = true
+
       axios({
         url: `http://localhost:4040/users`,
         method: `PUT`,
@@ -53,9 +75,15 @@ export default {
         }
       })
         .then(response => {
+          this.formSuccess = true
+          this.formSuccessMessage = "Success"
+          this.isSendingRequest = false
           console.log(response)
         })
         .catch(error => {
+          this.formError = true
+          this.formErrorMessage = "Error"
+          this.isSendingRequest = false
           console.log(error)
         })
     }

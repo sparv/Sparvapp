@@ -5,6 +5,8 @@
         <h3 class="f-ma0 c-card__header-title">Account-Einstellungen</h3>
       </div>
       <div class="c-card__content f-pv6 f-ph4 f-pv7-m f-ph6-m">
+        <FormError v-if="formError" :message="formErrorMessage" />
+        <FormSuccess v-if="formSuccess" :message="formSuccessMessage" />
         <form @submit.prevent="submitForm">
           <div class="f-mb6 f-mb7-m">
             <label class="c-label f-db f-mb3" for="forename">Vorname</label>
@@ -19,7 +21,9 @@
             <input class="c-input f-w-100" id="email" :value="email" ref="email" name="email" type="email">
           </div>
           <div class="f-cf">
-            <button class="c-btn c-btn--primary f-w-100 f-w-auto-m f-fr-m">Änderungen speichern</button>
+            <div class="f-w-100 f-w-auto-m f-fr-m">
+              <LoadingButton :isSendingRequest="isSendingRequest" :fullWidth="false" buttonText="Änderungen speichern" />
+            </div>
           </div>
         </form>
       </div>
@@ -43,10 +47,16 @@ import A11yDialog from 'a11y-dialog'
 import { unsetToken } from '~/utils/auth.js'
 
 import Modal from '~/components/Modal/DeleteUser.vue'
+import FormError from '~/components/Form/FormError.vue'
+import FormSuccess from '~/components/Form/FormSuccess.vue'
+import LoadingButton from '~/components/Buttons/LoadingButton.vue'
 
 export default {
   components: {
-    Modal
+    Modal,
+    FormError,
+    FormSuccess,
+    LoadingButton
   },
 
   asyncData ({ store }) {
@@ -79,6 +89,11 @@ export default {
 
   data () {
     return {
+      isSendingRequest: false,
+      formSuccess: false,
+      formSuccessMessage: '',
+      formError: false,
+      formErrorMessage: '',
       forename: '',
       surname: '',
       email: ''
@@ -88,6 +103,10 @@ export default {
   methods: {
     submitForm: function () {
       var updatedData = {}
+
+      this.formSuccess = false
+      this.formError = false
+      this.isSendingRequest = true
 
       if (this.$refs.forename.value !== this.forename) {
         this.forename = this.$refs.forename.value
@@ -116,9 +135,15 @@ export default {
       })
         .then(response => {
           updatedData = {}
+          this.formSuccess = true
+          this.formSuccessMessage = "Success"
+          this.isSendingRequest = false
           console.log(response)
         })
         .catch(error => {
+          this.formError = true
+          this.formErrorMessage = "Error"
+          this.isSendingRequest = false
           console.log(error)
         })
     },
