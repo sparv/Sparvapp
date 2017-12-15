@@ -4,11 +4,10 @@
 	"description": "Milestone 1 version of sparvapp for fitness trainer",
 	"main": "server.js",
 	"scripts": {
-		"test": "ava",
-    "dev": "cross-env HOST=0.0.0.0 PORT=3000 nuxt",
-    "test": "ava --serial --verbose",
+		"test": "ava --serial --verbose",
+		"dev": "cross-env HOST=0.0.0.0 PORT=3000 nuxt",
 		"lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
-    "lintFix": "eslint --ext .js,.vue --ignore-path .gitignore . --fix"
+		"lintFix": "eslint --ext .js,.vue --ignore-path .gitignore . --fix"
 	},
 	"repository": {
 		"type": "git",
