@@ -81,10 +81,8 @@ export default {
   },
 
   mounted: function () {
-    /* eslint-disable */
     const el = document.getElementById('deleteUser')
-    const dialog = new A11yDialog(el)
-    /* eslint-enable */
+    A11yDialog(el)
   },
 
   data () {
