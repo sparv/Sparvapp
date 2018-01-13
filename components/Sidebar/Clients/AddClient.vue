@@ -108,12 +108,12 @@ export default {
         .then(validationState => {
           if (validationState) {
             this.$emit('submitNewCustomer', newCustomer)
-            this.forename = '',
-            this.surname = '',
-            this.email = '',
-            this.phone = '',
-            this.gender = '',
-            this.age = '',
+            this.forename = ''
+            this.surname = ''
+            this.email = ''
+            this.phone = ''
+            this.gender = ''
+            this.age = ''
             this.notes = ''
           }
         })
