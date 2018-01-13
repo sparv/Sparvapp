@@ -51,7 +51,7 @@
           </div>
           <div class="c-sidebar__footer">
             <span class="c-btn c-btn--text" @click="hideSidebar">Abbrechen</span>
-            <button class="c-btn c-btn--primary f-w-100 f-w-auto-m">Änderungen speichern</button>
+            <LoadingButton class="c-btn c-btn--primary f-w-100 f-w-auto-m" :isSendingRequest="isSendingRequest" buttonText="Änderungen speichern" />
           </div>
         </form>
       </div>
@@ -61,8 +61,17 @@
 </template>
 
 <script>
+import LoadingButton from '~/components/Buttons/LoadingButton.vue'
 export default {
+  components: {
+    LoadingButton
+  },
+
   props: {
+    isSendingRequest: {
+      type: Boolean,
+      required: true
+    },
     sidebarState: {
       type: Boolean,
       required: true

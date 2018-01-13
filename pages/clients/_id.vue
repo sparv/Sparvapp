@@ -88,7 +88,7 @@
         {{ notes }}
       </div>
     </div>
-    <Sidebar :sidebarState="openSidebar" :user="userData" @submitEditCustomer="editCustomer"></Sidebar>
+    <Sidebar :sidebarState="openSidebar" :user="userData" :isSendingRequest="isSendingRequest" @submitEditCustomer="editCustomer"></Sidebar>
     <Modal :surname="surname" @submitDeleteCustomerForm="deleteCustomer"></Modal>
   </section>
 </template>
@@ -158,6 +158,7 @@ export default {
 
   data () {
     return {
+      isSendingRequest: false,
       showProfileSubmenu: false,
       forename: '',
       surname: '',
@@ -176,6 +177,7 @@ export default {
     },
 
     editCustomer: function (editedUserData) {
+      this.isSendingRequest = true
       axios({
         url: `http://localhost:4040/customers/${this.customer_id}`,
         method: `PUT`,
@@ -194,9 +196,11 @@ export default {
       })
         .then(response => {
           console.log(response)
+          this.isSendingRequest = false
         })
         .catch(error => {
           console.log(error)
+          this.isSendingRequest = false
         })
     },
 
