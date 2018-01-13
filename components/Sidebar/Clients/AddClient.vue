@@ -52,7 +52,7 @@
           </div>
           <div class="c-sidebar__footer">
             <span class="c-btn c-btn--text" @click="hideSidebar">Abbrechen</span>
-            <button class="c-btn c-btn--primary f-w-100 f-w-auto-m">Kunde hinzufügen</button>
+            <LoadingButton class="c-btn c-btn--primary f-w-100 f-w-auto-m" :isSendingRequest="isSendingRequest" buttonText="Kunde hinzufügen" />
           </div>
         </form>
       </div>
@@ -62,9 +62,18 @@
 </template>
 
 <script>
+import LoadingButton from '~/components/Buttons/LoadingButton.vue'
 
 export default {
+  components: {
+    LoadingButton
+  },
+
   props: {
+    isSendingRequest: {
+      type: Boolean,
+      required: true
+    },
     sidebarState: {
       type: Boolean,
       required: true
@@ -99,6 +108,13 @@ export default {
         .then(validationState => {
           if (validationState) {
             this.$emit('submitNewCustomer', newCustomer)
+            this.forename = '',
+            this.surname = '',
+            this.email = '',
+            this.phone = '',
+            this.gender = '',
+            this.age = '',
+            this.notes = ''
           }
         })
     },

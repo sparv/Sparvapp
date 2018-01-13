@@ -25,7 +25,7 @@
           	<input class="c-input f-w-100" :class="{'c-input--error': errors.has('password') }" id="password" name="password" type="password" v-model="password" v-validate="'required'">
 						<span v-show="errors.has('password')" class="c-input__error-msg">{{ errors.first('password') }}</span>
         	</div>
-          <LoadingButton :isSendingRequest="isSigningUp" :fullWidth="true" buttonText="Account erstellen" />
+          <LoadingButton class="c-btn c-btn--primary f-w-100" :isSendingRequest="isSigningUp" buttonText="Account erstellen" />
       	</form>
     	</div>
   	</div>

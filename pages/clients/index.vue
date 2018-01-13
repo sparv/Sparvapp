@@ -12,7 +12,7 @@
         <TableFlowCellBasic label="Telefonnummer" :text="client.phone"></TableFlowCellBasic>
       </nuxt-link>
     </div>
-    <Sidebar :sidebarState="openSidebar" @submitNewCustomer="addNewCustomer"></Sidebar>
+    <Sidebar :sidebarState="openSidebar" :isSendingRequest="isSendingRequest" @submitNewCustomer="addNewCustomer"></Sidebar>
   </section>
 </template>
 
@@ -59,6 +59,7 @@ export default {
 
   data () {
     return {
+      isSendingRequest: false,
       clients: []
     }
   },
@@ -69,6 +70,7 @@ export default {
     },
 
     addNewCustomer: function (customer) {
+      this.isSendingRequest = true
       axios({
         url: `http://localhost:4040/customers`,
         method: `POST`,
@@ -85,13 +87,15 @@ export default {
               'Authorization': `Bearer ${this.$store.state.authToken}`
             }
           })
-          .then((res) => {
-            this.clients = res.data.customer_list
-          })
+            .then((res) => {
+              this.clients = res.data.customer_list
+            })
           this.$store.commit('setApplicationSidebar', false)
+          this.isSendingRequest = false
         })
         .catch(error => {
           console.log(error)
+          this.isSendingRequest = false
         })
     }
   }

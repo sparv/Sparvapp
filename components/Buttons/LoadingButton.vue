@@ -1,5 +1,5 @@
 <template>
-  <button v-if="!isSendingRequest" class="c-btn c-btn--primary" :class="{ 'f-w-100': fullWidth }">{{buttonText}}</button>
+  <button v-if="!isSendingRequest">{{buttonText}}</button>
   <button v-else class="c-btn c-btn--primary f-w-100">
     <div class="spinner">
       <div class="bounce1"></div>
@@ -19,11 +19,8 @@ export default {
     buttonText: {
       type: String,
       required: true
-    },
-    fullWidth: {
-      type: Boolean
     }
-  },
+  }
 }
 </script>
 
