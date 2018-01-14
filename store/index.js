@@ -1,3 +1,4 @@
+import axios from 'axios'
 import Vuex from 'vuex'
 
 const createStore = () => {
@@ -9,8 +10,11 @@ const createStore = () => {
       mobileAppBarRightAction: false,
 
       authUser: null,
-      authToken: ''
+      authToken: '',
+
+      clients: []
     },
+
     mutations: {
       setApplicationTitle (state, string) {
         state.siteTitle = string
@@ -29,26 +33,51 @@ const createStore = () => {
       },
       setAuthToken (state, string) {
         state.authToken = string
+      },
+
+      UPDATE_SINGLE_CLIENT (state, client) {
+        const clientIndex = state.clients.findIndex((c => c.customer_id == client.customer_id));
+        state.clients[clientIndex] = client
+      },
+
+      UPDATE_CLIENTS (state, clients) {
+        state.clients = clients
       }
     },
-    getters: {
-      getApplicationTitle (state) {
-        return state.siteTitle
+
+    actions: {
+      getSingleClient({ commit, state }, param) {
+        axios({
+          url: `http://localhost:4040/customers/${param}`,
+          method: `GET`,
+          headers: {
+            'Authorization': `Bearer ${state.authToken}`
+          }
+        })
+        .then((response) => {
+          const client = response.data
+          commit("UPDATE_SINGLE_CLIENT", client)
+        })
+        .catch(error => {
+          console.log(error)
+        })
       },
-      getApplicationSidebar (state) {
-        return state.applicatonSidebar
-      },
-      getMobileAppBarLeftAction (state) {
-        return state.mobileAppBarLeftAction
-      },
-      getMobileAppBarRightAction (state) {
-        return state.mobileAppBarRightAction
-      },
-      getAuthUser (state) {
-        return state.authUser
-      },
-      getAuthToken (state) {
-        return state.authToken
+
+      getAllClients({ commit, state }) {
+        axios({
+          url: `http://localhost:4040/customers`,
+          method: `GET`,
+          headers: {
+            'Authorization': `Bearer ${state.authToken}`
+          }
+        })
+        .then((response) => {
+          const clients = response.data.customer_list
+          commit("UPDATE_CLIENTS", clients)
+        })
+        .catch(error => {
+          console.log(error)
+        })
       }
     }
   })

@@ -96,7 +96,7 @@
 <script>
 import axios from 'axios'
 import A11yDialog from 'a11y-dialog'
-import { mapGetters } from 'vuex'
+import { mapState } from 'vuex'
 
 import Modal from '~/components/Modal/DeleteClient.vue'
 import Sidebar from '~/components/Sidebar/Clients/EditClient.vue'
@@ -135,8 +135,8 @@ export default {
   },
 
   computed: {
-    ...mapGetters({
-      openSidebar: 'getApplicationSidebar'
+    ...mapState({
+      openSidebar: 'applicatonSidebar'
     }),
 
     fullName: function () {

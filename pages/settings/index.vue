@@ -81,8 +81,8 @@ export default {
   },
 
   mounted: function () {
-    const el = document.getElementById('deleteUser')
-    A11yDialog(el)
+    // const el = document.getElementById('deleteUser')
+    // A11yDialog(el)
   },
 
   data () {

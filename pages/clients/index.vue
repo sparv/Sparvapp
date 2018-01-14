@@ -18,7 +18,7 @@
 
 <script>
 import axios from 'axios'
-import { mapGetters } from 'vuex'
+import { mapState } from 'vuex'
 
 import Sidebar from '~/components/Sidebar/Clients/AddClient.vue'
 import TableFlowCellBasic from '~/components/Table/TableFlowCellBasic.vue'
@@ -33,16 +33,7 @@ export default {
   },
 
   asyncData ({ store }) {
-    return axios({
-      url: `http://localhost:4040/customers`,
-      method: `GET`,
-      headers: {
-        'Authorization': `Bearer ${store.state.authToken}`
-      }
-    })
-      .then((res) => {
-        return { clients: res.data.customer_list }
-      })
+    store.dispatch('getAllClients')
   },
 
   mounted: function () {
@@ -52,15 +43,15 @@ export default {
   },
 
   computed: {
-    ...mapGetters({
-      openSidebar: 'getApplicationSidebar'
+    ...mapState({
+      openSidebar: 'applicatonSidebar',
+      clients: 'clients'
     })
   },
 
   data () {
     return {
-      isSendingRequest: false,
-      clients: []
+      isSendingRequest: false
     }
   },
 
@@ -79,24 +70,15 @@ export default {
         },
         data: customer
       })
-        .then(response => {
-          axios({
-            url: `http://localhost:4040/customers`,
-            method: `GET`,
-            headers: {
-              'Authorization': `Bearer ${this.$store.state.authToken}`
-            }
-          })
-            .then((res) => {
-              this.clients = res.data.customer_list
-            })
-          this.$store.commit('setApplicationSidebar', false)
-          this.isSendingRequest = false
-        })
-        .catch(error => {
-          console.log(error)
-          this.isSendingRequest = false
-        })
+      .then(response => {
+        this.$store.dispatch('getAllClients')
+        this.$store.commit('setApplicationSidebar', false)
+        this.isSendingRequest = false
+      })
+      .catch(error => {
+        console.log(error)
+        this.isSendingRequest = false
+      })
     }
   }
 }

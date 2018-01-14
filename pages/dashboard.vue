@@ -3,15 +3,15 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapState } from 'vuex'
 
 export default {
   layout: 'application',
   middleware: ['check-auth', 'authenticated'],
 
   computed: {
-    ...mapGetters({
-      token: 'getAuthToken'
+    ...mapState({
+      token: 'authToken'
     })
   },
 

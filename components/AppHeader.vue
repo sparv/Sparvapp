@@ -53,7 +53,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapState } from 'vuex'
 import { unsetToken } from '~/utils/auth.js'
 
 export default {
@@ -65,10 +65,10 @@ export default {
   },
 
   computed: {
-    ...mapGetters({
-      user: 'getAuthUser',
-      leftAction: 'getMobileAppBarLeftAction',
-      rightAction: 'getMobileAppBarRightAction'
+    ...mapState({
+      user: 'authUser',
+      leftAction: 'mobileAppBarLeftAction',
+      rightAction: 'mobileAppBarRightAction'
     })
   },
 
