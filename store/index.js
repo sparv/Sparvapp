@@ -9,6 +9,8 @@ const createStore = () => {
       mobileAppBarLeftAction: false,
       mobileAppBarRightAction: false,
 
+      isSendingRequest: false,
+
       authUser: null,
       authToken: '',
 
@@ -35,48 +37,108 @@ const createStore = () => {
         state.authToken = string
       },
 
-      UPDATE_SINGLE_CLIENT (state, client) {
-        const clientIndex = state.clients.findIndex((c => c.customer_id == client.customer_id));
-        state.clients[clientIndex] = client
+      setIsSendingRequest (state, bool) {
+        state.isSendingRequest = bool
       },
 
       UPDATE_CLIENTS (state, clients) {
         state.clients = clients
+      },
+
+      ADD_NEW_CLIENT (state, client) {
+        state.clients.push(client);
+      },
+
+      DELETE_CLIENT (state, id) {
+        const clientIndex = state.clients.findIndex((c => c.customer_id == id));
+        state.clients.splice(clientIndex, 1)
       }
     },
 
     actions: {
-      getSingleClient({ commit, state }, param) {
-        axios({
-          url: `http://localhost:4040/customers/${param}`,
-          method: `GET`,
-          headers: {
-            'Authorization': `Bearer ${state.authToken}`
-          }
-        })
-        .then((response) => {
-          const client = response.data
-          commit("UPDATE_SINGLE_CLIENT", client)
-        })
-        .catch(error => {
-          console.log(error)
+      getAllClients({ commit, state }) {
+        return new Promise((resolve, reject) => {
+          axios({
+            url: `http://localhost:4040/customers`,
+            method: `GET`,
+            headers: {
+              'Authorization': `Bearer ${state.authToken}`
+            }
+          })
+          .then((response) => {
+            const clients = response.data.customer_list
+            commit("UPDATE_CLIENTS", clients)
+            resolve()
+          })
+          .catch(error => {
+            console.log(error)
+            reject()
+          })
         })
       },
 
-      getAllClients({ commit, state }) {
-        axios({
-          url: `http://localhost:4040/customers`,
-          method: `GET`,
-          headers: {
-            'Authorization': `Bearer ${state.authToken}`
-          }
+      addNewClient({ commit, state }, client) {
+        return new Promise((resolve, reject) => {
+          axios({
+            url: `http://localhost:4040/customers`,
+            method: `POST`,
+            headers: {
+              'Authorization': `Bearer ${state.authToken}`
+            },
+            data: client
+          })
+          .then((response) => {
+            resolve()
+          })
+          .catch(error => {
+            console.log(error)
+            reject()
+          })
         })
-        .then((response) => {
-          const clients = response.data.customer_list
-          commit("UPDATE_CLIENTS", clients)
+      },
+
+      editClient({ commit, dispatch, state }, payload) {
+        return new Promise((resolve, reject) => {
+          axios({
+            url: `http://localhost:4040/customers/${payload.customer_id}`,
+            method: `PUT`,
+            headers: {
+              'Authorization': `Bearer ${state.authToken}`
+            },
+            data: payload.editedClient
+          })
+          .then((response) => {
+            console.log(response);
+            dispatch('getSingleClient', payload.customer_id)
+            resolve()
+          })
+          .catch(error => {
+            console.log(error)
+            reject()
+          })
         })
-        .catch(error => {
-          console.log(error)
+      },
+
+      deleteClient({ commit, state }, payload) {
+        return new Promise((resolve, reject) => {
+          axios({
+            url: `http://localhost:4040/customers/${payload.customer_id}`,
+            method: `DELETE`,
+            headers: {
+              'Authorization': `Bearer ${state.authToken}`
+            },
+            data: {
+              surname: payload.surname
+            }
+          })
+          .then(() => {
+            commit("DELETE_CLIENT", payload.customer_id)
+            resolve()
+          })
+          .catch(error => {
+            console.log(error)
+            reject()
+          })
         })
       }
     }

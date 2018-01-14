@@ -31,6 +31,7 @@
 
 <script>
 import axios from 'axios'
+import { mapState } from 'vuex'
 
 import FormError from '~/components/Form/FormError.vue'
 import FormSuccess from '~/components/Form/FormSuccess.vue'
@@ -43,9 +44,14 @@ export default {
     LoadingButton
   },
 
+  computed: {
+    ...mapState({
+      isSendingRequest: 'isSendingRequest'
+    })
+  },
+
   data: function () {
     return {
-      isSendingRequest: false,
       formSuccess: false,
       formSuccessMessage: '',
       formError: false,
@@ -59,7 +65,7 @@ export default {
     submitForm: function () {
       this.formSuccess = false
       this.formError = false
-      this.isSendingRequest = true
+      this.$store.commit('setIsSendingRequest', true)
 
       axios({
         url: `http://localhost:4040/users`,
@@ -77,13 +83,13 @@ export default {
         .then(response => {
           this.formSuccess = true
           this.formSuccessMessage = response.data.message
-          this.isSendingRequest = false
+          this.$store.commit('setIsSendingRequest', false)
           console.log(response)
         })
         .catch(error => {
           this.formError = true
           this.formErrorMessage = error.response.statusText
-          this.isSendingRequest = false
+          this.$store.commit('setIsSendingRequest', false)
           console.log(error.response)
         })
     }

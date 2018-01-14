@@ -15,7 +15,7 @@
 						<input class="c-input f-w-100" :class="{'c-input--error': errors.has('password') }" id="password" name="password" type="password" v-model="password" v-validate="'required'">
 						<span v-show="errors.has('password')" class="c-input__error-msg">{{ errors.first('password') }}</span>
 					</div>
-					<LoadingButton class="c-btn c-btn--primary f-w-100" :isSendingRequest="isLoggingIn" buttonText="Einloggen" />
+					<LoadingButton class="c-btn c-btn--primary f-w-100" :isSendingRequest="isSendingRequest" buttonText="Einloggen" />
 				</form>
 			</div>
 		</div>
@@ -24,6 +24,7 @@
 
 <script>
 import axios from 'axios'
+import { mapState } from 'vuex'
 import { setToken } from '~/utils/auth.js'
 
 import LoginHeader from '~/components/LoginHeader.vue'
@@ -39,9 +40,14 @@ export default {
     LoadingButton
   },
 
+  computed: {
+    ...mapState({
+      isSendingRequest: 'isSendingRequest',
+    })
+  },
+
   data: function () {
     return {
-      isLoggingIn: false,
       formError: false,
       formErrorMessage: '',
       email: '',
@@ -54,7 +60,7 @@ export default {
       this.$validator.validateAll()
         .then(validationState => {
           if (validationState) {
-            this.isLoggingIn = true
+            this.$store.commit('setIsSendingRequest', true)
             axios({
               url: `http://localhost:4040/login`,
               method: `POST`,
@@ -66,6 +72,7 @@ export default {
               .then(response => {
                 this.$store.commit(`setAuthUser`, response.data)
                 this.$store.commit(`setAuthToken`, response.data.token)
+                this.$store.commit('setIsSendingRequest', false)
                 setToken(response.data.token, { expires: 1 })
                 this.$router.push(`/dashboard`)
               })
@@ -75,14 +82,14 @@ export default {
 
                 this.formError = true
                 this.formErrorMessage = response.data.message
-                this.isLoggingIn = false
+                this.$store.commit('setIsSendingRequest', false)
               })
           }
         })
         .catch(error => {
           console.log(error)
           this.formError = true
-          this.isLoggingIn = false
+          this.$store.commit('setIsSendingRequest', false)
         })
     }
   }

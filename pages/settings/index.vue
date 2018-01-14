@@ -43,6 +43,7 @@
 
 <script>
 import axios from 'axios'
+import { mapState } from 'vuex'
 import A11yDialog from 'a11y-dialog'
 import { unsetToken } from '~/utils/auth.js'
 
@@ -87,9 +88,14 @@ export default {
     /* eslint-enable */
   },
 
+  computed: {
+    ...mapState({
+      isSendingRequest: 'isSendingRequest'
+    })
+  },
+
   data () {
     return {
-      isSendingRequest: false,
       formSuccess: false,
       formSuccessMessage: '',
       formError: false,
@@ -103,7 +109,7 @@ export default {
 
       this.formSuccess = false
       this.formError = false
-      this.isSendingRequest = true
+      this.$store.commit('setIsSendingRequest', true)
 
       if (event.target.forename.value !== this.forename) {
         this.forename = event.target.forename.value
@@ -134,13 +140,13 @@ export default {
           updatedData = {}
           this.formSuccess = true
           this.formSuccessMessage = response.data.message
-          this.isSendingRequest = false
+          this.$store.commit('setIsSendingRequest', false)
           console.log(response)
         })
         .catch(error => {
           this.formError = true
           this.formErrorMessage = error.response.statusText
-          this.isSendingRequest = false
+          this.$store.commit('setIsSendingRequest', false)
           console.log(error)
         })
     },

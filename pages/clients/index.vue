@@ -32,8 +32,8 @@ export default {
     TableFlowCellBasic
   },
 
-  asyncData ({ store }) {
-    store.dispatch('getAllClients')
+  fetch ({ store }) {
+    return store.dispatch('getAllClients')
   },
 
   mounted: function () {
@@ -44,15 +44,10 @@ export default {
 
   computed: {
     ...mapState({
+      isSendingRequest: 'isSendingRequest',
       openSidebar: 'applicatonSidebar',
       clients: 'clients'
     })
-  },
-
-  data () {
-    return {
-      isSendingRequest: false
-    }
   },
 
   methods: {
@@ -61,23 +56,12 @@ export default {
     },
 
     addNewCustomer: function (customer) {
-      this.isSendingRequest = true
-      axios({
-        url: `http://localhost:4040/customers`,
-        method: `POST`,
-        headers: {
-          'Authorization': `Bearer ${this.$store.state.authToken}`
-        },
-        data: customer
-      })
-      .then(response => {
+      this.$store.commit('setIsSendingRequest', true)
+      this.$store.dispatch('addNewClient', customer)
+      .then(() => {
         this.$store.dispatch('getAllClients')
         this.$store.commit('setApplicationSidebar', false)
-        this.isSendingRequest = false
-      })
-      .catch(error => {
-        console.log(error)
-        this.isSendingRequest = false
+        this.$store.commit('setIsSendingRequest', false)
       })
     }
   }
