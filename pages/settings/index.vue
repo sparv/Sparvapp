@@ -22,7 +22,7 @@
           </div>
           <div class="f-cf">
             <div class="f-w-100 f-w-auto-m f-fr-m">
-              <LoadingButton :isSendingRequest="isSendingRequest" :fullWidth="false" buttonText="Änderungen speichern" />
+              <LoadingButton class="c-btn c-btn--primary f-w-100" :isSendingRequest="isSendingRequest" buttonText="Änderungen speichern" />
             </div>
           </div>
         </form>
@@ -81,8 +81,10 @@ export default {
   },
 
   mounted: function () {
-    // const el = document.getElementById('deleteUser')
-    // A11yDialog(el)
+    /* eslint-disable */
+    const el = document.getElementById('deleteUser')
+    const dialog = new A11yDialog(el)
+    /* eslint-enable */
   },
 
   data () {

@@ -66,7 +66,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapState } from 'vuex'
 import A11yDialog from 'a11y-dialog'
 
 import AddSidebar from '~/components/Sidebar/Exercises/AddExercise.vue'
@@ -84,8 +84,8 @@ export default {
   },
 
   computed: {
-    ...mapGetters({
-      openSidebar: 'getApplicationSidebar'
+    ...mapState({
+      openSidebar: 'applicatonSidebar'
     })
   },
 

@@ -72,7 +72,7 @@
 
 <script>
 import A11yDialog from 'a11y-dialog'
-import { mapGetters } from 'vuex'
+import { mapState } from 'vuex'
 
 import Modal from '~/components/Modal/Exercises/DeleteExercise.vue'
 import Sidebar from '~/components/Sidebar/Exercises/EditExercise.vue'
@@ -99,8 +99,8 @@ export default {
   },
 
   computed: {
-    ...mapGetters({
-      openSidebar: 'getApplicationSidebar'
+    ...mapState({
+      openSidebar: 'applicatonSidebar'
     })
   },
 

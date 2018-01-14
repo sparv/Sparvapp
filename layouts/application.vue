@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapState } from 'vuex'
 
 import AppHeader from '~/components/AppHeader.vue'
 import Tabbar from '~/components/Tabbar.vue'
@@ -21,8 +21,8 @@ export default {
   },
 
   computed: {
-    ...mapGetters({
-      siteTitle: 'getApplicationTitle'
+    ...mapState({
+      siteTitle: 'siteTitle'
     })
   }
 }

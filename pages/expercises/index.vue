@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapState } from 'vuex'
 import Sidebar from '~/components/Sidebar/Exercises/AddExerciseGroup.vue'
 
 export default {
@@ -30,8 +30,8 @@ export default {
   },
 
   computed: {
-    ...mapGetters({
-      openSidebar: 'getApplicationSidebar'
+    ...mapState({
+      openSidebar: 'applicatonSidebar'
     })
   },
 

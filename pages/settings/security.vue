@@ -20,7 +20,7 @@
         </div>
         <div class="f-cf">
           <div class="f-w-100 f-w-auto-m f-fr-m">
-            <LoadingButton :isSendingRequest="isSendingRequest" :fullWidth="false" buttonText="Neues Passwort speichern" />
+            <LoadingButton class="c-btn c-btn--primary f-w-100" :isSendingRequest="isSendingRequest" buttonText="Neues Passwort speichern" />
           </div>
         </div>
       </form>
