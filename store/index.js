@@ -46,17 +46,17 @@ const createStore = () => {
       },
 
       ADD_NEW_CLIENT (state, client) {
-        state.clients.push(client);
+        state.clients.push(client)
       },
 
       DELETE_CLIENT (state, id) {
-        const clientIndex = state.clients.findIndex((c => c.customer_id == id));
+        const clientIndex = state.clients.findIndex(c => c.customer_id === id)
         state.clients.splice(clientIndex, 1)
       }
     },
 
     actions: {
-      getAllClients({ commit, state }) {
+      getAllClients ({ commit, state }) {
         return new Promise((resolve, reject) => {
           axios({
             url: `http://localhost:4040/customers`,
@@ -65,19 +65,19 @@ const createStore = () => {
               'Authorization': `Bearer ${state.authToken}`
             }
           })
-          .then((response) => {
-            const clients = response.data.customer_list
-            commit("UPDATE_CLIENTS", clients)
-            resolve()
-          })
-          .catch(error => {
-            console.log(error)
-            reject()
-          })
+            .then((response) => {
+              const clients = response.data.customer_list
+              commit('UPDATE_CLIENTS', clients)
+              resolve()
+            })
+            .catch(error => {
+              console.log(error)
+              reject(error)
+            })
         })
       },
 
-      addNewClient({ commit, state }, client) {
+      addNewClient ({ commit, state }, client) {
         return new Promise((resolve, reject) => {
           axios({
             url: `http://localhost:4040/customers`,
@@ -87,17 +87,17 @@ const createStore = () => {
             },
             data: client
           })
-          .then((response) => {
-            resolve()
-          })
-          .catch(error => {
-            console.log(error)
-            reject()
-          })
+            .then((response) => {
+              resolve()
+            })
+            .catch(error => {
+              console.log(error)
+              reject(error)
+            })
         })
       },
 
-      editClient({ commit, dispatch, state }, payload) {
+      editClient ({ commit, dispatch, state }, payload) {
         return new Promise((resolve, reject) => {
           axios({
             url: `http://localhost:4040/customers/${payload.customer_id}`,
@@ -107,19 +107,19 @@ const createStore = () => {
             },
             data: payload.editedClient
           })
-          .then((response) => {
-            console.log(response);
-            dispatch('getSingleClient', payload.customer_id)
-            resolve()
-          })
-          .catch(error => {
-            console.log(error)
-            reject()
-          })
+            .then((response) => {
+              console.log(response)
+              dispatch('getSingleClient', payload.customer_id)
+              resolve()
+            })
+            .catch(error => {
+              console.log(error)
+              reject(error)
+            })
         })
       },
 
-      deleteClient({ commit, state }, payload) {
+      deleteClient ({ commit, state }, payload) {
         return new Promise((resolve, reject) => {
           axios({
             url: `http://localhost:4040/customers/${payload.customer_id}`,
@@ -131,14 +131,14 @@ const createStore = () => {
               surname: payload.surname
             }
           })
-          .then(() => {
-            commit("DELETE_CLIENT", payload.customer_id)
-            resolve()
-          })
-          .catch(error => {
-            console.log(error)
-            reject()
-          })
+            .then(() => {
+              commit('DELETE_CLIENT', payload.customer_id)
+              resolve()
+            })
+            .catch(error => {
+              console.log(error)
+              reject(error)
+            })
         })
       }
     }

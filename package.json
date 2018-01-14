@@ -12,7 +12,10 @@
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/puresick/sparvapp.git"
-	},
+  },
+  "pre-commit": [
+    "lint"
+  ],
 	"author": "Daniel Henning",
 	"license": "UNLICENSED",
 	"bugs": {
@@ -33,6 +36,7 @@
 		"eslint-plugin-standard": "^3.0.1",
 		"jsdom": "^11.3.0",
 		"node-sass": "^4.5.3",
+		"pre-commit": "^1.2.2",
 		"sass-loader": "^6.0.6"
 	},
 	"dependencies": {

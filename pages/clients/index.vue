@@ -17,7 +17,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 import { mapState } from 'vuex'
 
 import Sidebar from '~/components/Sidebar/Clients/AddClient.vue'
@@ -58,11 +57,11 @@ export default {
     addNewCustomer: function (customer) {
       this.$store.commit('setIsSendingRequest', true)
       this.$store.dispatch('addNewClient', customer)
-      .then(() => {
-        this.$store.dispatch('getAllClients')
-        this.$store.commit('setApplicationSidebar', false)
-        this.$store.commit('setIsSendingRequest', false)
-      })
+        .then(() => {
+          this.$store.dispatch('getAllClients')
+          this.$store.commit('setApplicationSidebar', false)
+          this.$store.commit('setIsSendingRequest', false)
+        })
     }
   }
 }
