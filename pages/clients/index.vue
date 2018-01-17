@@ -43,9 +43,9 @@ export default {
 
   computed: {
     ...mapState({
-      isSendingRequest: 'isSendingRequest',
-      openSidebar: 'applicatonSidebar',
-      clients: 'clients'
+      isSendingRequest: state => state.settings.isSendingRequest,
+      openSidebar: state => state.settings.applicatonSidebar,
+      clients: state => state.clients
     })
   },
 

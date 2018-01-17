@@ -4,41 +4,45 @@ import Vuex from 'vuex'
 const createStore = () => {
   return new Vuex.Store({
     state: {
-      siteTitle: '',
-      applicatonSidebar: false,
-      mobileAppBarLeftAction: false,
-      mobileAppBarRightAction: false,
-
-      isSendingRequest: false,
-
-      authUser: null,
-      authToken: '',
-
+      metadata: {
+        siteTitle: ''
+      },
+      settings: {
+        applicatonSidebar: false,
+        mobileAppBarLeftAction: false,
+        mobileAppBarRightAction: false,
+        isSendingRequest: false
+      },
+      user: {
+        authUser: null,
+        authToken: ''
+      },
       clients: []
     },
 
     mutations: {
       setApplicationTitle (state, string) {
-        state.siteTitle = string
-      },
-      setApplicationSidebar (state, bool) {
-        state.applicatonSidebar = bool
-      },
-      setMobileAppBarLeftAction (state, bool) {
-        state.mobileAppBarLeftAction = bool
-      },
-      setMobileAppBarRightAction (state, bool) {
-        state.mobileAppBarRightAction = bool
-      },
-      setAuthUser (state, user) {
-        state.authUser = user
-      },
-      setAuthToken (state, string) {
-        state.authToken = string
+        state.metadata.siteTitle = string
       },
 
+      setApplicationSidebar (state, bool) {
+        state.settings.applicatonSidebar = bool
+      },
+      setMobileAppBarLeftAction (state, bool) {
+        state.settings.mobileAppBarLeftAction = bool
+      },
+      setMobileAppBarRightAction (state, bool) {
+        state.settings.mobileAppBarRightAction = bool
+      },
       setIsSendingRequest (state, bool) {
-        state.isSendingRequest = bool
+        state.settings.isSendingRequest = bool
+      },
+
+      setAuthUser (state, user) {
+        state.user.authUser = user
+      },
+      setAuthToken (state, string) {
+        state.user.authToken = string
       },
 
       UPDATE_CLIENTS (state, clients) {
@@ -62,7 +66,7 @@ const createStore = () => {
             url: `http://localhost:4040/customers`,
             method: `GET`,
             headers: {
-              'Authorization': `Bearer ${state.authToken}`
+              'Authorization': `Bearer ${state.user.authToken}`
             }
           })
             .then((response) => {
@@ -83,7 +87,7 @@ const createStore = () => {
             url: `http://localhost:4040/customers`,
             method: `POST`,
             headers: {
-              'Authorization': `Bearer ${state.authToken}`
+              'Authorization': `Bearer ${state.user.authToken}`
             },
             data: client
           })
@@ -103,7 +107,7 @@ const createStore = () => {
             url: `http://localhost:4040/customers/${payload.customer_id}`,
             method: `PUT`,
             headers: {
-              'Authorization': `Bearer ${state.authToken}`
+              'Authorization': `Bearer ${state.user.authToken}`
             },
             data: payload.editedClient
           })
@@ -125,7 +129,7 @@ const createStore = () => {
             url: `http://localhost:4040/customers/${payload.customer_id}`,
             method: `DELETE`,
             headers: {
-              'Authorization': `Bearer ${state.authToken}`
+              'Authorization': `Bearer ${state.user.authToken}`
             },
             data: {
               surname: payload.surname

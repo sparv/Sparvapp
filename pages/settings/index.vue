@@ -65,7 +65,7 @@ export default {
       url: `http://localhost:4040/users`,
       method: `GET`,
       headers: {
-        'Authorization': `Bearer ${store.state.authToken}`
+        'Authorization': `Bearer ${store.state.user.authToken}`
       }
     })
       .then((res) => {
@@ -90,7 +90,7 @@ export default {
 
   computed: {
     ...mapState({
-      isSendingRequest: 'isSendingRequest'
+      isSendingRequest: state => state.settings.isSendingRequest
     })
   },
 
@@ -130,7 +130,7 @@ export default {
         url: `http://localhost:4040/users`,
         method: `PUT`,
         headers: {
-          'Authorization': `Bearer ${this.$store.state.authToken}`
+          'Authorization': `Bearer ${this.$store.state.user.authToken}`
         },
         data: {
           meta: updatedData
@@ -156,7 +156,7 @@ export default {
         url: 'http://localhost:4040/users',
         method: `DELETE`,
         headers: {
-          'Authorization': `Bearer ${this.$store.state.authToken}`
+          'Authorization': `Bearer ${this.$store.state.user.authToken}`
         },
         data: {
           password: password

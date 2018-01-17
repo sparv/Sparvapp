@@ -22,7 +22,7 @@ export default {
 
   computed: {
     ...mapState({
-      siteTitle: 'siteTitle'
+      siteTitle: state => state.metadata.siteTitle
     })
   }
 }

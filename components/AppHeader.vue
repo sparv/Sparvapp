@@ -66,9 +66,9 @@ export default {
 
   computed: {
     ...mapState({
-      user: 'authUser',
-      leftAction: 'mobileAppBarLeftAction',
-      rightAction: 'mobileAppBarRightAction'
+      user: state => state.user.authUser,
+      leftAction: state => state.settings.leftAction,
+      rightAction: state => state.settings.rightAction
     })
   },
 

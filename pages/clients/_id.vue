@@ -115,7 +115,7 @@ export default {
       url: `http://localhost:4040/customers/${params.id}`,
       method: `GET`,
       headers: {
-        'Authorization': `Bearer ${store.state.authToken}`
+        'Authorization': `Bearer ${store.state.user.authToken}`
       }
     })
       .then((res) => {
@@ -136,7 +136,7 @@ export default {
 
   computed: {
     ...mapState({
-      openSidebar: 'applicatonSidebar'
+      openSidebar: state => state.settings.applicatonSidebar
     }),
 
     fullName: function () {
@@ -182,7 +182,7 @@ export default {
         url: `http://localhost:4040/customers/${this.customer_id}`,
         method: `PUT`,
         headers: {
-          'Authorization': `Bearer ${this.$store.state.authToken}`
+          'Authorization': `Bearer ${this.$store.state.user.authToken}`
         },
         data: {
           forename: editedUserData.forename,
@@ -209,7 +209,7 @@ export default {
         url: `http://localhost:4040/customers/${this.customer_id}`,
         method: `DELETE`,
         headers: {
-          'Authorization': `Bearer ${this.$store.state.authToken}`
+          'Authorization': `Bearer ${this.$store.state.user.authToken}`
         },
         data: {
           surname: this.surname

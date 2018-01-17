@@ -100,7 +100,7 @@ export default {
 
   computed: {
     ...mapState({
-      openSidebar: 'applicatonSidebar'
+      openSidebar: state => state.settings.applicatonSidebar
     })
   },
 

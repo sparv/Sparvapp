@@ -42,7 +42,7 @@ export default {
 
   computed: {
     ...mapState({
-      isSendingRequest: 'isSendingRequest'
+      isSendingRequest: state => state.settings.isSendingRequest
     })
   },
 
