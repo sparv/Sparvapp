@@ -66,7 +66,6 @@ export default {
 
   computed: {
     ...mapState({
-      user: state => state.user.authUser,
       leftAction: state => state.settings.leftAction,
       rightAction: state => state.settings.rightAction
     })
@@ -85,7 +84,7 @@ export default {
 
     logout: function (event) {
       this.$store.commit(`setAuthUser`, null)
-      this.$store.commit(`setAuthToken`, '')
+      this.$store.commit(`setUserAuthToken`, '')
       unsetToken()
       this.$router.push(`/`)
     }

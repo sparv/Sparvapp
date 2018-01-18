@@ -10,15 +10,15 @@
         <form @submit.prevent="submitForm">
           <div class="f-mb6 f-mb7-m">
             <label class="c-label f-db f-mb3" for="forename">Vorname</label>
-            <input class="c-input f-w-100" id="forename" :value="forename" name="forename" type="text">
+            <input class="c-input f-w-100" id="forename" v-model="user.forename" name="forename" type="text">
           </div>
           <div class="f-mb6 f-mb7-m">
             <label class="c-label f-db f-mb3" for="surname">Nachname</label>
-            <input class="c-input f-w-100" id="surname" :value="surname" name="surname" type="text">
+            <input class="c-input f-w-100" id="surname" v-model="user.surname" name="surname" type="text">
           </div>
           <div class="f-mb6 f-mb7-m">
             <label class="c-label f-db f-mb3" for="email">E-Mail-Adresse</label>
-            <input class="c-input f-w-100" id="email" :value="email" name="email" type="email">
+            <input class="c-input f-w-100" id="email" v-model="user.email" name="email" type="email">
           </div>
           <div class="f-cf">
             <div class="f-w-100 f-w-auto-m f-fr-m">
@@ -60,25 +60,8 @@ export default {
     LoadingButton
   },
 
-  asyncData ({ store }) {
-    return axios({
-      url: `http://localhost:4040/users`,
-      method: `GET`,
-      headers: {
-        'Authorization': `Bearer ${store.state.user.authToken}`
-      }
-    })
-      .then((res) => {
-        const forename = res.data.forename !== null ? res.data.forename : ''
-        const surname = res.data.surname !== null ? res.data.surname : ''
-        const email = res.data.email !== null ? res.data.email : ''
-
-        return {
-          forename: forename,
-          surname: surname,
-          email: email
-        }
-      })
+  fetch ({ store }) {
+    return store.dispatch('getAllUserData')
   },
 
   mounted: function () {
@@ -90,6 +73,7 @@ export default {
 
   computed: {
     ...mapState({
+      user: state => state.user,
       isSendingRequest: state => state.settings.isSendingRequest
     })
   },
@@ -105,26 +89,9 @@ export default {
 
   methods: {
     submitForm: function (event) {
-      var updatedData = {}
-
       this.formSuccess = false
       this.formError = false
-      this.$store.commit('setIsSendingRequest', true)
-
-      if (event.target.forename.value !== this.forename) {
-        this.forename = event.target.forename.value
-        updatedData.forename = event.target.forename.value
-      }
-
-      if (event.target.surname.value !== this.surname) {
-        this.surname = event.target.surname.value
-        updatedData.surname = event.target.surname.value
-      }
-
-      if (event.target.email.value !== this.email) {
-        this.email = event.target.email.value
-        updatedData.email = event.target.email.value
-      }
+      this.$store.commit('SET_SENDING_REQUEST', true)
 
       axios({
         url: `http://localhost:4040/users`,
@@ -133,20 +100,23 @@ export default {
           'Authorization': `Bearer ${this.$store.state.user.authToken}`
         },
         data: {
-          meta: updatedData
+          meta: {
+            forename: this.forename,
+            surname: this.surname,
+            email: this.email
+          }
         }
       })
         .then(response => {
-          updatedData = {}
           this.formSuccess = true
           this.formSuccessMessage = response.data.message
-          this.$store.commit('setIsSendingRequest', false)
+          this.$store.commit('SET_SENDING_REQUEST', false)
           console.log(response)
         })
         .catch(error => {
           this.formError = true
           this.formErrorMessage = error.response.statusText
-          this.$store.commit('setIsSendingRequest', false)
+          this.$store.commit('SET_SENDING_REQUEST', false)
           console.log(error)
         })
     },
@@ -164,8 +134,7 @@ export default {
       })
         .then(response => {
           console.log(response)
-          this.$store.commit(`setAuthUser`, null)
-          this.$store.commit(`setAuthToken`, '')
+          this.$store.commit(`SET_USER_AUTH_TOKEN`, '')
           unsetToken()
           this.$router.push(`/`)
         })

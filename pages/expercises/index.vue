@@ -36,9 +36,9 @@ export default {
   },
 
   mounted: function () {
-    this.$store.commit('setApplicationTitle', 'Übungen')
-    this.$store.commit('setMobileAppBarLeftAction', false)
-    this.$store.commit('setMobileAppBarRightAction', true)
+    this.$store.commit('SET_APPLICATION_TITLE', 'Übungen')
+    this.$store.commit('SET_MOBILE_APPBAR_LEFT_ACTION', false)
+    this.$store.commit('SET_MOBILE_APPBAR_RIGHT_ACTION', true)
   },
 
   data () {
@@ -91,7 +91,7 @@ export default {
 
   methods: {
     showSidebar: function () {
-      this.$store.commit('setApplicationSidebar', true)
+      this.$store.commit('SET_APPLICATION_SIDEBAR', true)
     }
   }
 }

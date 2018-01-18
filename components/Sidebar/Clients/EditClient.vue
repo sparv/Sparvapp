@@ -95,11 +95,11 @@ export default {
       }
 
       this.$emit('submitEditCustomer', editedCustomer)
-      this.$store.commit('setApplicationSidebar', false)
+      this.$store.commit('SET_APPLICATION_SIDEBAR', false)
     },
 
     hideSidebar: function () {
-      this.$store.commit('setApplicationSidebar', false)
+      this.$store.commit('SET_APPLICATION_SIDEBAR', false)
     }
   }
 }

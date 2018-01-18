@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 
 import Sidebar from '~/components/Sidebar/Clients/AddClient.vue'
 import TableFlowCellBasic from '~/components/Table/TableFlowCellBasic.vue'
@@ -36,31 +36,37 @@ export default {
   },
 
   mounted: function () {
-    this.$store.commit('setApplicationTitle', 'Kunden')
-    this.$store.commit('setMobileAppBarLeftAction', false)
-    this.$store.commit('setMobileAppBarRightAction', true)
+    this.$store.commit('SET_APPLICATION_TITLE', 'Kunden')
+    this.$store.commit('SET_MOBILE_APPBAR_LEFT_ACTION', false)
+    this.$store.commit('SET_MOBILE_APPBAR_RIGHT_ACTION', true)
   },
 
   computed: {
     ...mapState({
       isSendingRequest: state => state.settings.isSendingRequest,
-      openSidebar: state => state.settings.applicatonSidebar,
-      clients: state => state.clients
+      openSidebar: state => state.settings.applicatonSidebar
+    }),
+
+    ...mapGetters({
+      clients: 'allClients'
     })
   },
 
   methods: {
     showSidebar: function () {
-      this.$store.commit('setApplicationSidebar', true)
+      this.$store.commit('SET_APPLICATION_SIDEBAR', true)
     },
 
     addNewCustomer: function (customer) {
-      this.$store.commit('setIsSendingRequest', true)
+      this.$store.commit('SET_SENDING_REQUEST', true)
       this.$store.dispatch('addNewClient', customer)
         .then(() => {
           this.$store.dispatch('getAllClients')
-          this.$store.commit('setApplicationSidebar', false)
-          this.$store.commit('setIsSendingRequest', false)
+          this.$store.commit('SET_APPLICATION_SIDEBAR', false)
+          this.$store.commit('SET_SENDING_REQUEST', false)
+        })
+        .catch(error => {
+          console.log(error.message)
         })
     }
   }

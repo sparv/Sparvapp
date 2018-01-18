@@ -60,7 +60,7 @@ export default {
       this.$validator.validateAll()
         .then(validationState => {
           if (validationState) {
-            this.$store.commit('setIsSendingRequest', true)
+            this.$store.commit('SET_SENDING_REQUEST', true)
             axios({
               url: `http://localhost:4040/login`,
               method: `POST`,
@@ -70,9 +70,13 @@ export default {
               }
             })
               .then(response => {
-                this.$store.commit(`setAuthUser`, response.data)
-                this.$store.commit(`setAuthToken`, response.data.token)
-                this.$store.commit('setIsSendingRequest', false)
+                console.log(response.data)
+                this.$store.commit(`SET_USER_AUTH_TOKEN`, response.data.token)
+                this.$store.commit(`SET_USER_RELATION_ID`, response.data.relation_id)
+                this.$store.commit(`SET_USER_FORENAME`, response.data.forname)
+                this.$store.commit(`SET_USER_SURNAME`, response.data.surname)
+                this.$store.commit(`SET_USER_EMAIL`, response.data.email)
+                this.$store.commit('SET_SENDING_REQUEST', false)
                 setToken(response.data.token, { expires: 1 })
                 this.$router.push(`/dashboard`)
               })
@@ -82,14 +86,14 @@ export default {
 
                 this.formError = true
                 this.formErrorMessage = response.data.message
-                this.$store.commit('setIsSendingRequest', false)
+                this.$store.commit('SET_SENDING_REQUEST', false)
               })
           }
         })
         .catch(error => {
           console.log(error)
           this.formError = true
-          this.$store.commit('setIsSendingRequest', false)
+          this.$store.commit('SET_SENDING_REQUEST', false)
         })
     }
   }

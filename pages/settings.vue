@@ -33,9 +33,9 @@ export default {
   middleware: ['check-auth', 'authenticated'],
 
   mounted: function () {
-    this.$store.commit('setApplicationTitle', 'Einstellungen')
-    this.$store.commit('setMobileAppBarLeftAction', false)
-    this.$store.commit('setMobileAppBarRightAction', false)
+    this.$store.commit('SET_APPLICATION_TITLE', 'Einstellungen')
+    this.$store.commit('SET_MOBILE_APPBAR_LEFT_ACTION', false)
+    this.$store.commit('SET_MOBILE_APPBAR_RIGHT_ACTION', false)
   },
 
   computed: {

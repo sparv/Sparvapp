@@ -92,10 +92,9 @@ export default {
     const dialog = new A11yDialog(el)
     /* eslint-enable */
 
-    this.$store.commit('setApplicationTitle', 'Kunden')
-
-    this.$store.commit('setMobileAppBarLeftAction', false)
-    this.$store.commit('setMobileAppBarRightAction', true)
+    this.$store.commit('SET_APPLICATION_TITLE', 'Kunden')
+    this.$store.commit('SET_MOBILE_APPBAR_LEFT_ACTION', false)
+    this.$store.commit('SET_MOBILE_APPBAR_RIGHT_ACTION', true)
   },
 
   computed: {
@@ -114,7 +113,7 @@ export default {
   methods: {
     showSidebar: function () {
       this.showProfileSubmenu = false
-      this.$store.commit('setApplicationSidebar', true)
+      this.$store.commit('SET_APPLICATION_SIDEBAR', true)
     }
   }
 }

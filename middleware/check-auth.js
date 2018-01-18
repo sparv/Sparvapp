@@ -6,6 +6,6 @@ export default function ({ isServer, store, req }) {
 
   if (isServer) {
     const loggedUserToken = getUserFromCookie(req)
-    store.commit(`setAuthToken`, loggedUserToken)
+    store.commit(`SET_USER_AUTH_TOKEN`, loggedUserToken)
   }
 }

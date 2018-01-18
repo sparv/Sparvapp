@@ -65,7 +65,7 @@ export default {
     submitForm: function () {
       this.formSuccess = false
       this.formError = false
-      this.$store.commit('setIsSendingRequest', true)
+      this.$store.commit('SET_SENDING_REQUEST', true)
 
       axios({
         url: `http://localhost:4040/users`,
@@ -83,13 +83,13 @@ export default {
         .then(response => {
           this.formSuccess = true
           this.formSuccessMessage = response.data.message
-          this.$store.commit('setIsSendingRequest', false)
+          this.$store.commit('SET_SENDING_REQUEST', false)
           console.log(response)
         })
         .catch(error => {
           this.formError = true
           this.formErrorMessage = error.response.statusText
-          this.$store.commit('setIsSendingRequest', false)
+          this.$store.commit('SET_SENDING_REQUEST', false)
           console.log(error.response)
         })
     }
