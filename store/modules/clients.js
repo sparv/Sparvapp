@@ -1,7 +1,8 @@
 import * as types from '../mutation-types'
 
 const state = {
-  all: []
+  all: [],
+  currentProfile: {}
 }
 
 const getters = {
@@ -14,8 +15,7 @@ const mutations = {
   },
 
   [types.SET_SINGLE_CLIENT] (state, client) {
-    let index = state.all.findIndex(c => c.customer_id === client.customer_id)
-    state.splice(index, 1, client)
+    state.currentProfile = client
   },
 
   [types.DELETE_CLIENT] (state, id) {

@@ -31,7 +31,6 @@ export const getSingleClient = ({ commit, state }, id) => {
       }
     })
       .then((response) => {
-        console.log(response)
         const client = response.data
         commit('SET_SINGLE_CLIENT', client)
         resolve()

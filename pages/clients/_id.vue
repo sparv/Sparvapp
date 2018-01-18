@@ -47,49 +47,49 @@
         <div class="o-grid__item f-w-33-m f-mb6">
           <div class="c-data-item">
             <h4 class="c-data-item__title">Vorname</h4>
-            <span class="c-data-item__text">{{forename}}</span>
+            <span class="c-data-item__text">{{client.forename}}</span>
           </div>
         </div>
         <div class="o-grid__item f-w-33-m f-mb6">
           <div class="c-data-item">
             <h4 class="c-data-item__title">Nachname</h4>
-            <span class="c-data-item__text">{{surname}}</span>
+            <span class="c-data-item__text">{{client.surname}}</span>
           </div>
         </div>
         <div class="o-grid__item f-w-33-m f-mb6">
           <div class="c-data-item">
             <h4 class="c-data-item__title">Geschlecht</h4>
-            <span class="c-data-item__text">{{gender}}</span>
+            <span class="c-data-item__text">{{client.gender}}</span>
           </div>
         </div>
         <div class="o-grid__item f-w-33-m f-mb6">
           <div class="c-data-item">
             <h4 class="c-data-item__title">Alter</h4>
-            <span class="c-data-item__text">{{age}}</span>
+            <span class="c-data-item__text">{{client.age}}</span>
           </div>
         </div>
         <div class="o-grid__item f-w-33-m f-mb6 f-mb0-m">
           <div class="c-data-item">
             <h4 class="c-data-item__title">E-Mail-Adresse</h4>
-            <span class="c-data-item__text">{{email}}</span>
+            <span class="c-data-item__text">{{client.email}}</span>
           </div>
         </div>
         <div class="o-grid__item f-w-33-m">
           <div class="c-data-item">
             <h4 class="c-data-item__title">Telefonnummer</h4>
-            <span class="c-data-item__text">{{phone}}</span>
+            <span class="c-data-item__text">{{client.phone}}</span>
           </div>
         </div>
       </div>
     </div>
     <div class="c-card f-pa6">
-      <span v-if="!notes" class="text-placeholder">Keine Notizen hinterlegt</span>
-      <div v-if="notes">
-        {{ notes }}
+      <span v-if="!client.notes" class="text-placeholder">Keine Notizen hinterlegt</span>
+      <div v-if="client.notes">
+        {{ client.notes }}
       </div>
     </div>
-    <Sidebar :sidebarState="openSidebar" :user="userData" :isSendingRequest="isSendingRequest" @submitEditCustomer="editCustomer"></Sidebar>
-    <Modal :surname="surname" @submitDeleteCustomerForm="deleteCustomer"></Modal>
+    <Sidebar :sidebarState="openSidebar" :user="client" :isSendingRequest="isSendingRequest" @submitEditCustomer="editCustomer"></Sidebar>
+    <Modal :surname="client.surname" @submitDeleteCustomerForm="deleteCustomer"></Modal>
   </section>
 </template>
 
@@ -110,17 +110,8 @@ export default {
     Sidebar
   },
 
-  asyncData ({ store, params }) {
-    return axios({
-      url: `http://localhost:4040/customers/${params.id}`,
-      method: `GET`,
-      headers: {
-        'Authorization': `Bearer ${store.state.user.authToken}`
-      }
-    })
-      .then((res) => {
-        return res.data
-      })
+  fetch ({ store, params }) {
+    return store.dispatch('getSingleClient', params.id)
   },
 
   mounted: function () {
@@ -136,37 +127,19 @@ export default {
 
   computed: {
     ...mapState({
-      openSidebar: state => state.settings.applicatonSidebar
+      isSendingRequest: state => state.settings.isSendingRequest,
+      openSidebar: state => state.settings.applicatonSidebar,
+      client: state => state.clients.currentProfile
     }),
 
     fullName: function () {
-      return this.forename + ' ' + this.surname
-    },
-
-    userData: function () {
-      return {
-        forename: this.forename,
-        surname: this.surname,
-        gender: this.gender,
-        age: this.age,
-        email: this.email,
-        phone: this.phone,
-        notes: this.notes
-      }
+      return this.client.forename + ' ' + this.client.surname
     }
   },
 
   data () {
     return {
-      isSendingRequest: false,
-      showProfileSubmenu: false,
-      forename: '',
-      surname: '',
-      gender: '',
-      age: '',
-      email: '',
-      phone: '',
-      notes: ''
+      showProfileSubmenu: false
     }
   },
 
@@ -177,9 +150,11 @@ export default {
     },
 
     editCustomer: function (editedUserData) {
-      this.isSendingRequest = true
+      const id = this.client.customer_id
+      this.$store.commit('SET_SENDING_REQUEST', true)
+
       axios({
-        url: `http://localhost:4040/customers/${this.customer_id}`,
+        url: `http://localhost:4040/customers/${id}`,
         method: `PUT`,
         headers: {
           'Authorization': `Bearer ${this.$store.state.user.authToken}`
@@ -196,31 +171,35 @@ export default {
       })
         .then(response => {
           console.log(response)
-          this.isSendingRequest = false
+          this.$store.dispatch('getSingleClient', id)
+          this.$store.commit('SET_SENDING_REQUEST', false)
         })
         .catch(error => {
           console.log(error)
-          this.isSendingRequest = false
+          this.$store.commit('SET_SENDING_REQUEST', false)
         })
     },
 
     deleteCustomer: function () {
+      this.$store.commit('SET_SENDING_REQUEST', true)
       axios({
-        url: `http://localhost:4040/customers/${this.customer_id}`,
+        url: `http://localhost:4040/customers/${this.client.customer_id}`,
         method: `DELETE`,
         headers: {
           'Authorization': `Bearer ${this.$store.state.user.authToken}`
         },
         data: {
-          surname: this.surname
+          surname: this.client.surname
         }
       })
         .then(response => {
           console.log(response)
+          this.$store.commit('SET_SENDING_REQUEST', false)
           this.$router.push(`/clients`)
         })
         .catch(error => {
           console.log(error)
+          this.$store.commit('SET_SENDING_REQUEST', false)
         })
     }
   }
