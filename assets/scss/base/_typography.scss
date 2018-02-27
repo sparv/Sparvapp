@@ -16,10 +16,17 @@ body {
   font-weight: bold;
 	line-height: 1.27;
   color: #15171a;
-  
+
   @media (min-width: $breakpoint-medium) {
     font-size: 30px;
   }
+}
+
+.caption-uc--big {
+  font-size: 14px;
+  line-height: 18px;
+  color: #727375;
+  letter-spacing: 0.72px;
 }
 
 .text-placeholder {

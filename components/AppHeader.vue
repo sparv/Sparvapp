@@ -27,6 +27,9 @@
             <nuxt-link to="/expercises">Übungen</nuxt-link>
           </li>
           <li class="f-ml8 m-app-header-nav__item">
+            <nuxt-link to="/workouts">Trainingspläne</nuxt-link>
+          </li>
+          <li class="f-ml8 m-app-header-nav__item">
             <details v-on:click="showUserSubmenu = !showUserSubmenu">
               <summary>
                 <svg class="f-db" fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
