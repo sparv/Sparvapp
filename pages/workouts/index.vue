@@ -43,20 +43,20 @@ export default {
     return {
       workouts: [{
         'id': 1,
-        'title': 'Bla',
-        'client': 'Bla'
+        'title': 'Trainingsplan Grundlage 1',
+        'client': 'Anna-Maria BrinkmannBla'
       }, {
         'id': 2,
-        'title': 'Bla',
-        'client': 'Bla'
+        'title': 'Grundlage Muskelaufbau 2',
+        'client': 'Centa Jäger'
       }, {
         'id': 3,
-        'title': 'Bla',
-        'client': 'Bla'
+        'title': 'Trainingsplan Grundlage 6',
+        'client': 'Isabella Burger'
       }, {
         'id': 4,
-        'title': 'Bla',
-        'client': 'Bla'
+        'title': 'Grundlage Muskelaufbau 3',
+        'client': 'Friedhelm Hagen'
       }]
     }
   },
