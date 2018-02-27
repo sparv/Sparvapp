@@ -12,7 +12,7 @@
       </button>
     </div>
     <div class="m-site-header__bottom" v-bind:class="{ 'm-site-header__bottom--open': mobileNavigationShow }">
-      <nuxt-link to="/login" class="c-btn c-btn--white f-mb5 f-w-100 f-mb0-m f-mr7-m f-w-auto-m">Login</nuxt-link>
+      <nuxt-link to="/" class="c-btn c-btn--white f-mb5 f-w-100 f-mb0-m f-mr7-m f-w-auto-m">Login</nuxt-link>
       <nuxt-link to="/signup" class="c-btn c-btn--white f-w-100 f-mb0-m f-w-auto-m">Registrierung</nuxt-link>
     </div>
   </header>
