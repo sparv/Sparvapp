@@ -33,7 +33,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 import { mapState } from 'vuex'
 import { setToken } from '~/utils/auth.js'
 
@@ -68,47 +67,32 @@ export default {
   },
 
   methods: {
-    submitForm: function () {
-      this.$validator
-        .validateAll()
-        .then(validationState => {
-          if (validationState) {
-            this.$store.commit('SET_SENDING_REQUEST', true)
-            axios({
-              url: `http://localhost:4040/users`,
-              method: `POST`,
-              data: {
-                forename: this.forename,
-                surname: this.surname,
-                email: this.email,
-                password: this.password
-              }
-            })
-              .then(response => {
-                this.$store.commit(`SET_USER_AUTH_TOKEN`, response.data.token)
-                this.$store.commit(`SET_USER_RELATION_ID`, response.data.relation_id)
-                this.$store.commit(`SET_USER_FORENAME`, response.data.forname)
-                this.$store.commit(`SET_USER_SURNAME`, response.data.surname)
-                this.$store.commit(`SET_USER_EMAIL`, response.data.email)
-                this.$store.commit('SET_SENDING_REQUEST', false)
-                setToken(response.data.token, { expires: 1 })
-                this.$router.push(`/dashboard`)
-              })
-              .catch(error => {
-                console.log(error)
-                const response = error.response
+    async submitForm () {
+      this.$store.commit('SET_SENDING_REQUEST', true)
 
-                this.formError = true
-                this.formErrorMessage = response.data.message
-                this.$store.commit('SET_SENDING_REQUEST', false)
-              })
-          }
+      try {
+        const data = await this.$axios.$post('/users', {
+          forename: this.forename,
+          surname: this.surname,
+          email: this.email,
+          password: this.password
         })
-        .catch(error => {
-          console.log(error)
-          this.formError = true
-          this.$store.commit('SET_SENDING_REQUEST', false)
-        })
+
+        this.$store.commit(`SET_USER_AUTH_TOKEN`, data.token)
+        this.$store.commit(`SET_USER_RELATION_ID`, data.relation_id)
+        this.$store.commit(`SET_USER_FORENAME`, data.forname)
+        this.$store.commit(`SET_USER_SURNAME`, data.surname)
+        this.$store.commit(`SET_USER_EMAIL`, data.email)
+        this.$store.commit('SET_SENDING_REQUEST', false)
+        setToken(data.token, { expires: 1 })
+        this.$router.push(`/dashboard`)
+      } catch (error) {
+        const response = error.response
+
+        this.formError = true
+        this.formErrorMessage = response.data.message
+        this.$store.commit('SET_SENDING_REQUEST', false)
+      }
     }
   }
 }
