@@ -9,5 +9,10 @@ module.exports = {
   },
   css: [ '@/assets/scss/main.scss' ],
   plugins: [ { src: '~/plugins/vee-validate', ssr: true } ],
+  modules: ['@nuxtjs/axios'],
+  axios: {
+    debug: true,
+    baseURL: 'http://localhost:4040'
+  },
   build: { vendor: ['vee-validate'] }
 }
