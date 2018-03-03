@@ -18,7 +18,7 @@
       <nav class="m-app-header-nav">
         <ul class="m-app-header-nav__list">
           <li class="m-app-header-nav__item">
-            <nuxt-link to="/dashboard">Dashboard</nuxt-link>
+            <nuxt-link to="/">Dashboard</nuxt-link>
           </li>
           <li class="f-ml8 m-app-header-nav__item">
             <nuxt-link to="/clients">Kunden</nuxt-link>

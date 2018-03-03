@@ -71,7 +71,7 @@ export default {
         this.$store.commit(`SET_USER_EMAIL`, data.email)
         this.$store.commit('SET_SENDING_REQUEST', false)
         setToken(data.token, { expires: 1 })
-        this.$router.push(`/dashboard`)
+        this.$router.push(`/`)
       } catch (error) {
         const responseError = error.response
 
