@@ -40,6 +40,7 @@
         </div>
       </div>
     </div>
+    <Sidebar :sidebarState="openSidebar" :isSendingRequest="isSendingRequest"></Sidebar>
   </section>
 </template>
 
@@ -48,12 +49,14 @@ import { mapState } from 'vuex'
 import ProfileHeadMenu from '~/components/ProfileHeadMenu.vue'
 import TableFlowCellBasic from '~/components/Table/TableFlowCellBasic.vue'
 import TableFlowCellMore from '~/components/Table/TableFlowCellMore.vue'
+import Sidebar from '~/components/Sidebar/Workouts/EditWorkout.vue'
 
 export default {
   layout: 'application',
   middleware: ['check-auth', 'authenticated'],
 
   components: {
+    Sidebar,
     ProfileHeadMenu,
     TableFlowCellMore,
     TableFlowCellBasic
@@ -112,13 +115,6 @@ export default {
         'repetitions': 12,
         'level': 'easy'
       }]
-    }
-  },
-
-  methods: {
-    showSidebar: function () {
-      this.showProfileSubmenu = false
-      this.$store.commit('SET_APPLICATION_SIDEBAR', true)
     }
   }
 }
