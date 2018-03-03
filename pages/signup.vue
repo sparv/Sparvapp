@@ -41,7 +41,7 @@ import FormError from '~/components/Form/FormError.vue'
 import LoadingButton from '~/components/Buttons/LoadingButton.vue'
 
 export default {
-  layout: 'landingpage',
+  layout: 'authPage',
 
   components: {
     FormError,
