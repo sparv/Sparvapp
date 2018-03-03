@@ -10,8 +10,8 @@
           <li class="c-single-breadcrumb__item">Grundlage Muskelaufbau 3</li>
         </ul>
       </h2>
+      <ProfileHeadMenu editLabel="Trainingsplan bearbeiten" removeLabel="Trainingsplan löschen" />
     </div>
-
     <div class="o-grid o-grid--rev">
       <div class="o-grid__item f-w-25-m">
         <aside class="f-mb6 f-mb0-m">
@@ -35,6 +35,7 @@
             <TableFlowCellBasic label="Name" :text="workout.name"></TableFlowCellBasic>
             <TableFlowCellBasic label="Gewicht" :text="workout.weight"></TableFlowCellBasic>
             <TableFlowCellBasic label="Wiederholungen" :text="workout.repetitions"></TableFlowCellBasic>
+            <TableFlowCellMore />
           </div>
         </div>
       </div>
@@ -44,13 +45,17 @@
 
 <script>
 import { mapState } from 'vuex'
+import ProfileHeadMenu from '~/components/ProfileHeadMenu.vue'
 import TableFlowCellBasic from '~/components/Table/TableFlowCellBasic.vue'
+import TableFlowCellMore from '~/components/Table/TableFlowCellMore.vue'
 
 export default {
   layout: 'application',
   middleware: ['check-auth', 'authenticated'],
 
   components: {
+    ProfileHeadMenu,
+    TableFlowCellMore,
     TableFlowCellBasic
   },
 
@@ -121,7 +126,6 @@ export default {
 
 
 <style lang="scss" scoped>
-
 .c-table-flow__item--status {
   border-left: 4px solid #000;
 
@@ -138,4 +142,15 @@ export default {
   }
 }
 
+@media (max-width: 860px) {
+  .c-table-flow__item {
+    .c-table-flow__item-data {
+      flex: auto;
+      width: 50%;
+      &:first-child {
+        width: 100%;
+      }
+    }
+  }
+}
 </style>
