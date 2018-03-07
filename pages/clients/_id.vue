@@ -10,7 +10,7 @@
           <li class="c-single-breadcrumb__item">{{fullName}}</li>
         </ul>
       </h2>
-      <ProfileHeadMenu editLabel="Kunden bearbeiten" removeLabel="Kunden löschen" />
+      <ProfileHeadMenu editLabel="Kunden bearbeiten" removeLabel="Kunden löschen" deleteModalTrigger="deleteClient" />
     </div>
     <div class="c-card f-mb6 f-mb8-m f-pa6">
       <h2 class="">Basis Informationen</h2>

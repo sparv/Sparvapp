@@ -10,7 +10,7 @@
           <li class="c-single-breadcrumb__item">Arme</li>
         </ul>
       </h2>
-      <ProfileHeadMenu editLabel="Übungsgruppe bearbeiten" removeLabel="Übungsgruppe löschen" />
+      <ProfileHeadMenu editLabel="Übungsgruppe bearbeiten" removeLabel="Übungsgruppe löschen" deleteModalTrigger="deleteExerciseGroup" />
     </div>
 
     <div class="c-table-flow__list">

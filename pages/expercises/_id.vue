@@ -14,7 +14,7 @@
           <li class="c-single-breadcrumb__item">Armbeugen Gerät</li>
         </ul>
       </h2>
-      <ProfileHeadMenu editLabel="Übung bearbeiten" removeLabel="Übung löschen" />
+      <ProfileHeadMenu editLabel="Übung bearbeiten" removeLabel="Übung löschen" deleteModalTrigger="deleteExercise" />
     </div>
 
     <div>
@@ -35,7 +35,6 @@
         </div>
       </div>
     </div>
-
     <Sidebar :sidebarState="openSidebar"></Sidebar>
     <Modal name="Armbeugen Gerät"></Modal>
   </section>

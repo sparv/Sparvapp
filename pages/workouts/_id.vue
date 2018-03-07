@@ -10,7 +10,7 @@
           <li class="c-single-breadcrumb__item">Grundlage Muskelaufbau 3</li>
         </ul>
       </h2>
-      <ProfileHeadMenu editLabel="Trainingsplan bearbeiten" removeLabel="Trainingsplan löschen" />
+      <ProfileHeadMenu editLabel="Trainingsplan bearbeiten" removeLabel="Trainingsplan löschen" deleteModalTrigger="deleteWorkout" />
     </div>
     <div class="o-grid o-grid--rev">
       <div class="o-grid__item f-w-25-m">
@@ -41,11 +41,14 @@
       </div>
     </div>
     <Sidebar :sidebarState="openSidebar" :isSendingRequest="isSendingRequest"></Sidebar>
+    <Modal title="Grundlage Muskelaufbau 3" @submitDeleteCustomerForm="deleteCustomer"></Modal>
   </section>
 </template>
 
 <script>
 import { mapState } from 'vuex'
+import A11yDialog from 'a11y-dialog'
+import Modal from '~/components/Modal/Workouts/DeleteWorkout.vue'
 import ProfileHeadMenu from '~/components/ProfileHeadMenu.vue'
 import TableFlowCellBasic from '~/components/Table/TableFlowCellBasic.vue'
 import TableFlowCellMore from '~/components/Table/TableFlowCellMore.vue'
@@ -56,6 +59,7 @@ export default {
   middleware: ['check-auth', 'authenticated'],
 
   components: {
+    Modal,
     Sidebar,
     ProfileHeadMenu,
     TableFlowCellMore,
@@ -63,6 +67,11 @@ export default {
   },
 
   mounted: function () {
+    /* eslint-disable */
+    const el = document.getElementById('deleteWorkout')
+    const dialog = new A11yDialog(el)
+     /* eslint-enable */
+
     this.$store.commit('SET_APPLICATION_TITLE', 'Trainingspläne')
     this.$store.commit('SET_MOBILE_APPBAR_LEFT_ACTION', false)
     this.$store.commit('SET_MOBILE_APPBAR_RIGHT_ACTION', true)
@@ -115,6 +124,12 @@ export default {
         'repetitions': 12,
         'level': 'easy'
       }]
+    }
+  },
+
+  methods: {
+    deleteCustomer: function () {
+      console.log('Okay...')
     }
   }
 }
