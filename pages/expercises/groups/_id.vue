@@ -10,7 +10,7 @@
           <li class="c-single-breadcrumb__item">Arme</li>
         </ul>
       </h2>
-      <ProfileHeadMenu editLabel="Übungsgruppe bearbeiten" removeLabel="Übungsgruppe löschen" deleteModalTrigger="deleteExerciseGroup" />
+      <ProfileHeadMenu editLabel="Übungsgruppe bearbeiten" removeLabel="Übungsgruppe löschen" @deletePageSourceTrigger="showModal" />
     </div>
 
     <div class="c-table-flow__list">
@@ -31,17 +31,25 @@
     </div>
     <AddSidebar v-if="showAddSidebar" :sidebarState="openSidebar"></AddSidebar>
     <EditSidebar v-if="showEditSidebar" :sidebarState="openSidebar"></EditSidebar>
-    <Modal name="Arme"></Modal>
+    <modal name="deleteExerciseGroup" height="auto">
+      <ModalContent confirmationValue="Arme"
+        title="Gruppe löschen"
+        summary="Bist Du Dir sicher, dass du diese Gruppe löschen möchtest? Das Löschen kann nicht rückgängig gemacht werden."
+        formLabel="Gib den Namen der Gruppe zur Bestätigung ein"
+        submitButtonText="Gruppe löschen"
+        @hideModal="hideModal"
+        @formSubmitted="deleteExerciseGroup"
+      />
+    </modal>
   </section>
 </template>
 
 <script>
 import { mapState } from 'vuex'
-import A11yDialog from 'a11y-dialog'
 
+import ModalContent from '~/components/Modal/DeleteMaster.vue'
 import ProfileHeadMenu from '~/components/ProfileHeadMenu.vue'
 import AddSidebar from '~/components/Sidebar/Exercises/AddExercise.vue'
-import Modal from '~/components/Modal/Exercises/deleteExerciseGroup.vue'
 import EditSidebar from '~/components/Sidebar/Exercises/EditExerciseGroup.vue'
 
 export default {
@@ -49,7 +57,7 @@ export default {
   middleware: ['check-auth', 'authenticated'],
 
   components: {
-    Modal,
+    ModalContent,
     AddSidebar,
     EditSidebar,
     ProfileHeadMenu
@@ -62,11 +70,6 @@ export default {
   },
 
   mounted: function () {
-    /* eslint-disable */
-    const el = document.getElementById('deleteExerciseGroup')
-    const dialog = new A11yDialog(el)
-    /* eslint-enable */
-
     this.$store.commit('SET_APPLICATION_TITLE', 'Kunden')
     this.$store.commit('SET_MOBILE_APPBAR_LEFT_ACTION', false)
     this.$store.commit('SET_MOBILE_APPBAR_RIGHT_ACTION', true)
@@ -86,6 +89,14 @@ export default {
   },
 
   methods: {
+    showModal: function () {
+      this.$modal.show('deleteExerciseGroup')
+    },
+
+    hideModal: function () {
+      this.$modal.hide('deleteExerciseGroup')
+    },
+
     showSidebar: function (triggerType) {
       this.$store.commit('SET_APPLICATION_SIDEBAR', true)
 
@@ -104,7 +115,9 @@ export default {
           this.showAddSidebar = false
           this.showEditSidebar = false
       }
-    }
+    },
+
+    deleteExerciseGroup: function () {}
   }
 }
 </script>

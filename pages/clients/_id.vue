@@ -10,7 +10,7 @@
           <li class="c-single-breadcrumb__item">{{fullName}}</li>
         </ul>
       </h2>
-      <ProfileHeadMenu editLabel="Kunden bearbeiten" removeLabel="Kunden löschen" deleteModalTrigger="deleteClient" @deletePageSourceTrigger="showWorkoutDeleteModal" />
+      <ProfileHeadMenu editLabel="Kunden bearbeiten" removeLabel="Kunden löschen" deleteModalTrigger="deleteClient" @deletePageSourceTrigger="showModal" />
     </div>
     <div class="c-card f-mb6 f-mb8-m f-pa6">
       <h2 class="">Basis Informationen</h2>
@@ -60,7 +60,16 @@
       </div>
     </div>
     <Sidebar :sidebarState="openSidebar" :user="client" :isSendingRequest="isSendingRequest" @submitEditCustomer="editCustomer"></Sidebar>
-    <Modal :surname="client.surname" @submitDeleteCustomerForm="deleteCustomer"></Modal>
+    <modal name="deleteClient" height="auto">
+      <ModalContent :confirmationValue="client.surname"
+        title="Kunde löschen"
+        summary="Bist Du Dir sicher, dass du diesen Kunden löschen möchtest? Das Löschen kann nicht rückgängig gemacht werden."
+        formLabel="Gib den Titel des Trainingsplans zur Bestätigung ein"
+        submitButtonText="Kunde löschen"
+        @hideModal="hideModal"
+        @formSubmitted="deleteCustomer"
+      />
+    </modal>
   </section>
 </template>
 
@@ -68,7 +77,7 @@
 import axios from 'axios'
 import { mapState } from 'vuex'
 
-import Modal from '~/components/Modal/DeleteClient.vue'
+import ModalContent from '~/components/Modal/DeleteMaster.vue'
 import ProfileHeadMenu from '~/components/ProfileHeadMenu.vue'
 import Sidebar from '~/components/Sidebar/Clients/EditClient.vue'
 
@@ -77,7 +86,7 @@ export default {
   middleware: ['check-auth', 'authenticated'],
 
   components: {
-    Modal,
+    ModalContent,
     Sidebar,
     ProfileHeadMenu
   },
@@ -105,8 +114,12 @@ export default {
   },
 
   methods: {
-    showWorkoutDeleteModal: function () {
+    showModal: function () {
       this.$modal.show('deleteClient')
+    },
+
+    hideModal: function () {
+      this.$modal.hide('deleteClient')
     },
 
     editCustomer: function (editedUserData) {

@@ -34,7 +34,7 @@
       </div>
       <div class="c-card__content f-pv7 f-ph6">
         <p>Möchten Sie wirklich Ihren Account endgültig löschen?</p>
-        <button class="c-btn c-btn--error" data-a11y-dialog-show="deleteUser">Account endgültig löschen</button>
+        <button class="c-btn c-btn--error" @click="showDeleteModal">Account endgültig löschen</button>
       </div>
     </div>
     <Modal @submitDeleteUserForm="deleteUser"></Modal>
@@ -44,7 +44,6 @@
 <script>
 import axios from 'axios'
 import { mapState } from 'vuex'
-import A11yDialog from 'a11y-dialog'
 import { unsetToken } from '~/utils/auth.js'
 
 import Modal from '~/components/Modal/DeleteUser.vue'
@@ -64,13 +63,6 @@ export default {
     return store.dispatch('getAllUserData')
   },
 
-  mounted: function () {
-    /* eslint-disable */
-    const el = document.getElementById('deleteUser')
-    const dialog = new A11yDialog(el)
-    /* eslint-enable */
-  },
-
   computed: {
     ...mapState({
       user: state => state.user,
@@ -88,6 +80,10 @@ export default {
   },
 
   methods: {
+    showDeleteModal: function () {
+      this.$modal.show('deleteUser')
+    },
+
     submitForm: function (event) {
       this.formSuccess = false
       this.formError = false

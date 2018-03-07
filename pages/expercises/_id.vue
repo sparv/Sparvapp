@@ -14,7 +14,7 @@
           <li class="c-single-breadcrumb__item">Armbeugen Gerät</li>
         </ul>
       </h2>
-      <ProfileHeadMenu editLabel="Übung bearbeiten" removeLabel="Übung löschen" deleteModalTrigger="deleteExercise" />
+      <ProfileHeadMenu editLabel="Übung bearbeiten" removeLabel="Übung löschen" @deletePageSourceTrigger="showModal" />
     </div>
 
     <div>
@@ -36,16 +36,24 @@
       </div>
     </div>
     <Sidebar :sidebarState="openSidebar"></Sidebar>
-    <Modal name="Armbeugen Gerät"></Modal>
+    <modal name="deleteExercise" height="auto">
+      <ModalContent confirmationValue="Armbeugen Gerät"
+        title="Übung löschen"
+        summary="Bist Du Dir sicher, dass du diese Übung löschen möchtest? Das Löschen kann nicht rückgängig gemacht werden."
+        formLabel="Gib den Namen der Übung zur Bestätigung ein"
+        submitButtonText="Übung löschen"
+        @hideModal="hideModal"
+        @formSubmitted="deleteExercise"
+      />
+    </modal>
   </section>
 </template>
 
 <script>
-import A11yDialog from 'a11y-dialog'
 import { mapState } from 'vuex'
 
+import ModalContent from '~/components/Modal/DeleteMaster.vue'
 import ProfileHeadMenu from '~/components/ProfileHeadMenu.vue'
-import Modal from '~/components/Modal/Exercises/DeleteExercise.vue'
 import Sidebar from '~/components/Sidebar/Exercises/EditExercise.vue'
 
 export default {
@@ -53,17 +61,12 @@ export default {
   middleware: ['check-auth', 'authenticated'],
 
   components: {
-    Modal,
+    ModalContent,
     Sidebar,
     ProfileHeadMenu
   },
 
   mounted: function () {
-    /* eslint-disable */
-    const el = document.getElementById('deleteExercise')
-    const dialog = new A11yDialog(el)
-    /* eslint-enable */
-
     this.$store.commit('SET_APPLICATION_TITLE', 'Kunden')
     this.$store.commit('SET_MOBILE_APPBAR_LEFT_ACTION', false)
     this.$store.commit('SET_MOBILE_APPBAR_RIGHT_ACTION', true)
@@ -83,10 +86,20 @@ export default {
   },
 
   methods: {
+    showModal: function () {
+      this.$modal.show('deleteExercise')
+    },
+
+    hideModal: function () {
+      this.$modal.hide('deleteExercise')
+    },
+
     showSidebar: function () {
       this.showProfileSubmenu = false
       this.$store.commit('SET_APPLICATION_SIDEBAR', true)
-    }
+    },
+
+    deleteExercise: function () {}
   }
 }
 </script>
