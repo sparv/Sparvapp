@@ -18,7 +18,7 @@
           </button>
         </li>
         <li class="c-submenu__item c-submenu__item--important">
-          <button :data-a11y-dialog-show="deleteModalTrigger" v-on:click="showProfileSubmenu = !showProfileSubmenu">
+          <button @click="showDelete">
             <svg class="f-mr5" fill="#F03D5D" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
               <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/>
               <path d="M0 0h24v24H0z" fill="none"/>
@@ -41,10 +41,6 @@ export default {
     removeLabel: {
       type: String,
       required: true
-    },
-    deleteModalTrigger: {
-      type: String,
-      required: true
     }
   },
 
@@ -56,8 +52,13 @@ export default {
 
   methods: {
     showSidebar: function () {
-      this.showProfileSubmenu = false
+      this.showProfileSubmenu = !this.showProfileSubmenu
       this.$store.commit('SET_APPLICATION_SIDEBAR', true)
+    },
+
+    showDelete: function () {
+      this.showProfileSubmenu = !this.showProfileSubmenu
+      this.$emit('deletePageSourceTrigger')
     }
   }
 }

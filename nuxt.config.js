@@ -8,7 +8,7 @@ module.exports = {
     ]
   },
   css: [ '@/assets/scss/main.scss' ],
-  plugins: [ { src: '~/plugins/vee-validate', ssr: true } ],
+  plugins: [ { src: '~/plugins/vee-validate', ssr: true }, '~plugins/vue-js-modal' ],
   modules: ['@nuxtjs/axios'],
   axios: {
     debug: true,

@@ -10,7 +10,7 @@
           <li class="c-single-breadcrumb__item">Grundlage Muskelaufbau 3</li>
         </ul>
       </h2>
-      <ProfileHeadMenu editLabel="Trainingsplan bearbeiten" removeLabel="Trainingsplan löschen" deleteModalTrigger="deleteWorkout" />
+      <ProfileHeadMenu editLabel="Trainingsplan bearbeiten" removeLabel="Trainingsplan löschen" @deletePageSourceTrigger="showWorkoutDeleteModal" />
     </div>
     <div class="o-grid o-grid--rev">
       <div class="o-grid__item f-w-25-m">
@@ -23,9 +23,12 @@
             <h3 class="f-mb3 caption-uc--big">Titel</h3>
             <span>Grundlage Muskelaufbau 3</span>
           </div>
-          <div>
+          <div class="f-mb6">
             <h3 class="f-mb3 caption-uc--big">Beschreibung</h3>
             <p class="f-mb0">Attending a trade show can be a very effective method of promoting your company and its products. And one of the most effective ways to optimize your trade show display and increase traffic to your booth is through the use of banner stands.</p>
+          </div>
+          <div>
+            <button class="c-btn c-btn--primary f-w-100">Plan downloaden</button>
           </div>
         </aside>
       </div>
@@ -35,20 +38,23 @@
             <TableFlowCellBasic label="Name" :text="workout.name"></TableFlowCellBasic>
             <TableFlowCellBasic label="Gewicht" :text="workout.weight"></TableFlowCellBasic>
             <TableFlowCellBasic label="Wiederholungen" :text="workout.repetitions"></TableFlowCellBasic>
-            <TableFlowCellMore />
+            <TableFlowCellMore @editTrigger="showExerciseEditModal" @deleteTrigger="showExerciseDeleteModal" />
           </div>
         </div>
       </div>
     </div>
     <Sidebar :sidebarState="openSidebar" :isSendingRequest="isSendingRequest"></Sidebar>
-    <Modal title="Grundlage Muskelaufbau 3" @submitDeleteCustomerForm="deleteCustomer"></Modal>
+    <modals-container />
   </section>
 </template>
 
 <script>
 import { mapState } from 'vuex'
-import A11yDialog from 'a11y-dialog'
-import Modal from '~/components/Modal/Workouts/DeleteWorkout.vue'
+
+import WorkoutDeleteModal from '~/components/Modal/Workouts/DeleteWorkout.vue'
+import ExerciseDeleteModal from '~/components/Modal/Workouts/ExerciseDelete.vue'
+import ExerciseEditModal from '~/components/Modal/Workouts/ExerciseEdit.vue'
+
 import ProfileHeadMenu from '~/components/ProfileHeadMenu.vue'
 import TableFlowCellBasic from '~/components/Table/TableFlowCellBasic.vue'
 import TableFlowCellMore from '~/components/Table/TableFlowCellMore.vue'
@@ -59,7 +65,9 @@ export default {
   middleware: ['check-auth', 'authenticated'],
 
   components: {
-    Modal,
+    WorkoutDeleteModal,
+    ExerciseDeleteModal,
+    ExerciseEditModal,
     Sidebar,
     ProfileHeadMenu,
     TableFlowCellMore,
@@ -67,11 +75,6 @@ export default {
   },
 
   mounted: function () {
-    /* eslint-disable */
-    const el = document.getElementById('deleteWorkout')
-    const dialog = new A11yDialog(el)
-     /* eslint-enable */
-
     this.$store.commit('SET_APPLICATION_TITLE', 'Trainingspläne')
     this.$store.commit('SET_MOBILE_APPBAR_LEFT_ACTION', false)
     this.$store.commit('SET_MOBILE_APPBAR_RIGHT_ACTION', true)
@@ -128,8 +131,30 @@ export default {
   },
 
   methods: {
-    deleteCustomer: function () {
-      console.log('Okay...')
+    showWorkoutDeleteModal: function () {
+      this.$modal.show(WorkoutDeleteModal, {
+        title: 'Grundlage Muskelaufbau 3'
+      }, {
+        height: 'auto'
+      })
+    },
+
+    showExerciseEditModal: function () {
+      this.$modal.show(ExerciseEditModal, {
+        title: 'Bizeps KH-Curls Schrägbank',
+        weight: 30,
+        repetitions: 12
+      }, {
+        height: 'auto'
+      })
+    },
+
+    showExerciseDeleteModal: function () {
+      this.$modal.show(ExerciseDeleteModal, {
+        workoutTitle: 'Grundlage Muskelaufbau 3'
+      }, {
+        height: 'auto'
+      })
     }
   }
 }
