@@ -10,7 +10,7 @@
           <li class="c-single-breadcrumb__item">{{fullName}}</li>
         </ul>
       </h2>
-      <ProfileHeadMenu editLabel="Kunden bearbeiten" removeLabel="Kunden löschen" deleteModalTrigger="deleteClient" />
+      <ProfileHeadMenu editLabel="Kunden bearbeiten" removeLabel="Kunden löschen" deleteModalTrigger="deleteClient" @deletePageSourceTrigger="showWorkoutDeleteModal" />
     </div>
     <div class="c-card f-mb6 f-mb8-m f-pa6">
       <h2 class="">Basis Informationen</h2>
@@ -66,7 +66,6 @@
 
 <script>
 import axios from 'axios'
-import A11yDialog from 'a11y-dialog'
 import { mapState } from 'vuex'
 
 import Modal from '~/components/Modal/DeleteClient.vue'
@@ -88,11 +87,6 @@ export default {
   },
 
   mounted: function () {
-    /* eslint-disable */
-    const el = document.getElementById('deleteClient')
-    const dialog = new A11yDialog(el)
-     /* eslint-enable */
-
     this.$store.commit('SET_APPLICATION_TITLE', 'Kunden')
     this.$store.commit('SET_MOBILE_APPBAR_LEFT_ACTION', false)
     this.$store.commit('SET_MOBILE_APPBAR_RIGHT_ACTION', true)
@@ -111,6 +105,10 @@ export default {
   },
 
   methods: {
+    showWorkoutDeleteModal: function () {
+      this.$modal.show('deleteClient')
+    },
+
     editCustomer: function (editedUserData) {
       const id = this.client.customer_id
       this.$store.commit('SET_SENDING_REQUEST', true)
