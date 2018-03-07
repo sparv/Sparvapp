@@ -66,6 +66,7 @@ export default {
           this.$store.commit('SET_SENDING_REQUEST', false)
         })
         .catch(error => {
+          this.$store.commit('SET_SENDING_REQUEST', false)
           console.log(error.message)
         })
     }

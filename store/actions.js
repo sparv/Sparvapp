@@ -23,10 +23,8 @@ export async function getSingleClient ({ commit, state }, id) {
 }
 
 export async function addNewClient ({ commit, state }, client) {
-  await this.$axios.$post('/customers/', {
-    headers: { 'Authorization': `Bearer ${state.user.authToken}` },
-    data: client
-  })
+  this.$axios.setToken(state.user.authToken, 'Bearer')
+  await this.$axios.$post('/customers/', client)
 }
 
 export async function editClient ({ commit, dispatch, state }, payload) {
