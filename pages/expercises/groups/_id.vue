@@ -54,7 +54,6 @@ import EditSidebar from '~/components/Sidebar/Exercises/EditExerciseGroup.vue'
 
 export default {
   layout: 'application',
-  middleware: ['check-auth', 'authenticated'],
 
   components: {
     ModalContent,

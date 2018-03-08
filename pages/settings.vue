@@ -30,7 +30,6 @@ import { mapState } from 'vuex'
 
 export default {
   layout: 'application',
-  middleware: ['check-auth', 'authenticated'],
 
   mounted: function () {
     this.$store.commit('SET_APPLICATION_TITLE', 'Einstellungen')

@@ -9,10 +9,28 @@ module.exports = {
   },
   css: [ '@/assets/scss/main.scss' ],
   plugins: [ { src: '~/plugins/vee-validate', ssr: true }, '~plugins/vue-js-modal' ],
-  modules: ['@nuxtjs/axios'],
+  modules: ['@nuxtjs/axios', '@nuxtjs/auth'],
   axios: {
     debug: true,
     baseURL: 'http://localhost:4040'
+  },
+  auth: {
+    resetOnError: true,
+    endpoints: {
+      login: { url: '/authentication', method: 'post', propertyName: 'token' },
+      logout: false,
+      user: { url: '/users', method: 'get', propertyName: false }
+    },
+    cookie: {
+      name: 'token',
+      options: {
+        path: '/',
+        expires: 1
+      }
+    }
+  },
+  router: {
+    middleware: ['auth']
   },
   build: { vendor: ['vee-validate'] }
 }

@@ -24,7 +24,6 @@
 
 <script>
 import { mapState } from 'vuex'
-import { setToken } from '~/utils/auth.js'
 
 import LoginHeader from '~/components/LoginHeader.vue'
 import FormError from '~/components/Form/FormError.vue'
@@ -37,6 +36,12 @@ export default {
     FormError,
     LoginHeader,
     LoadingButton
+  },
+
+  mounted: function () {
+    console.log(this.$auth.state.user)
+    console.log(this.$auth.token)
+    console.log(this.$auth.state.loggedIn)
   },
 
   computed: {
@@ -59,20 +64,24 @@ export default {
       this.$store.commit('SET_SENDING_REQUEST', true)
 
       try {
-        const data = await this.$axios.$post('/authentication', {
-          email: this.email,
-          password: this.password
+        await this.$auth.login({
+          data: {
+            email: this.email,
+            password: this.password
+          }
         })
 
-        this.$store.commit(`SET_USER_AUTH_TOKEN`, data.token)
-        this.$store.commit(`SET_USER_RELATION_ID`, data.relation_id)
-        this.$store.commit(`SET_USER_FORENAME`, data.forname)
-        this.$store.commit(`SET_USER_SURNAME`, data.surname)
-        this.$store.commit(`SET_USER_EMAIL`, data.email)
+        console.log(this.$auth.token)
+        console.log(this.$auth.state.user)
+        console.log(this.$auth.state.loggedIn)
+
+        // this.$store.commit(`SET_USER_RELATION_ID`, data.relation_id)
+        // this.$store.commit(`SET_USER_FORENAME`, data.forname)
+        // this.$store.commit(`SET_USER_SURNAME`, data.surname)
+        // this.$store.commit(`SET_USER_EMAIL`, data.email)
         this.$store.commit('SET_SENDING_REQUEST', false)
-        setToken(data.token, { expires: 1 })
-        this.$router.push(`/`)
       } catch (error) {
+        console.log(error)
         const responseError = error.response
 
         this.formError = true

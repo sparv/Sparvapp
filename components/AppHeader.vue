@@ -57,7 +57,6 @@
 
 <script>
 import { mapState } from 'vuex'
-import { unsetToken } from '~/utils/auth.js'
 
 export default {
   props: {
@@ -86,9 +85,7 @@ export default {
     },
 
     logout: function (event) {
-      this.$store.commit(`setAuthUser`, null)
-      this.$store.commit(`setUserAuthToken`, '')
-      unsetToken()
+      this.$auth.logout()
       this.$router.push(`/`)
     }
   }

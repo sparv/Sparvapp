@@ -34,7 +34,6 @@
 
 <script>
 import { mapState } from 'vuex'
-import { setToken } from '~/utils/auth.js'
 
 import LoginHeader from '~/components/LoginHeader.vue'
 import FormError from '~/components/Form/FormError.vue'
@@ -84,7 +83,6 @@ export default {
         this.$store.commit(`SET_USER_SURNAME`, data.surname)
         this.$store.commit(`SET_USER_EMAIL`, data.email)
         this.$store.commit('SET_SENDING_REQUEST', false)
-        setToken(data.token, { expires: 1 })
         this.$router.push(`/`)
       } catch (error) {
         const response = error.response

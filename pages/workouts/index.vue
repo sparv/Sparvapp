@@ -20,7 +20,6 @@ import TableFlowCellBasic from '~/components/Table/TableFlowCellBasic.vue'
 
 export default {
   layout: 'application',
-  middleware: ['check-auth', 'authenticated'],
 
   components: {
     TableFlowCellBasic

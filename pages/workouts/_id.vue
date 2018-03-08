@@ -62,7 +62,6 @@ import Sidebar from '~/components/Sidebar/Workouts/EditWorkout.vue'
 
 export default {
   layout: 'application',
-  middleware: ['check-auth', 'authenticated'],
 
   components: {
     WorkoutDeleteModal,

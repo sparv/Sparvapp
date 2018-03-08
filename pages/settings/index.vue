@@ -44,7 +44,6 @@
 <script>
 import axios from 'axios'
 import { mapState } from 'vuex'
-import { unsetToken } from '~/utils/auth.js'
 
 import Modal from '~/components/Modal/DeleteUser.vue'
 import FormError from '~/components/Form/FormError.vue'
@@ -131,7 +130,7 @@ export default {
         .then(response => {
           console.log(response)
           this.$store.commit(`SET_USER_AUTH_TOKEN`, '')
-          unsetToken()
+          this.$auth.logout()
           this.$router.push(`/`)
         })
         .catch(error => {

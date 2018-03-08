@@ -1,7 +1,5 @@
 export async function getAllClients ({ commit, state }) {
-  const data = await this.$axios.$get('/customers', {
-    headers: { 'Authorization': `Bearer ${state.user.authToken}` }
-  })
+  const data = await this.$axios.$get('/customers')
 
   try {
     commit('SET_CLIENTS', data.customer_list)
@@ -11,9 +9,7 @@ export async function getAllClients ({ commit, state }) {
 }
 
 export async function getSingleClient ({ commit, state }, id) {
-  const data = await this.$axios.$get(`/customers/${id}`, {
-    headers: { 'Authorization': `Bearer ${state.user.authToken}` }
-  })
+  const data = await this.$axios.$get(`/customers/${id}`)
 
   try {
     commit('SET_SINGLE_CLIENT', data.customer)
@@ -23,15 +19,11 @@ export async function getSingleClient ({ commit, state }, id) {
 }
 
 export async function addNewClient ({ commit, state }, client) {
-  this.$axios.setToken(state.user.authToken, 'Bearer')
   await this.$axios.$post('/customers/', client)
 }
 
 export async function editClient ({ commit, dispatch, state }, payload) {
-  await this.$axios.$put(`/customers/${payload.customer_id}`, {
-    headers: { 'Authorization': `Bearer ${state.user.authToken}` },
-    data: payload.editedClient
-  })
+  await this.$axios.$put(`/customers/${payload.customer_id}`, payload.editedClient)
 
   try {
     dispatch('getSingleClient', payload.customer_id)
@@ -41,10 +33,7 @@ export async function editClient ({ commit, dispatch, state }, payload) {
 }
 
 export async function deleteClient ({ commit, state }, payload) {
-  await this.$axios.$delete(`/customers/${payload.customer_id}`, {
-    headers: { 'Authorization': `Bearer ${state.user.authToken}` },
-    data: payload.surname
-  })
+  await this.$axios.$delete(`/customers/${payload.customer_id}`, payload.surname)
 
   try {
     commit('DELETE_CLIENT', payload.customer_id)
@@ -54,9 +43,7 @@ export async function deleteClient ({ commit, state }, payload) {
 }
 
 export async function getAllUserData ({ commit, state }) {
-  const data = await this.$axios.$get('/users', {
-    headers: { 'Authorization': `Bearer ${state.user.authToken}` }
-  })
+  const data = await this.$axios.$get('/users')
 
   try {
     const user = data
