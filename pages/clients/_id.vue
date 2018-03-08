@@ -74,7 +74,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 import { mapState } from 'vuex'
 
 import ModalContent from '~/components/Modal/DeleteMaster.vue'
@@ -125,58 +124,34 @@ export default {
       this.$modal.hide('deleteClient')
     },
 
-    editCustomer: function (editedUserData) {
+    editCustomer: async function (data) {
       const id = this.client.customer_id
       this.$store.commit('SET_SENDING_REQUEST', true)
 
-      axios({
-        url: `http://localhost:4040/customers/${id}`,
-        method: `PUT`,
-        headers: {
-          'Authorization': `Bearer ${this.$store.state.user.authToken}`
-        },
-        data: {
-          forename: editedUserData.forename,
-          surname: editedUserData.surname,
-          email: editedUserData.email,
-          phone: editedUserData.phone,
-          gender: editedUserData.gender,
-          age: editedUserData.age,
-          notes: editedUserData.notes
-        }
-      })
-        .then(response => {
-          console.log(response)
-          this.$store.dispatch('getSingleClient', id)
-          this.$store.commit('SET_SENDING_REQUEST', false)
-        })
-        .catch(error => {
-          console.log(error)
-          this.$store.commit('SET_SENDING_REQUEST', false)
-        })
+      try {
+        await this.$axios.$put(`/customers/${id}`, data)
+        this.$store.dispatch('getSingleClient', id)
+        this.$store.commit('SET_SENDING_REQUEST', false)
+      } catch (error) {
+        console.log(error)
+        this.$store.commit('SET_SENDING_REQUEST', false)
+      }
     },
 
-    deleteCustomer: function () {
+    deleteCustomer: async function () {
       this.$store.commit('SET_SENDING_REQUEST', true)
-      axios({
-        url: `http://localhost:4040/customers/${this.client.customer_id}`,
-        method: `DELETE`,
-        headers: {
-          'Authorization': `Bearer ${this.$store.state.user.authToken}`
-        },
-        data: {
-          surname: this.client.surname
-        }
-      })
-        .then(response => {
-          console.log(response)
-          this.$store.commit('SET_SENDING_REQUEST', false)
-          this.$router.push(`/clients`)
-        })
-        .catch(error => {
-          console.log(error)
-          this.$store.commit('SET_SENDING_REQUEST', false)
-        })
+
+      console.log(this.client.surname)
+      console.log(this.client.customer_id)
+
+      try {
+        await this.$axios.$delete(`/customers/${this.client.customer_id}`, { surname: this.client.surname })
+        this.$store.commit('SET_SENDING_REQUEST', false)
+        this.$router.push(`/clients`)
+      } catch (error) {
+        console.log(error)
+        this.$store.commit('SET_SENDING_REQUEST', false)
+      }
     }
   }
 }
