@@ -71,14 +71,6 @@ export default {
           }
         })
 
-        console.log(this.$auth.token)
-        console.log(this.$auth.state.user)
-        console.log(this.$auth.state.loggedIn)
-
-        // this.$store.commit(`SET_USER_RELATION_ID`, data.relation_id)
-        // this.$store.commit(`SET_USER_FORENAME`, data.forname)
-        // this.$store.commit(`SET_USER_SURNAME`, data.surname)
-        // this.$store.commit(`SET_USER_EMAIL`, data.email)
         this.$store.commit('SET_SENDING_REQUEST', false)
       } catch (error) {
         console.log(error)

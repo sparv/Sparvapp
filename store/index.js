@@ -3,6 +3,7 @@ import * as actions from './actions'
 
 import user from './modules/user'
 import clients from './modules/clients'
+import exercises from './modules/exercises'
 import metadata from './modules/metadata'
 import settings from './modules/settings'
 
@@ -12,6 +13,7 @@ const createStore = () => {
     modules: {
       metadata,
       settings,
+      exercises,
       user,
       clients
     }

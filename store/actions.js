@@ -1,3 +1,6 @@
+/* ------------------------------------------------------------------
+||  Customers
+------------------------------------------------------------------- */
 export async function getAllClients ({ commit, state }) {
   const data = await this.$axios.$get('/customers')
 
@@ -42,6 +45,51 @@ export async function deleteClient ({ commit, state }, payload) {
   }
 }
 
+/* ------------------------------------------------------------------
+||  Exercises
+------------------------------------------------------------------- */
+export async function getAllExerciseGroups ({ commit, state }) {
+  const data = await this.$axios.$get('/exercisegroups/')
+
+  try {
+    commit('SET_EXERCISE_GROUPS', data.exercise_groups_list)
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export async function addNewExerciseGroup ({ commit, state }, group) {
+  await this.$axios.$post('/exercisegroups/', group)
+}
+
+// export async function getSingleExerciseGroup ({ commit, state }, id) {
+//   try {
+//     var { exercisegroup } = await this.$axios.$get(`/exercisegroups/${id}`)
+//     const { exercise_list } = await this.$axios.$get(`/exercisegroups/${id}/exercises`)
+//     exercisegroup.exercises = exercise_list
+
+//     commit('SET_SINGLE_EXERCISE_GROUPS', exercisegroup)
+//   } catch (error) {
+//     console.log(error)
+//   }
+// }
+
+// export async function getSingleExercise ({ commit, state }, ids) {
+//   try {
+//     await this.$axios.$post(`/exercisegroups/${ids.groups}/exercises/${ids.exercise}`, )
+//   } catch (error) {
+//     console.log(error)
+//   }
+// }
+
+export async function addNewExercise ({ commit, state }, data) {
+  console.log(data.exercise)
+  await this.$axios.$post(`/exercisegroups/${data.groupId}/exercises/`, data.exercise)
+}
+
+/* ------------------------------------------------------------------
+||  User
+------------------------------------------------------------------- */
 export async function getAllUserData ({ commit, state }) {
   const data = await this.$axios.$get('/users')
 

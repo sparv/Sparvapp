@@ -56,12 +56,25 @@ export default {
   data () {
     return {
       name: '',
-      color: '',
+      level: '',
       description: ''
     }
   },
 
   methods: {
+    submitForm: function () {
+      const exercise = {
+        name: this.name,
+        level: 'heavy',
+        description: this.description
+      }
+
+      this.$emit('submitNewExercise', exercise)
+      this.name = ''
+      this.level = ''
+      this.description = ''
+    },
+
     hideSidebar: function () {
       this.$store.commit('SET_APPLICATION_SIDEBAR', false)
     }

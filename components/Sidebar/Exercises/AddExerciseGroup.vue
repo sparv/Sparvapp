@@ -52,6 +52,18 @@ export default {
   },
 
   methods: {
+    submitForm: function () {
+      const exerciseGroup = {
+        name: this.name,
+        description: this.description
+      }
+
+      this.$emit('submitNewExerciseGroup', exerciseGroup)
+      this.name = ''
+      this.color = ''
+      this.description = ''
+    },
+
     hideSidebar: function () {
       this.$store.commit('SET_APPLICATION_SIDEBAR', false)
     }

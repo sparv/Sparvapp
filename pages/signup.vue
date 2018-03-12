@@ -40,6 +40,7 @@ import FormError from '~/components/Form/FormError.vue'
 import LoadingButton from '~/components/Buttons/LoadingButton.vue'
 
 export default {
+  auth: false,
   layout: 'authPage',
 
   components: {
@@ -70,20 +71,13 @@ export default {
       this.$store.commit('SET_SENDING_REQUEST', true)
 
       try {
-        const data = await this.$axios.$post('/users', {
+        await this.$axios.$post('/users/', {
           forename: this.forename,
           surname: this.surname,
           email: this.email,
           password: this.password
         })
-
-        this.$store.commit(`SET_USER_AUTH_TOKEN`, data.token)
-        this.$store.commit(`SET_USER_RELATION_ID`, data.relation_id)
-        this.$store.commit(`SET_USER_FORENAME`, data.forname)
-        this.$store.commit(`SET_USER_SURNAME`, data.surname)
-        this.$store.commit(`SET_USER_EMAIL`, data.email)
         this.$store.commit('SET_SENDING_REQUEST', false)
-        this.$router.push(`/`)
       } catch (error) {
         const response = error.response
 
