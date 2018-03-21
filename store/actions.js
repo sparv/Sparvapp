@@ -116,6 +116,14 @@ export async function deleteExercise ({ commit, state }, id) {
   }
 }
 
+export async function deleteExerciseGroup ({ commit, state }, id) {
+  try {
+    await this.$axios.$delete(`/exercisegroups/${id}`)
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 /* ------------------------------------------------------------------
 ||  User
 ------------------------------------------------------------------- */

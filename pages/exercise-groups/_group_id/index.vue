@@ -10,13 +10,12 @@
           <li class="c-single-breadcrumb__item">{{exerciseGroup.name}}</li>
         </ul>
       </h2>
-      <nuxt-link :to="'/exercises/groups/' + exerciseGroup.exercisegroup_id + '/add'" class="c-btn c-btn--primary">Neue Übung hinzufügen</nuxt-link>
-
+      <nuxt-link :to="`/exercise-groups/${exerciseGroup.exercisegroup_id}/exercise/add`" class="c-btn c-btn--primary">Neue Übung hinzufügen</nuxt-link>
       <ProfileHeadMenu editLabel="Übungsgruppe bearbeiten" removeLabel="Übungsgruppe löschen" :link="'/exercises/groups/' + exerciseGroup.exercisegroup_id + '/edit'" @deletePageSourceTrigger="showModal" />
     </div>
 
     <div class="c-table-flow__list">
-      <nuxt-link :to="'/exercises/' + exercise.exercise_id" class="c-table-flow__item f-mb3" v-for="(exercise, index) in exerciseGroup.exercises" v-bind:item="exercise" v-bind:index="index" v-bind:key="exercise.exercise_id">
+      <nuxt-link :to="`/exercise-groups/${exerciseGroup.exercisegroup_id}/exercise/${exercise.exercise_id}`" class="c-table-flow__item f-mb3" v-for="(exercise, index) in exerciseGroup.exercises" v-bind:item="exercise" v-bind:index="index" v-bind:key="exercise.exercise_id">
         <div class="c-table-flow__item-data f-mb4 f-mb0-m f-ph6-m">
           <span>
             <img src="~/assets/images/exercise-icon.svg" class="f-db" alt="">
@@ -32,7 +31,7 @@
       </nuxt-link>
     </div>
     <modal name="deleteExerciseGroup" height="auto">
-      <ModalContent confirmationValue="Arme"
+      <ModalContent :confirmationValue="exerciseGroup.name"
         title="Gruppe löschen"
         summary="Bist Du Dir sicher, dass du diese Gruppe löschen möchtest? Das Löschen kann nicht rückgängig gemacht werden."
         formLabel="Gib den Namen der Gruppe zur Bestätigung ein"
@@ -59,13 +58,12 @@ export default {
   },
 
   fetch ({ store, params }) {
-    return store.dispatch('getSingleExerciseGroup', params.id)
+    return store.dispatch('getSingleExerciseGroup', params.group_id)
   },
 
   computed: {
     ...mapState({
-      isSendingRequest: state => state.settings.isSendingRequest,
-      openSidebar: state => state.settings.applicatonSidebar
+      isSendingRequest: state => state.settings.isSendingRequest
     }),
 
     ...mapGetters({
@@ -94,7 +92,16 @@ export default {
       this.$modal.hide('deleteExerciseGroup')
     },
 
-    deleteExerciseGroup: function () {}
+    deleteExerciseGroup: async function () {
+      const exerciseGroupParamsId = this.$route.params.group_id
+
+      try {
+        await this.$store.dispatch('deleteExerciseGroup', exerciseGroupParamsId)
+        this.$router.push(`/exercise-groups/`)
+      } catch (error) {
+        console.log(error)
+      }
+    }
   }
 }
 </script>

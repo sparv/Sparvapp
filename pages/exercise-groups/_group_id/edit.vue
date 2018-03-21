@@ -22,7 +22,7 @@ export default {
   layout: 'application',
 
   fetch ({ store, params }) {
-    return store.dispatch('getSingleExerciseGroup', params.id)
+    return store.dispatch('getSingleExerciseGroup', params.group_id)
   },
 
   computed: {
@@ -37,7 +37,7 @@ export default {
 
   methods: {
     submitForm: async function () {
-      const params = this.$route.params.id
+      const params = this.$route.params.groupId
       this.$store.commit('SET_SENDING_REQUEST', true)
       try {
         await this.$store.dispatch('editExerciseGroup', this.exerciseGroup)

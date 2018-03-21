@@ -24,7 +24,7 @@
             <nuxt-link to="/clients">Kunden</nuxt-link>
           </li>
           <li class="f-ml8 m-app-header-nav__item">
-            <nuxt-link to="/exercises">Übungen</nuxt-link>
+            <nuxt-link to="/exercise-groups">Übungen</nuxt-link>
           </li>
           <li class="f-ml8 m-app-header-nav__item">
             <nuxt-link to="/workouts">Trainingspläne</nuxt-link>

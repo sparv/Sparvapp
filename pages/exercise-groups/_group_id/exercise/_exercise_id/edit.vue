@@ -32,7 +32,7 @@ export default {
   layout: 'application',
 
   fetch ({ store, params }) {
-    return store.dispatch('getSingleExercise', params.id)
+    return store.dispatch('getSingleExercise', params.exercise_id)
   },
 
   computed: {
@@ -47,9 +47,10 @@ export default {
 
   methods: {
     submitForm: async function () {
-      const params = this.$route.params.id
+      const exerciseParamsId = this.$route.params.exercise_id
+      const exerciseGroupParamsId = this.$route.params.group_id
       const data = {
-        id: params,
+        id: exerciseParamsId,
         exercise: {
           name: this.exercise.name,
           level: this.exercise.level,
@@ -61,7 +62,7 @@ export default {
       try {
         await this.$store.dispatch('editExercise', data)
         this.$store.commit('SET_SENDING_REQUEST', false)
-        this.$router.push(`/exercises/${params}/`)
+        this.$router.push(`/exercise-groups/${exerciseGroupParamsId}/exercise/${exerciseParamsId}`)
       } catch (error) {
         console.log(error.message)
         this.$store.commit('SET_SENDING_REQUEST', false)

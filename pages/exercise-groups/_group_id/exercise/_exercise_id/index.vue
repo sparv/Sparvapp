@@ -14,7 +14,7 @@
           <li class="c-single-breadcrumb__item">{{exercise.name}}</li>
         </ul>
       </h2>
-      <ProfileHeadMenu editLabel="Übung bearbeiten" removeLabel="Übung löschen" :link="'/exercises/' + exercise.exercise_id + '/edit'" @deletePageSourceTrigger="showModal" />
+      <ProfileHeadMenu editLabel="Übung bearbeiten" removeLabel="Übung löschen" :link="`/exercise-groups/${this.$route.params.exercise_id}/exercise/${exercise.exercise_id}/edit`" @deletePageSourceTrigger="showModal" />
     </div>
 
     <div>
@@ -63,7 +63,7 @@ export default {
   },
 
   fetch ({ store, params }) {
-    return store.dispatch('getSingleExercise', params.id)
+    return store.dispatch('getSingleExercise', params.exercise_id)
   },
 
   mounted: function () {
@@ -97,8 +97,16 @@ export default {
       this.$modal.hide('deleteExercise')
     },
 
-    deleteExercise: function () {
-      this.$store.dispatch('deleteExercise', this.exercise_id)
+    deleteExercise: async function () {
+      const exerciseParamsId = this.$route.params.exercise_id
+      const exerciseGroupParamsId = this.$route.params.group_id
+
+      try {
+        await this.$store.dispatch('deleteExercise', exerciseParamsId)
+        this.$router.push(`/exercise-groups/${exerciseGroupParamsId}`)
+      } catch (error) {
+        console.log(error)
+      }
     }
   }
 }
