@@ -2,12 +2,14 @@ import * as types from '../mutation-types'
 
 const state = {
   exerciseGroups: [],
-  currentExerciseGroup: {}
+  currentExerciseGroup: {},
+  currentExercise: {}
 }
 
 const getters = {
   allExerciseGroups: state => state.exerciseGroups,
-  exerciseGroup: state => state.currentExerciseGroup
+  exerciseGroup: state => state.currentExerciseGroup,
+  exercise: state => state.currentExercise
 }
 
 const mutations = {
@@ -17,6 +19,9 @@ const mutations = {
 
   [types.SET_SINGLE_EXERCISE_GROUPS] (state, exerciseGroups) {
     state.currentExerciseGroup = exerciseGroups
+  },
+  [types.SET_SINGLE_EXERCISE] (state, exerciseGroups) {
+    state.currentExercise = exerciseGroups
   }
 }
 

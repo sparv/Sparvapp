@@ -17,15 +17,11 @@
             <div class="f-mb6 f-mb7-m">
               <fieldset>
                 <legend>Schwierigkeitsgrad</legend>
-                <div class="f-mb3">
-                  <label for="gender_male"><input class="f-mr3" type="radio" name="gender" value="1" id="difficulty_level" checked>Einsteiger</label>
-                </div>
-                <div class="f-mb3">
-                  <label for="gender_female"><input class="f-mr3" type="radio" name="gender" value="2" id="difficulty_level">Weiblich</label>
-                </div>
-                <div class="f-mb3">
-                  <label for="gender_neutral"><input class="f-mr3" type="radio" name="gender" value="3" id="difficulty_level">keine Angaben</label>
-                </div>
+                <el-radio-group v-model="level">
+                  <el-radio-button label="beginner">Einsteiger</el-radio-button>
+                  <el-radio-button label="advanced">Mittel</el-radio-button>
+                  <el-radio-button label="professional">Profi</el-radio-button>
+                </el-radio-group>
               </fieldset>
             </div>
             <div>
@@ -65,7 +61,7 @@ export default {
     submitForm: function () {
       const exercise = {
         name: this.name,
-        level: 'heavy',
+        level: this.level,
         description: this.description
       }
 

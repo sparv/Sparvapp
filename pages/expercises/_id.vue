@@ -11,7 +11,7 @@
             <nuxt-link to="/expercises/groups/3/">Arme</nuxt-link>
             <span class="f-mh3">/</span>
           </li>
-          <li class="c-single-breadcrumb__item">Armbeugen Gerät</li>
+          <li class="c-single-breadcrumb__item">{{exercise.name}}</li>
         </ul>
       </h2>
       <ProfileHeadMenu editLabel="Übung bearbeiten" removeLabel="Übung löschen" @deletePageSourceTrigger="showModal" />
@@ -24,20 +24,20 @@
             <div class="f-mb6">
               <img src="~/assets/images/exercise-icon-big.svg" class="f-db f-w-100" alt="">
             </div>
-            <span class="f-db f-w-100 token token--positiv">Einsteigerlevel</span>
+            <span class="f-db f-w-100 token token--positiv">{{exercise.level}}</span>
           </div>
         </div>
         <div class="o-grid__item f-w-two-thirds-m">
           <div class="c-card f-pa7">
             <h3>Beschreibung</h3>
-            <p class="f-ma0">Marketers/advertisers usually focus their efforts on the people responsible for making the purchase. In many cases, this is an effective approach but in other cases it can make for a totally useless marketing campaign.</p>
+            <p class="f-ma0">{{exercise.description}}</p>
           </div>
         </div>
       </div>
     </div>
     <Sidebar :sidebarState="openSidebar"></Sidebar>
     <modal name="deleteExercise" height="auto">
-      <ModalContent confirmationValue="Armbeugen Gerät"
+      <ModalContent :confirmationValue="exercise.name"
         title="Übung löschen"
         summary="Bist Du Dir sicher, dass du diese Übung löschen möchtest? Das Löschen kann nicht rückgängig gemacht werden."
         formLabel="Gib den Namen der Übung zur Bestätigung ein"
@@ -50,7 +50,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 
 import ModalContent from '~/components/Modal/DeleteMaster.vue'
 import ProfileHeadMenu from '~/components/ProfileHeadMenu.vue'
@@ -65,6 +65,10 @@ export default {
     ProfileHeadMenu
   },
 
+  fetch ({ store, params }) {
+    return store.dispatch('getSingleExercise', params.id)
+  },
+
   mounted: function () {
     this.$store.commit('SET_APPLICATION_TITLE', 'Kunden')
     this.$store.commit('SET_MOBILE_APPBAR_LEFT_ACTION', false)
@@ -74,13 +78,16 @@ export default {
   computed: {
     ...mapState({
       openSidebar: state => state.settings.applicatonSidebar
+    }),
+
+    ...mapGetters({
+      exercise: 'exercise'
     })
   },
 
   data () {
     return {
-      showProfileSubmenu: false,
-      name: ''
+      showProfileSubmenu: false
     }
   },
 
@@ -98,7 +105,9 @@ export default {
       this.$store.commit('SET_APPLICATION_SIDEBAR', true)
     },
 
-    deleteExercise: function () {}
+    deleteExercise: function () {
+      this.$store.dispatch('deleteExercise', this.exercise_id)
+    }
   }
 }
 </script>
