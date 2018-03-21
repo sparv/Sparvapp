@@ -37,7 +37,9 @@
 		"jsdom": "^11.6.2",
 		"node-sass": "^4.7.2",
 		"pre-commit": "^1.2.2",
-		"sass-loader": "^6.0.7"
+		"sass-loader": "^6.0.7",
+		"vue-awesome": "^2.3.5",
+		"webpack-node-externals": "^1.6.0"
 	},
 	"dependencies": {
 		"@nuxtjs/auth": "^4.0.0-rc.3",

@@ -1,3 +1,5 @@
+const nodeExternals = require('webpack-node-externals')
+
 module.exports = {
   head: {
     titleTemplate: '%s - Sparv',
@@ -16,7 +18,8 @@ module.exports = {
     '~/plugins/vue-js-modal',
     '~/plugins/element-ui',
     '~/plugins/auth',
-    '~/plugins/axios' ],
+    '~/plugins/axios',
+    '~plugins/vue-awesome'],
   modules: ['@nuxtjs/axios', '@nuxtjs/auth'],
   axios: {
     debug: true,
@@ -40,5 +43,17 @@ module.exports = {
   router: {
     middleware: ['auth']
   },
-  build: { vendor: ['vee-validate'] }
+  build: {
+    extend (config, { isServer }) {
+      // ...
+      if (isServer) {
+        config.externals = [
+          nodeExternals({
+            whitelist: [/es6-promise|\.(?!(?:js|json)$).{1,5}$/i, /^vue-awesome/]
+          })
+        ]
+      }
+    },
+    vendor: ['vee-validate', 'vue-awesome']
+  }
 }
