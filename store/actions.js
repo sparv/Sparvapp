@@ -74,6 +74,14 @@ export async function getSingleExerciseGroup ({ commit, state }, id) {
   }
 }
 
+export async function editExerciseGroup ({ commit, state }, payload) {
+  try {
+    await this.$axios.$put(`/exercisegroups/${payload.exercisegroup_id}`, { name: payload.name, description: payload.description })
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 export async function getSingleExercise ({ commit, state }, id) {
   try {
     const { exercise } = await this.$axios.$get(`/exercisegroups/exercises/${id}`)
@@ -85,7 +93,16 @@ export async function getSingleExercise ({ commit, state }, id) {
 
 export async function addNewExercise ({ commit, state }, data) {
   try {
-    await this.$axios.$post(`/exercisegroups/${data.groupId}/exercises/`, data.exercise)
+    await this.$axios.$post(`/exercisegroups/${data.id}/exercises/`, data.exercise)
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export async function editExercise ({ commit, dispatch, state }, payload) {
+  console.log(payload)
+  try {
+    await this.$axios.$put(`/exercisegroups/exercises/${payload.id}`, payload.exercise)
   } catch (error) {
     console.log(error)
   }

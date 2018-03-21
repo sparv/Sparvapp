@@ -10,12 +10,13 @@
           <li class="c-single-breadcrumb__item">{{exerciseGroup.name}}</li>
         </ul>
       </h2>
-      <button class="c-btn c-btn--primary" @click="showSidebar('add')">Neue Übung hinzufügen</button>
-      <ProfileHeadMenu editLabel="Übungsgruppe bearbeiten" removeLabel="Übungsgruppe löschen" @deletePageSourceTrigger="showModal" />
+      <nuxt-link :to="'/exercises/groups/' + exerciseGroup.exercisegroup_id + '/add'" class="c-btn c-btn--primary">Neue Übung hinzufügen</nuxt-link>
+
+      <ProfileHeadMenu editLabel="Übungsgruppe bearbeiten" removeLabel="Übungsgruppe löschen" :link="'/exercises/groups/' + exerciseGroup.exercisegroup_id + '/edit'" @deletePageSourceTrigger="showModal" />
     </div>
 
     <div class="c-table-flow__list">
-      <nuxt-link :to="'/expercises/' + exercise.exercise_id" class="c-table-flow__item f-mb3" v-for="(exercise, index) in exerciseGroup.exercises" v-bind:item="exercise" v-bind:index="index" v-bind:key="exercise.exercise_id">
+      <nuxt-link :to="'/exercises/' + exercise.exercise_id" class="c-table-flow__item f-mb3" v-for="(exercise, index) in exerciseGroup.exercises" v-bind:item="exercise" v-bind:index="index" v-bind:key="exercise.exercise_id">
         <div class="c-table-flow__item-data f-mb4 f-mb0-m f-ph6-m">
           <span>
             <img src="~/assets/images/exercise-icon.svg" class="f-db" alt="">
@@ -30,11 +31,6 @@
         </div>
       </nuxt-link>
     </div>
-    <AddSidebar v-if="showAddSidebar" :sidebarState="openSidebar" :isSendingRequest="isSendingRequest" @submitNewExercise="addNewExercise"></AddSidebar>
-
-    <EditSidebar v-if="showEditSidebar" :sidebarState="openSidebar"></EditSidebar>
-
-
     <modal name="deleteExerciseGroup" height="auto">
       <ModalContent confirmationValue="Arme"
         title="Gruppe löschen"
@@ -52,17 +48,13 @@
 import { mapState, mapGetters } from 'vuex'
 
 import ModalContent from '~/components/Modal/DeleteMaster.vue'
-import ProfileHeadMenu from '~/components/ProfileHeadMenu.vue'
-import AddSidebar from '~/components/Sidebar/Exercises/AddExercise.vue'
-import EditSidebar from '~/components/Sidebar/Exercises/EditExerciseGroup.vue'
+import ProfileHeadMenu from '~/components/ProfileHeadMenuLink.vue'
 
 export default {
   layout: 'application',
 
   components: {
     ModalContent,
-    AddSidebar,
-    EditSidebar,
     ProfileHeadMenu
   },
 
@@ -89,9 +81,7 @@ export default {
 
   data () {
     return {
-      showProfileSubmenu: false,
-      showAddSidebar: false,
-      showEditSidebar: false
+      showProfileSubmenu: false
     }
   },
 
@@ -104,54 +94,7 @@ export default {
       this.$modal.hide('deleteExerciseGroup')
     },
 
-    showSidebar: function (triggerType) {
-      this.$store.commit('SET_APPLICATION_SIDEBAR', true)
-
-      switch (triggerType) {
-        case 'add':
-          this.showAddSidebar = true
-          this.showEditSidebar = false
-          break
-        case 'edit':
-          this.showAddSidebar = false
-          this.showEditSidebar = true
-
-          this.showProfileSubmenu = !this.showProfileSubmenu
-          break
-        default:
-          this.showAddSidebar = false
-          this.showEditSidebar = false
-      }
-    },
-
-    addNewExercise: async function (exercise) {
-      const groupId = this.exerciseGroup.exercisegroup_id
-      const payload = { groupId, exercise }
-      this.$store.commit('SET_SENDING_REQUEST', true)
-
-      try {
-        await this.$store.dispatch('addNewExercise', payload)
-
-        this.$store.commit('SET_APPLICATION_SIDEBAR', false)
-        this.$store.commit('SET_SENDING_REQUEST', false)
-
-        await this.$store.dispatch('getSingleExerciseGroup', groupId)
-      } catch (error) {
-        console.log(error.message)
-        this.$store.commit('SET_SENDING_REQUEST', false)
-      }
-    },
-
     deleteExerciseGroup: function () {}
   }
 }
 </script>
-
-<style lang="scss" scoped>
-.f-wrapper {
-  padding: 0;
-  @media (min-width: 860px) {
-    padding: 0 24px;
-  }
-}
-</style>

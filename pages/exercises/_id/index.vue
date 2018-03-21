@@ -14,7 +14,7 @@
           <li class="c-single-breadcrumb__item">{{exercise.name}}</li>
         </ul>
       </h2>
-      <ProfileHeadMenu editLabel="Übung bearbeiten" removeLabel="Übung löschen" @deletePageSourceTrigger="showModal" />
+      <ProfileHeadMenu editLabel="Übung bearbeiten" removeLabel="Übung löschen" :link="'/exercises/' + exercise.exercise_id + '/edit'" @deletePageSourceTrigger="showModal" />
     </div>
 
     <div>
@@ -35,7 +35,6 @@
         </div>
       </div>
     </div>
-    <Sidebar :sidebarState="openSidebar"></Sidebar>
     <modal name="deleteExercise" height="auto">
       <ModalContent :confirmationValue="exercise.name"
         title="Übung löschen"
@@ -53,15 +52,13 @@
 import { mapState, mapGetters } from 'vuex'
 
 import ModalContent from '~/components/Modal/DeleteMaster.vue'
-import ProfileHeadMenu from '~/components/ProfileHeadMenu.vue'
-import Sidebar from '~/components/Sidebar/Exercises/EditExercise.vue'
+import ProfileHeadMenu from '~/components/ProfileHeadMenuLink.vue'
 
 export default {
   layout: 'application',
 
   components: {
     ModalContent,
-    Sidebar,
     ProfileHeadMenu
   },
 
@@ -98,11 +95,6 @@ export default {
 
     hideModal: function () {
       this.$modal.hide('deleteExercise')
-    },
-
-    showSidebar: function () {
-      this.showProfileSubmenu = false
-      this.$store.commit('SET_APPLICATION_SIDEBAR', true)
     },
 
     deleteExercise: function () {
