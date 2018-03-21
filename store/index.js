@@ -1,21 +1,19 @@
 import Vuex from 'vuex'
-import * as actions from './actions'
 
-import user from './modules/user'
-import clients from './modules/clients'
-import exercises from './modules/exercises'
+import users from './modules/users'
 import metadata from './modules/metadata'
 import settings from './modules/settings'
+import customers from './modules/customers'
+import exercises from './modules/exercises'
 
 const createStore = () => {
   return new Vuex.Store({
-    actions,
     modules: {
+      users,
       metadata,
       settings,
-      exercises,
-      user,
-      clients
+      customers,
+      exercises
     }
   })
 }

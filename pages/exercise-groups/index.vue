@@ -23,7 +23,7 @@ export default {
   layout: 'application',
 
   fetch ({ store }) {
-    return store.dispatch('getAllExerciseGroups')
+    return store.dispatch('getExerciseGroups')
   },
 
   computed: {

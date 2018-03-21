@@ -43,7 +43,7 @@
 
 <script>
 import axios from 'axios'
-import { mapState } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 
 import Modal from '~/components/Modal/DeleteUser.vue'
 import FormError from '~/components/Form/FormError.vue'
@@ -59,13 +59,16 @@ export default {
   },
 
   fetch ({ store }) {
-    return store.dispatch('getAllUserData')
+    return store.dispatch('getUser')
   },
 
   computed: {
     ...mapState({
-      user: state => state.user,
       isSendingRequest: state => state.settings.isSendingRequest
+    }),
+
+    ...mapGetters({
+      user: 'user'
     })
   },
 
@@ -83,37 +86,24 @@ export default {
       this.$modal.show('deleteUser')
     },
 
-    submitForm: function (event) {
-      this.formSuccess = false
-      this.formError = false
+    submitForm: async function (event) {
+      const data = {
+        meta: {
+          email: this.email,
+          forename: this.forename,
+          surname: this.surname
+        }
+      }
+
       this.$store.commit('SET_SENDING_REQUEST', true)
 
-      axios({
-        url: `http://localhost:4040/users`,
-        method: `PUT`,
-        headers: {
-          'Authorization': `Bearer ${this.$store.state.user.authToken}`
-        },
-        data: {
-          meta: {
-            forename: this.forename,
-            surname: this.surname,
-            email: this.email
-          }
-        }
-      })
-        .then(response => {
-          this.formSuccess = true
-          this.formSuccessMessage = response.data.message
-          this.$store.commit('SET_SENDING_REQUEST', false)
-          console.log(response)
-        })
-        .catch(error => {
-          this.formError = true
-          this.formErrorMessage = error.response.statusText
-          this.$store.commit('SET_SENDING_REQUEST', false)
-          console.log(error)
-        })
+      try {
+        await this.$store.dispatch('editUserMeta', data)
+        this.$store.commit('SET_SENDING_REQUEST', false)
+      } catch (error) {
+        console.log(error)
+        this.$store.commit('SET_SENDING_REQUEST', false)
+      }
     },
 
     deleteUser: function (password) {

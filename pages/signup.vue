@@ -71,13 +71,24 @@ export default {
       this.$store.commit('SET_SENDING_REQUEST', true)
 
       try {
-        await this.$axios.$post('/users/', {
+        const user = await this.$axios.$post('/users/', {
           forename: this.forename,
           surname: this.surname,
           email: this.email,
           password: this.password
         })
-        this.$store.commit('SET_SENDING_REQUEST', false)
+
+        if (user) {
+          await this.$auth.login({
+            data: {
+              email: this.email,
+              password: this.password
+            }
+          })
+          this.$store.commit('SET_SENDING_REQUEST', false)
+        } else {
+          console.log('Sign Up - Redirection Error.')
+        }
       } catch (error) {
         const response = error.response
 

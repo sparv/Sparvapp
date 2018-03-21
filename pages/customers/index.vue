@@ -6,10 +6,10 @@
     </div>
 
     <div class="c-table-flow__list">
-      <nuxt-link :to="'/clients/' + client.customer_id" class="c-table-flow__item f-mb3" v-for="(client, index) in clients" v-bind:item="client" v-bind:index="index" v-bind:key="client.id">
-        <TableFlowCellBasic label="Nachname" :text="client.surname"></TableFlowCellBasic>
-        <TableFlowCellBasic label="E-Mail-Adresse" :text="client.email"></TableFlowCellBasic>
-        <TableFlowCellBasic label="Telefonnummer" :text="client.phone"></TableFlowCellBasic>
+      <nuxt-link :to="'/customers/' + customer.customer_id" class="c-table-flow__item f-mb3" v-for="(customer, index) in customers" v-bind:item="customer" v-bind:index="index" v-bind:key="customer.id">
+        <TableFlowCellBasic label="Nachname" :text="customer.surname"></TableFlowCellBasic>
+        <TableFlowCellBasic label="E-Mail-Adresse" :text="customer.email"></TableFlowCellBasic>
+        <TableFlowCellBasic label="Telefonnummer" :text="customer.phone"></TableFlowCellBasic>
       </nuxt-link>
     </div>
     <Sidebar :sidebarState="openSidebar" :isSendingRequest="isSendingRequest" @submitNewCustomer="addNewCustomer"></Sidebar>
@@ -31,7 +31,7 @@ export default {
   },
 
   fetch ({ store }) {
-    return store.dispatch('getAllClients')
+    return store.dispatch('getCustomers')
   },
 
   mounted: function () {
@@ -47,7 +47,7 @@ export default {
     }),
 
     ...mapGetters({
-      clients: 'allClients'
+      customers: 'allCustomers'
     })
   },
 
@@ -56,18 +56,19 @@ export default {
       this.$store.commit('SET_APPLICATION_SIDEBAR', true)
     },
 
-    addNewCustomer: function (customer) {
+    addNewCustomer: async function (customer) {
       this.$store.commit('SET_SENDING_REQUEST', true)
-      this.$store.dispatch('addNewClient', customer)
-        .then(() => {
-          this.$store.dispatch('getAllClients')
-          this.$store.commit('SET_APPLICATION_SIDEBAR', false)
-          this.$store.commit('SET_SENDING_REQUEST', false)
-        })
-        .catch(error => {
-          this.$store.commit('SET_SENDING_REQUEST', false)
-          console.log(error.message)
-        })
+
+      try {
+        await this.$store.dispatch('addCustomer', customer)
+        await this.$store.dispatch('getCustomers')
+
+        this.$store.commit('SET_APPLICATION_SIDEBAR', false)
+        this.$store.commit('SET_SENDING_REQUEST', false)
+      } catch (error) {
+        console.log(error)
+        this.$store.commit('SET_SENDING_REQUEST', false)
+      }
     }
   }
 }

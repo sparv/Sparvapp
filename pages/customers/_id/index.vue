@@ -18,50 +18,50 @@
         <div class="o-grid__item f-w-33-m f-mb6">
           <div class="c-data-item">
             <h4 class="c-data-item__title">Vorname</h4>
-            <span class="c-data-item__text">{{client.forename}}</span>
+            <span class="c-data-item__text">{{customer.forename}}</span>
           </div>
         </div>
         <div class="o-grid__item f-w-33-m f-mb6">
           <div class="c-data-item">
             <h4 class="c-data-item__title">Nachname</h4>
-            <span class="c-data-item__text">{{client.surname}}</span>
+            <span class="c-data-item__text">{{customer.surname}}</span>
           </div>
         </div>
         <div class="o-grid__item f-w-33-m f-mb6">
           <div class="c-data-item">
             <h4 class="c-data-item__title">Geschlecht</h4>
-            <span class="c-data-item__text">{{client.gender}}</span>
+            <span class="c-data-item__text">{{customer.gender}}</span>
           </div>
         </div>
         <div class="o-grid__item f-w-33-m f-mb6">
           <div class="c-data-item">
             <h4 class="c-data-item__title">Alter</h4>
-            <span class="c-data-item__text">{{client.age}}</span>
+            <span class="c-data-item__text">{{customer.age}}</span>
           </div>
         </div>
         <div class="o-grid__item f-w-33-m f-mb6 f-mb0-m">
           <div class="c-data-item">
             <h4 class="c-data-item__title">E-Mail-Adresse</h4>
-            <span class="c-data-item__text">{{client.email}}</span>
+            <span class="c-data-item__text">{{customer.email}}</span>
           </div>
         </div>
         <div class="o-grid__item f-w-33-m">
           <div class="c-data-item">
             <h4 class="c-data-item__title">Telefonnummer</h4>
-            <span class="c-data-item__text">{{client.phone}}</span>
+            <span class="c-data-item__text">{{customer.phone}}</span>
           </div>
         </div>
       </div>
     </div>
     <div class="c-card f-pa6">
-      <span v-if="!client.notes" class="text-placeholder">Keine Notizen hinterlegt</span>
-      <div v-if="client.notes">
-        {{ client.notes }}
+      <span v-if="!customer.notes" class="text-placeholder">Keine Notizen hinterlegt</span>
+      <div v-if="customer.notes">
+        {{ customer.notes }}
       </div>
     </div>
-    <Sidebar :sidebarState="openSidebar" :user="client" :isSendingRequest="isSendingRequest" @submitEditCustomer="editCustomer"></Sidebar>
+    <Sidebar :sidebarState="openSidebar" :user="customer" :isSendingRequest="isSendingRequest" @submitEditCustomer="editCustomer"></Sidebar>
     <modal name="deleteClient" height="auto">
-      <ModalContent :confirmationValue="client.surname"
+      <ModalContent :confirmationValue="customer.surname"
         title="Kunde löschen"
         summary="Bist Du Dir sicher, dass du diesen Kunden löschen möchtest? Das Löschen kann nicht rückgängig gemacht werden."
         formLabel="Gib den Titel des Trainingsplans zur Bestätigung ein"
@@ -90,14 +90,10 @@ export default {
   },
 
   fetch ({ store, params }) {
-    return store.dispatch('getSingleClient', params.id)
+    return store.dispatch('getCustomer', params.id)
   },
 
   mounted: function () {
-    console.log(this.$auth.state.user)
-    console.log(this.$auth.token)
-    console.log(this.$auth.state.loggedIn)
-
     this.$store.commit('SET_APPLICATION_TITLE', 'Kunden')
     this.$store.commit('SET_MOBILE_APPBAR_LEFT_ACTION', false)
     this.$store.commit('SET_MOBILE_APPBAR_RIGHT_ACTION', true)
@@ -107,11 +103,11 @@ export default {
     ...mapState({
       isSendingRequest: state => state.settings.isSendingRequest,
       openSidebar: state => state.settings.applicatonSidebar,
-      client: state => state.clients.currentProfile
+      customer: state => state.customers.currentCustomer
     }),
 
     fullName: function () {
-      return this.client.forename + ' ' + this.client.surname
+      return this.customer.forename + ' ' + this.customer.surname
     }
   },
 
@@ -141,13 +137,10 @@ export default {
     deleteCustomer: async function () {
       this.$store.commit('SET_SENDING_REQUEST', true)
 
-      console.log(this.client.surname)
-      console.log(this.client.customer_id)
-
       try {
-        await this.$axios.$delete(`/customers/${this.client.customer_id}`, { surname: this.client.surname })
+        await this.$axios.$delete(`/customers/${this.customer.customer_id}`)
         this.$store.commit('SET_SENDING_REQUEST', false)
-        this.$router.push(`/clients`)
+        this.$router.push(`/customers`)
       } catch (error) {
         console.log(error)
         this.$store.commit('SET_SENDING_REQUEST', false)

@@ -38,12 +38,6 @@ export default {
     LoadingButton
   },
 
-  mounted: function () {
-    console.log(this.$auth.state.user)
-    console.log(this.$auth.token)
-    console.log(this.$auth.state.loggedIn)
-  },
-
   computed: {
     ...mapState({
       isSendingRequest: state => state.settings.isSendingRequest
