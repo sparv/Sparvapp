@@ -7,8 +7,12 @@ module.exports = {
       { hid: 'description', name: 'description', content: 'Meta description' }
     ]
   },
-  css: [ '@/assets/scss/main.scss' ],
-  plugins: [ { src: '~/plugins/vee-validate', ssr: true }, '~plugins/vue-js-modal' ],
+  css: [
+    'element-ui/lib/theme-chalk/reset.css',
+    'element-ui/lib/theme-chalk/index.css',
+    '@/assets/scss/main.scss'
+  ],
+  plugins: [ { src: '~/plugins/vee-validate', ssr: true }, '~/plugins/vue-js-modal', '~/plugins/element-ui' ],
   modules: ['@nuxtjs/axios', '@nuxtjs/auth'],
   axios: {
     debug: true,
