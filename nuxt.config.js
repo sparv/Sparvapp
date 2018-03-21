@@ -12,7 +12,11 @@ module.exports = {
     'element-ui/lib/theme-chalk/index.css',
     '@/assets/scss/main.scss'
   ],
-  plugins: [ { src: '~/plugins/vee-validate', ssr: true }, '~/plugins/vue-js-modal', '~/plugins/element-ui' ],
+  plugins: [ { src: '~/plugins/vee-validate', ssr: true },
+    '~/plugins/vue-js-modal',
+    '~/plugins/element-ui',
+    '~/plugins/auth',
+    '~/plugins/axios' ],
   modules: ['@nuxtjs/axios', '@nuxtjs/auth'],
   axios: {
     debug: true,

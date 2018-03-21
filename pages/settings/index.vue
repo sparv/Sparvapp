@@ -37,12 +37,11 @@
         <button class="c-btn c-btn--error" @click="showDeleteModal">Account endgültig löschen</button>
       </div>
     </div>
-    <Modal @submitDeleteUserForm="deleteUser"></Modal>
+    <Modal @submitDeleteUserForm="submitDeleteForm"></Modal>
   </div>
 </template>
 
 <script>
-import axios from 'axios'
 import { mapState, mapGetters } from 'vuex'
 
 import Modal from '~/components/Modal/DeleteUser.vue'
@@ -89,9 +88,9 @@ export default {
     submitForm: async function (event) {
       const data = {
         meta: {
-          email: this.email,
-          forename: this.forename,
-          surname: this.surname
+          email: this.user.email,
+          forename: this.user.forename,
+          surname: this.user.surname
         }
       }
 
@@ -106,26 +105,17 @@ export default {
       }
     },
 
-    deleteUser: function (password) {
-      axios({
-        url: 'http://localhost:4040/users',
-        method: `DELETE`,
-        headers: {
-          'Authorization': `Bearer ${this.$store.state.user.authToken}`
-        },
-        data: {
-          password: password
-        }
-      })
-        .then(response => {
-          console.log(response)
-          this.$store.commit(`SET_USER_AUTH_TOKEN`, '')
-          this.$auth.logout()
-          this.$router.push(`/`)
-        })
-        .catch(error => {
-          console.log(error)
-        })
+    submitDeleteForm: async function (password) {
+      this.$store.commit('SET_SENDING_REQUEST', true)
+
+      try {
+        await this.$store.dispatch('deleteUser', { password: password })
+        this.$store.commit('SET_SENDING_REQUEST', false)
+        this.$auth.logout()
+        this.$router.push(`/`)
+      } catch (error) {
+        console.log(error)
+      }
     }
   }
 }

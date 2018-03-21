@@ -30,7 +30,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 import { mapState } from 'vuex'
 
 import FormError from '~/components/Form/FormError.vue'
@@ -62,36 +61,24 @@ export default {
   },
 
   methods: {
-    submitForm: function () {
-      this.formSuccess = false
-      this.formError = false
+    submitForm: async function () {
+      const data = {
+        security: {
+          password_old: this.oldPassword,
+          password_new: this.newPassword
+        }
+      }
+
+      console.log(data)
       this.$store.commit('SET_SENDING_REQUEST', true)
 
-      axios({
-        url: `http://localhost:4040/users`,
-        method: `PUT`,
-        headers: {
-          'Authorization': `Bearer ${this.$store.state.user.authToken}`
-        },
-        data: {
-          security: {
-            password_old: this.oldPassword,
-            password_new: this.newPassword
-          }
-        }
-      })
-        .then(response => {
-          this.formSuccess = true
-          this.formSuccessMessage = response.data.message
-          this.$store.commit('SET_SENDING_REQUEST', false)
-          console.log(response)
-        })
-        .catch(error => {
-          this.formError = true
-          this.formErrorMessage = error.response.statusText
-          this.$store.commit('SET_SENDING_REQUEST', false)
-          console.log(error.response)
-        })
+      try {
+        await this.$store.dispatch('editUserSecurity', data)
+        this.$store.commit('SET_SENDING_REQUEST', false)
+      } catch (error) {
+        console.log(error)
+        this.$store.commit('SET_SENDING_REQUEST', false)
+      }
     }
   }
 }

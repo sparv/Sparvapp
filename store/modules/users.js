@@ -35,7 +35,23 @@ const actions = {
 
   async editUserMeta ({ commit, state }, data) {
     try {
-      await this.$axios.$put(`/users/`, data)
+      await this.$axios.$put('/users', data)
+    } catch (error) {
+      console.log(error)
+    }
+  },
+
+  async editUserSecurity ({ commit, state }, data) {
+    try {
+      await this.$axios.$put('/users', data)
+    } catch (error) {
+      console.log(error)
+    }
+  },
+
+  async deleteUser ({ commit, state }, password) {
+    try {
+      await this.$axios.$delete('/users', password)
     } catch (error) {
       console.log(error)
     }
