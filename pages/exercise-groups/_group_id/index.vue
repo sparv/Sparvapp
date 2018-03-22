@@ -11,7 +11,7 @@
         </ul>
       </h2>
       <nuxt-link :to="`/exercise-groups/${exerciseGroup.exercisegroup_id}/exercise/add`" class="c-btn c-btn--primary">Neue Übung hinzufügen</nuxt-link>
-      <ProfileHeadMenu editLabel="Übungsgruppe bearbeiten" removeLabel="Übungsgruppe löschen" :link="'/exercises/groups/' + exerciseGroup.exercisegroup_id + '/edit'" @deletePageSourceTrigger="showModal" />
+      <ProfileHeadMenu editLabel="Übungsgruppe bearbeiten" removeLabel="Übungsgruppe löschen" :link="'/exercise-groups/' + exerciseGroup.exercisegroup_id + '/edit'" @deletePageSourceTrigger="showModal" />
     </div>
 
     <div class="c-table-flow__list">

@@ -43,7 +43,7 @@ export default {
       try {
         await this.$store.dispatch('addNewExerciseGroup', this.$data)
         this.$store.commit('SET_SENDING_REQUEST', false)
-        this.$router.push(`/exercises/`)
+        this.$router.push(`/exercise-groups/`)
       } catch (error) {
         console.log(error.message)
         this.$store.commit('SET_SENDING_REQUEST', false)

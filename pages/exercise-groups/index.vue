@@ -2,7 +2,7 @@
   <section class="f-wrapper">
     <div class="m-app-control f-mb8 f-mb10-m">
       <h2 class="f-ma0">Übungen</h2>
-      <nuxt-link to="/exercises/groups/add" class="c-btn c-btn--primary">Neue Gruppe hinzufügen</nuxt-link>
+      <nuxt-link to="/exercise-groups/add" class="c-btn c-btn--primary">Neue Gruppe hinzufügen</nuxt-link>
     </div>
     <div class="o-grid">
       <div class="o-grid__item f-w-50-ns f-w-33-l" v-for="(group, index) in exerciseGroups" v-bind:item="group" v-bind:index="index" v-bind:key="group.exercisegroup_id">
