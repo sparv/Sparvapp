@@ -35,6 +35,7 @@
         title="Gruppe löschen"
         summary="Bist Du Dir sicher, dass du diese Gruppe löschen möchtest? Das Löschen kann nicht rückgängig gemacht werden."
         formLabel="Gib den Namen der Gruppe zur Bestätigung ein"
+        formName="exerciseGroup"
         submitButtonText="Gruppe löschen"
         @hideModal="hideModal"
         @formSubmitted="deleteExerciseGroup"

@@ -40,6 +40,7 @@
         title="Übung löschen"
         summary="Bist Du Dir sicher, dass du diese Übung löschen möchtest? Das Löschen kann nicht rückgängig gemacht werden."
         formLabel="Gib den Namen der Übung zur Bestätigung ein"
+        formName="exercise"
         submitButtonText="Übung löschen"
         @hideModal="hideModal"
         @formSubmitted="deleteExercise"

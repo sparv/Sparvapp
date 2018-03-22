@@ -65,6 +65,7 @@
         title="Kunde löschen"
         summary="Bist Du Dir sicher, dass du diesen Kunden löschen möchtest? Das Löschen kann nicht rückgängig gemacht werden."
         formLabel="Gib den Titel des Trainingsplans zur Bestätigung ein"
+        formName="customer"
         submitButtonText="Kunde löschen"
         @hideModal="hideModal"
         @formSubmitted="deleteCustomer"

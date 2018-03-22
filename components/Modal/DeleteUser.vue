@@ -1,12 +1,12 @@
 <template>
   <modal name="deleteUser" height="auto">
     <div class="dialog-content">
-      <button @click="hideModal" class="dialog-close" type="button" aria-label="Close this dialog window">
-        <img class="f-db" src="~/assets/images/close.svg" alt="" height="24" width="24">
+      <button @click="hideModal" class="dialog-close" type="button" aria-label="Modal Dialog schließen">
+        <icon name="times-circle" scale="1.5" color="#3D3F42"></icon>
       </button>
       <div class="dialog__header f-mb7">
         <span class="dialog__icon dialog__icon--delete f-mr6">
-          <img src="/images/delete.svg" alt="" width="32" height="32">
+          <icon name="trash" scale="1.5" color="#F03D5D"></icon>
         </span>
         <h3 class="f-mb0 display-3">Deinen Account löschen</h3>
       </div>
