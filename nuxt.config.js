@@ -10,7 +10,6 @@ module.exports = {
     ]
   },
   css: [
-    'element-ui/lib/theme-chalk/reset.css',
     'element-ui/lib/theme-chalk/index.css',
     '@/assets/scss/main.scss'
   ],
@@ -26,7 +25,7 @@ module.exports = {
     baseURL: 'http://localhost:4040'
   },
   auth: {
-    resetOnError: true,
+    resetOnError: false,
     endpoints: {
       login: { url: '/authentication', method: 'post', propertyName: 'token' },
       logout: false,

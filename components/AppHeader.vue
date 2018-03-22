@@ -81,9 +81,13 @@ export default {
       this.$store.commit('setApplicationSidebar', true)
     },
 
-    logout: function (event) {
-      this.$auth.logout()
-      this.$router.push(`/`)
+    logout: async function () {
+      try {
+        await this.$auth.logout()
+        this.$axios.setHeader('Authorization', null)
+      } catch (error) {
+        console.log(error)
+      }
     }
   }
 }

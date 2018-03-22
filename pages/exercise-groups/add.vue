@@ -41,7 +41,7 @@ export default {
       this.$store.commit('SET_SENDING_REQUEST', true)
 
       try {
-        await this.$store.dispatch('addNewExerciseGroup', this.$data)
+        await this.$store.dispatch('addExerciseGroup', this.$data)
         this.$store.commit('SET_SENDING_REQUEST', false)
         this.$router.push(`/exercise-groups/`)
       } catch (error) {

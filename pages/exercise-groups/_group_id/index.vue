@@ -58,7 +58,7 @@ export default {
   },
 
   fetch ({ store, params }) {
-    return store.dispatch('getSingleExerciseGroup', params.group_id)
+    return store.dispatch('getExerciseGroup', params.group_id)
   },
 
   computed: {

@@ -33,6 +33,16 @@ const actions = {
     }
   },
 
+  async getRefreshToken ({ commit, state }) {
+    console.log('Okay!')
+    try {
+      const data = await this.$axios.$put('/authentication')
+      console.log(data)
+    } catch (error) {
+      console.log(error)
+    }
+  },
+
   async editUserMeta ({ commit, state }, data) {
     try {
       await this.$axios.$put('/users', data)

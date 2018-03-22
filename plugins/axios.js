@@ -1,12 +1,8 @@
-export default function ({ $axios, redirect }) {
-  $axios.onRequest(config => {
-    console.log('Making request to ' + config.url)
-  })
-
-  $axios.onError(error => {
-    const code = parseInt(error.response && error.response.status)
-    if (code === 400) {
-      redirect('/400')
+export default function ({ $axios, app, store, redirect }) {
+  $axios.onResponseError(async (error) => {
+    if (error.response.status === 401) {
+      console.log('Refresh Token is needed here!')
+      store.dispatch('getRefreshToken')
     }
   })
 }

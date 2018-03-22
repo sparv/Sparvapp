@@ -32,7 +32,7 @@ export default {
   layout: 'application',
 
   fetch ({ store, params }) {
-    return store.dispatch('getSingleExercise', params.exercise_id)
+    return store.dispatch('getExercise', params.exercise_id)
   },
 
   computed: {

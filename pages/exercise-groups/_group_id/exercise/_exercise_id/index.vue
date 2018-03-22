@@ -63,7 +63,7 @@ export default {
   },
 
   fetch ({ store, params }) {
-    return store.dispatch('getSingleExercise', params.exercise_id)
+    return store.dispatch('getExercise', params.exercise_id)
   },
 
   mounted: function () {

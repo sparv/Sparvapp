@@ -22,6 +22,14 @@ const getters = {
 ||  Exercises - Actions
 ------------------------------------------------------------------- */
 const actions = {
+  async addExerciseGroup ({ commit, state }, group) {
+    try {
+      await this.$axios.$post('/exercisegroups/', group)
+    } catch (error) {
+      console.log(error)
+    }
+  },
+
   async getExerciseGroups ({ commit, state }) {
     try {
       const data = await this.$axios.$get('/exercisegroups/')
@@ -31,15 +39,7 @@ const actions = {
     }
   },
 
-  async addNewExerciseGroup ({ commit, state }, group) {
-    try {
-      await this.$axios.$post('/exercisegroups/', group)
-    } catch (error) {
-      console.log(error)
-    }
-  },
-
-  async getSingleExerciseGroup ({ commit, state }, id) {
+  async getExerciseGroup ({ commit, state }, id) {
     try {
       const { exercisegroup } = await this.$axios.$get(`/exercisegroups/${id}`)
       commit('SET_SINGLE_EXERCISE_GROUPS', exercisegroup)
@@ -56,18 +56,26 @@ const actions = {
     }
   },
 
-  async getSingleExercise ({ commit, state }, id) {
+  async deleteExerciseGroup ({ commit, state }, id) {
     try {
-      const { exercise } = await this.$axios.$get(`/exercisegroups/exercises/${id}`)
-      commit('SET_SINGLE_EXERCISE', exercise)
+      await this.$axios.$delete(`/exercisegroups/${id}`)
     } catch (error) {
       console.log(error)
     }
   },
 
-  async addNewExercise ({ commit, state }, data) {
+  async addExercise ({ commit, state }, data) {
     try {
       await this.$axios.$post(`/exercisegroups/${data.id}/exercises/`, data.exercise)
+    } catch (error) {
+      console.log(error)
+    }
+  },
+
+  async getExercise ({ commit, state }, id) {
+    try {
+      const { exercise } = await this.$axios.$get(`/exercisegroups/exercises/${id}`)
+      commit('SET_SINGLE_EXERCISE', exercise)
     } catch (error) {
       console.log(error)
     }
@@ -85,14 +93,6 @@ const actions = {
   async deleteExercise ({ commit, state }, id) {
     try {
       await this.$axios.$delete(`/exercisegroups/exercises/${id}`)
-    } catch (error) {
-      console.log(error)
-    }
-  },
-
-  async deleteExerciseGroup ({ commit, state }, id) {
-    try {
-      await this.$axios.$delete(`/exercisegroups/${id}`)
     } catch (error) {
       console.log(error)
     }

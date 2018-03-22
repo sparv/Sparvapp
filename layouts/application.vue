@@ -4,7 +4,6 @@
     <main class="application-content">
       <nuxt/>
     </main>
-    <Tabbar></Tabbar>
   </div>
 </template>
 
@@ -12,12 +11,10 @@
 import { mapState } from 'vuex'
 
 import AppHeader from '~/components/AppHeader.vue'
-import Tabbar from '~/components/Tabbar.vue'
 
 export default {
   components: {
-    AppHeader,
-    Tabbar
+    AppHeader
   },
 
   computed: {

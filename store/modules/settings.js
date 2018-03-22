@@ -1,3 +1,6 @@
+/* ------------------------------------------------------------------
+||  Settings
+------------------------------------------------------------------- */
 import * as types from '../mutation-types'
 
 const state = {
@@ -7,6 +10,9 @@ const state = {
   isSendingRequest: false
 }
 
+/* ------------------------------------------------------------------
+||  Settings - Mutations
+------------------------------------------------------------------- */
 const mutations = {
   [types.SET_APPLICATION_SIDEBAR] (state, bool) {
     state.applicatonSidebar = bool

@@ -54,8 +54,7 @@ $white: #FFFFFF !default;
 /*------------------------------------------------------------------
 ||  Typography
 -------------------------------------------------------------------*/
-@import url('https://rsms.me/inter/inter-ui.css');
-$basic-font: 'Inter UI', sans-serif !default;
+$basic-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol" !default;
 
 /*------------------------------------------------------------------
 ||  Border Radius

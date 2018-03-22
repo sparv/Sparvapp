@@ -19,24 +19,7 @@ const getters = {
 ||  Customers
 ------------------------------------------------------------------- */
 const actions = {
-  async getCustomers ({ commit, state }) {
-    try {
-      const data = await this.$axios.$get('/customers')
-      commit('SET_CLIENTS', data.customer_list)
-    } catch (error) {
-      console.log(error)
-    }
-  },
-
-  async getCustomer ({ commit, state }, id) {
-    try {
-      const data = await this.$axios.$get(`/customers/${id}`)
-      commit('SET_SINGLE_CLIENT', data.customer)
-    } catch (error) {
-      console.log(error)
-    }
-  },
-
+  // Create A Customer
   async addCustomer ({ commit, state }, data) {
     try {
       await this.$axios.$post('/customers/', data)
@@ -45,6 +28,27 @@ const actions = {
     }
   },
 
+  // Get All Customers
+  async getCustomers ({ commit, state }) {
+    try {
+      const data = await this.$axios.$get('/customers')
+      commit('SET_CUSTOMERS', data.customer_list)
+    } catch (error) {
+      console.log(error)
+    }
+  },
+
+  // Get One Customer
+  async getCustomer ({ commit, state }, id) {
+    try {
+      const data = await this.$axios.$get(`/customers/${id}`)
+      commit('SET_CUSTOMER', data.customer)
+    } catch (error) {
+      console.log(error)
+    }
+  },
+
+  // Edit One Customer
   async editCustomer ({ commit, dispatch, state }, data) {
     try {
       await this.$axios.$put(`/customers/${data.customer_id}`, data.editedClient)
@@ -54,6 +58,7 @@ const actions = {
     }
   },
 
+  // Delete One Customer
   async deleteCustomer ({ commit, state }, id) {
     try {
       await this.$axios.$delete(`/customers/${id}`)
@@ -67,11 +72,11 @@ const actions = {
 ||  Customers - Mutations
 ------------------------------------------------------------------- */
 const mutations = {
-  [types.SET_CLIENTS] (state, customers) {
+  [types.SET_CUSTOMERS] (state, customers) {
     state.allCustomers = customers
   },
 
-  [types.SET_SINGLE_CLIENT] (state, customer) {
+  [types.SET_CUSTOMER] (state, customer) {
     state.currentCustomer = customer
   }
 }
