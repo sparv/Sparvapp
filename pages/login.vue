@@ -54,26 +54,9 @@ export default {
   },
 
   methods: {
-    async submitForm () {
-      this.$store.commit('SET_SENDING_REQUEST', true)
-
-      try {
-        await this.$auth.login({
-          data: {
-            email: this.email,
-            password: this.password
-          }
-        })
-
-        this.$store.commit('SET_SENDING_REQUEST', false)
-      } catch (error) {
-        console.log(error)
-        const responseError = error.response
-
-        this.formError = true
-        this.formErrorMessage = responseError.data.message
-        this.$store.commit('SET_SENDING_REQUEST', false)
-      }
+    submitForm () {
+      const loginData = { email: this.email, password: this.password }
+      this.$store.dispatch('loginUser', loginData)
     }
   }
 }

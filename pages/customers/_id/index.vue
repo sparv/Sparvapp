@@ -122,28 +122,21 @@ export default {
 
     editCustomer: async function (data) {
       const id = this.client.customer_id
-      this.$store.commit('SET_SENDING_REQUEST', true)
 
       try {
         await this.$axios.$put(`/customers/${id}`, data)
         this.$store.dispatch('getSingleClient', id)
-        this.$store.commit('SET_SENDING_REQUEST', false)
       } catch (error) {
         console.log(error)
-        this.$store.commit('SET_SENDING_REQUEST', false)
       }
     },
 
     deleteCustomer: async function () {
-      this.$store.commit('SET_SENDING_REQUEST', true)
-
       try {
         await this.$axios.$delete(`/customers/${this.customer.customer_id}`)
-        this.$store.commit('SET_SENDING_REQUEST', false)
-        this.$router.push(`/customers`)
+        this.$router.push(`/customers/`)
       } catch (error) {
         console.log(error)
-        this.$store.commit('SET_SENDING_REQUEST', false)
       }
     }
   }

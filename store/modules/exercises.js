@@ -82,7 +82,6 @@ const actions = {
   },
 
   async editExercise ({ commit, dispatch, state }, payload) {
-    console.log(payload)
     try {
       await this.$axios.$put(`/exercisegroups/exercises/${payload.id}`, payload.exercise)
     } catch (error) {

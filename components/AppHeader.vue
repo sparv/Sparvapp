@@ -85,6 +85,7 @@ export default {
       try {
         await this.$auth.logout()
         this.$axios.setHeader('Authorization', null)
+        this.$router.push(`/`)
       } catch (error) {
         console.log(error)
       }

@@ -21,6 +21,26 @@ const getters = {
 ||  Users - Actions
 ------------------------------------------------------------------- */
 const actions = {
+  async loginUser ({ commit, state }, data) {
+    try {
+      await this.$auth.login({ data })
+    } catch (error) {
+      console.log(error)
+    }
+  },
+
+  async signUpUser ({ dispatch, commit, state }, data) {
+    try {
+      const user = await this.$axios.$post('/users/', data)
+
+      if (user) {
+        await dispatch('loginUser', { email: data.email, password: data.password })
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  },
+
   async getUser ({ commit, state }) {
     try {
       const user = await this.$axios.$get('/users')

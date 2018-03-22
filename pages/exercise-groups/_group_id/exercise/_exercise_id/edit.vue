@@ -58,14 +58,11 @@ export default {
         }
       }
 
-      this.$store.commit('SET_SENDING_REQUEST', true)
       try {
         await this.$store.dispatch('editExercise', data)
-        this.$store.commit('SET_SENDING_REQUEST', false)
         this.$router.push(`/exercise-groups/${exerciseGroupParamsId}/exercise/${exerciseParamsId}`)
       } catch (error) {
         console.log(error.message)
-        this.$store.commit('SET_SENDING_REQUEST', false)
       }
     }
   }

@@ -57,17 +57,12 @@ export default {
     },
 
     addNewCustomer: async function (customer) {
-      this.$store.commit('SET_SENDING_REQUEST', true)
-
       try {
         await this.$store.dispatch('addCustomer', customer)
         await this.$store.dispatch('getCustomers')
-
         this.$store.commit('SET_APPLICATION_SIDEBAR', false)
-        this.$store.commit('SET_SENDING_REQUEST', false)
       } catch (error) {
         console.log(error)
-        this.$store.commit('SET_SENDING_REQUEST', false)
       }
     }
   }

@@ -68,34 +68,9 @@ export default {
 
   methods: {
     async submitForm () {
-      this.$store.commit('SET_SENDING_REQUEST', true)
-
-      try {
-        const user = await this.$axios.$post('/users/', {
-          forename: this.forename,
-          surname: this.surname,
-          email: this.email,
-          password: this.password
-        })
-
-        if (user) {
-          await this.$auth.login({
-            data: {
-              email: this.email,
-              password: this.password
-            }
-          })
-          this.$store.commit('SET_SENDING_REQUEST', false)
-        } else {
-          console.log('Sign Up - Redirection Error.')
-        }
-      } catch (error) {
-        const response = error.response
-
-        this.formError = true
-        this.formErrorMessage = response.data.message
-        this.$store.commit('SET_SENDING_REQUEST', false)
-      }
+      const userData = { forename: this.forename, surname: this.surname, email: this.email, password: this.password }
+      await this.$store.dispatch('signUpUser', userData)
+      this.$router.push('/')
     }
   }
 }

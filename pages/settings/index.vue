@@ -94,14 +94,10 @@ export default {
         }
       }
 
-      this.$store.commit('SET_SENDING_REQUEST', true)
-
       try {
         await this.$store.dispatch('editUserMeta', data)
-        this.$store.commit('SET_SENDING_REQUEST', false)
       } catch (error) {
         console.log(error)
-        this.$store.commit('SET_SENDING_REQUEST', false)
       }
     },
 

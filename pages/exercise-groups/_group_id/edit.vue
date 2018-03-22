@@ -38,14 +38,12 @@ export default {
   methods: {
     submitForm: async function () {
       const exerciseGroupParamsId = this.$route.params.group_id
-      this.$store.commit('SET_SENDING_REQUEST', true)
+
       try {
         await this.$store.dispatch('editExerciseGroup', this.exerciseGroup)
-        this.$store.commit('SET_SENDING_REQUEST', false)
         this.$router.push(`/exercise-groups/${exerciseGroupParamsId}`)
       } catch (error) {
         console.log(error.message)
-        this.$store.commit('SET_SENDING_REQUEST', false)
       }
     }
   }
