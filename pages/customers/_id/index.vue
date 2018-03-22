@@ -121,19 +121,21 @@ export default {
     },
 
     editCustomer: async function (data) {
-      const id = this.client.customer_id
+      const id = this.customer.customer_id
 
       try {
         await this.$axios.$put(`/customers/${id}`, data)
-        this.$store.dispatch('getSingleClient', id)
+        this.$store.dispatch('getCustomer', id)
       } catch (error) {
         console.log(error)
       }
     },
 
     deleteCustomer: async function () {
+      const id = this.customer.customer_id
+
       try {
-        await this.$axios.$delete(`/customers/${this.customer.customer_id}`)
+        await this.$store.dispatch('deleteCustomer', id)
         this.$router.push(`/customers/`)
       } catch (error) {
         console.log(error)

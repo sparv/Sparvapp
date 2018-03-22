@@ -43,7 +43,7 @@ const actions = {
 
   async getUser ({ commit, state }) {
     try {
-      const user = await this.$axios.$get('/users')
+      const user = await this.$axios.$get('/users/')
       commit(`SET_USER_RELATION_ID`, user.relation_id)
       commit(`SET_USER_FORENAME`, user.forename)
       commit(`SET_USER_SURNAME`, user.surname)
@@ -56,7 +56,7 @@ const actions = {
   async getRefreshToken ({ commit, state }) {
     console.log('Okay!')
     try {
-      const data = await this.$axios.$put('/authentication')
+      const data = await this.$axios.$put('/authentication/')
       console.log(data)
     } catch (error) {
       console.log(error)
@@ -65,7 +65,7 @@ const actions = {
 
   async editUserMeta ({ commit, state }, data) {
     try {
-      await this.$axios.$put('/users', data)
+      await this.$axios.$put('/users/', data)
     } catch (error) {
       console.log(error)
     }
@@ -73,15 +73,15 @@ const actions = {
 
   async editUserSecurity ({ commit, state }, data) {
     try {
-      await this.$axios.$put('/users', data)
+      await this.$axios.$put('/users/', data)
     } catch (error) {
       console.log(error)
     }
   },
 
-  async deleteUser ({ commit, state }, password) {
+  async deleteUser ({ commit, state }, data) {
     try {
-      await this.$axios.$delete('/users', password)
+      await this.$axios.$delete('/users/', data)
     } catch (error) {
       console.log(error)
     }

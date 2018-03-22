@@ -102,11 +102,8 @@ export default {
     },
 
     submitDeleteForm: async function (password) {
-      this.$store.commit('SET_SENDING_REQUEST', true)
-
       try {
         await this.$store.dispatch('deleteUser', { password: password })
-        this.$store.commit('SET_SENDING_REQUEST', false)
         this.$auth.logout()
         this.$router.push(`/`)
       } catch (error) {
