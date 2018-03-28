@@ -9,7 +9,10 @@
         <nuxt-link :to="'/exercise-groups/' + group.exercisegroup_id" class="f-db f-mb6 f-mb8-m c-card c-group-item" :style="{ borderColor: group.color }">
           <h3 class="c-group-item__title">{{group.name}}</h3>
           <p class="c-group-item__description">{{group.description}}</p>
-          <span class="c-group-item__caption">{{group.experciseCount}} Übungen</span>
+
+          <span v-if="group.count === 0" class="c-group-item__caption">Keine Übungen vorhanden</span>
+          <span v-else-if="group.count === 1" class="c-group-item__caption">{{group.count}} Übung</span>
+          <span v-else class="c-group-item__caption">{{group.count}} Übungen</span>
         </nuxt-link>
       </div>
     </div>
