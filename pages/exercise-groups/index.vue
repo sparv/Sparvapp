@@ -10,9 +10,9 @@
           <h3 class="c-group-item__title">{{group.name}}</h3>
           <p class="c-group-item__description">{{group.description}}</p>
 
-          <span v-if="group.count === 0" class="c-group-item__caption">Keine Übungen vorhanden</span>
-          <span v-else-if="group.count === 1" class="c-group-item__caption">{{group.count}} Übung</span>
-          <span v-else class="c-group-item__caption">{{group.count}} Übungen</span>
+          <span v-if="group.exercise_count === 0" class="c-group-item__caption">Keine Übungen vorhanden</span>
+          <span v-else-if="group.exercise_count === 1" class="c-group-item__caption">{{group.exercise_count}} Übung</span>
+          <span v-else class="c-group-item__caption">{{group.exercise_count}} Übungen</span>
         </nuxt-link>
       </div>
     </div>
