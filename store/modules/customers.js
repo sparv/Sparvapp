@@ -52,7 +52,7 @@ const actions = {
   // Edit One Customer
   async editCustomer ({ commit, dispatch, state }, data) {
     try {
-      await this.$axios.$put(`/customers/${data.customer_id}`, data.editedClient)
+      await this.$axios.$patch(`/customers/${data.customer_id}`, data.editedClient)
       dispatch('getSingleClient', data.customer_id)
     } catch (error) {
       console.log(error)

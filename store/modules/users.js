@@ -56,7 +56,7 @@ const actions = {
   async getRefreshToken ({ commit, state }) {
     console.log('Okay!')
     try {
-      const data = await this.$axios.$put('/authentication/')
+      const data = await this.$axios.$get('/authentication/')
       console.log(data)
     } catch (error) {
       console.log(error)
@@ -65,7 +65,7 @@ const actions = {
 
   async editUserMeta ({ commit, state }, data) {
     try {
-      await this.$axios.$put('/users/', data)
+      await this.$axios.$patch('/users/', data)
     } catch (error) {
       console.log(error)
     }
@@ -73,7 +73,7 @@ const actions = {
 
   async editUserSecurity ({ commit, state }, data) {
     try {
-      await this.$axios.$put('/users/', data)
+      await this.$axios.$patch('/users/', data)
     } catch (error) {
       console.log(error)
     }

@@ -49,8 +49,14 @@ const actions = {
   },
 
   async editExerciseGroup ({ commit, state }, payload) {
+    const groupData = {
+      name: payload.name,
+      description: payload.description,
+      color: payload.color
+    }
+
     try {
-      await this.$axios.$put(`/exercisegroups/${payload.exercisegroup_id}`, { name: payload.name, description: payload.description })
+      await this.$axios.$patch(`/exercisegroups/${payload.exercisegroup_id}`, groupData)
     } catch (error) {
       console.log(error)
     }
@@ -83,7 +89,7 @@ const actions = {
 
   async editExercise ({ commit, dispatch, state }, payload) {
     try {
-      await this.$axios.$put(`/exercisegroups/exercises/${payload.id}`, payload.exercise)
+      await this.$axios.$patch(`/exercisegroups/exercises/${payload.id}`, payload.exercise)
     } catch (error) {
       console.log(error)
     }

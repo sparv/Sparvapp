@@ -55,3 +55,16 @@
   background: #F03D5D;
   border-radius: 0 0 5px 5px;
 }
+
+.c-input-color-wrapper {
+  display: flex;
+}
+
+.el-color-picker {
+  height: 48px;
+}
+
+.el-color-picker__trigger {
+  height: 48px;
+  width: 48px;
+}

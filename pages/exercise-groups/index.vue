@@ -6,7 +6,7 @@
     </div>
     <div class="o-grid">
       <div class="o-grid__item f-w-50-ns f-w-33-l" v-for="(group, index) in exerciseGroups" v-bind:item="group" v-bind:index="index" v-bind:key="group.exercisegroup_id">
-        <nuxt-link :to="'/exercise-groups/' + group.exercisegroup_id" class="f-db f-mb6 f-mb8-m c-card c-group-item" :style="{ borderColor: group.groupColor }">
+        <nuxt-link :to="'/exercise-groups/' + group.exercisegroup_id" class="f-db f-mb6 f-mb8-m c-card c-group-item" :style="{ borderColor: group.color }">
           <h3 class="c-group-item__title">{{group.name}}</h3>
           <p class="c-group-item__description">{{group.description}}</p>
           <span class="c-group-item__caption">{{group.experciseCount}} Übungen</span>

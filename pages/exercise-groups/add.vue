@@ -6,6 +6,13 @@
         <label class="c-label f-db f-mb3" for="">Name</label>
         <input class="c-input f-w-100" name="name" type="text" v-model="name">
       </div>
+      <div class="f-mb6 f-mb7-m">
+        <label class="c-label f-db f-mb3" for="">Gruppenfarbe</label>
+        <div class="c-input-color-wrapper">
+          <input class="c-input f-w-100" name="name" type="text" v-model="color">
+          <el-color-picker class="f-ml3" v-model="color"></el-color-picker>
+        </div>
+      </div>
       <div>
         <label class="c-label f-db f-mb3" for="">Beschreibung</label>
         <textarea class="c-input c-input--textarea" name="description" id="" v-model="description"></textarea>
@@ -21,8 +28,6 @@ import { mapState } from 'vuex'
 export default {
   layout: 'application',
 
-  components: {},
-
   computed: {
     ...mapState({
       isSendingRequest: state => state.settings.isSendingRequest
@@ -32,6 +37,7 @@ export default {
   data () {
     return {
       name: '',
+      color: '',
       description: ''
     }
   },

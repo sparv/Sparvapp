@@ -125,7 +125,7 @@ export default {
       const id = this.customer.customer_id
 
       try {
-        await this.$axios.$put(`/customers/${id}`, data)
+        await this.$axios.$patch(`/customers/${id}`, data)
         this.$store.dispatch('getCustomer', id)
       } catch (error) {
         console.log(error)
